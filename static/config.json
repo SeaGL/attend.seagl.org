@@ -22,7 +22,7 @@
         "https://scalar-staging.vector.im/api",
         "https://scalar-staging.riot.im/scalar/api"
     ],
-    "defaultCountryCode": "GB",
+    "defaultCountryCode": "US",
     "showLabsSettings": false,
     "features": { },
     "default_federate": true,
