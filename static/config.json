@@ -23,7 +23,7 @@
         "https://scalar-staging.riot.im/scalar/api"
     ],
     "default_widget_height": 280,
-    "default_country_code": "GB",
+    "default_country_code": "US",
     "show_labs_settings": false,
     "features": {},
     "default_federate": true,
