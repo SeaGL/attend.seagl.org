@@ -33,6 +33,8 @@
     },
     "settingDefaults": {
         "UIFeature.feedback": false,
+        "UIFeature.shareQrCode": false,
+        "UIFeature.shareSocial": false,
         "breadcrumbs": true
     },
     "jitsi": {
