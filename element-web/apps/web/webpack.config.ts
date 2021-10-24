@@ -675,7 +675,7 @@ export default (env: string, argv: Record<string, any>): webpack.Configuration =
                     },
                     ...(devMode ? [
                         "../../../static/config.json",
-                        { from: "modules/**", context: path.resolve(__dirname, "../../../static") },
+                        { from: "{custom-assets,modules}/**", context: path.resolve(__dirname, "../../../static") },
                     ] : [])
                 ],
             }),

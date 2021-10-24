@@ -16,7 +16,7 @@ import { UIFeature } from "../../../settings/UIFeature";
 import LanguageSelector from "./LanguageSelector";
 import EmbeddedPage from "../../structures/EmbeddedPage";
 import { MATRIX_LOGO_HTML } from "../../structures/static-page-vars";
-import DefaultWelcome from "./DefaultWelcome.tsx";
+import ConferenceWelcome from "./ConferenceWelcome.tsx";
 import { type ValidatedServerConfig } from "../../../utils/ValidatedServerConfig.ts";
 
 interface Props {
@@ -40,7 +40,7 @@ export default class Welcome extends React.PureComponent<Props> {
         if (pageUrl) {
             body = <EmbeddedPage className="mx_WelcomePage" url={pageUrl} replaceMap={replaceMap} />;
         } else {
-            body = <DefaultWelcome serverConfig={this.props.serverConfig} />;
+            body = <ConferenceWelcome serverConfig={this.props.serverConfig} />;
         }
 
         return (

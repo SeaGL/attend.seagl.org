@@ -11,7 +11,7 @@ clean:
 	  'dist' \
 	  'element-web/apps/web/webapp'
 
-dist: dist/.sentinel dist/config.json dist/modules/.sentinel
+dist: dist/.sentinel dist/config.json dist/custom-assets/.sentinel dist/modules/.sentinel
 
 dist/.sentinel: element-web/apps/web/webapp
 	rsync --itemize-changes --recursive --times \
@@ -22,6 +22,12 @@ dist/.sentinel: element-web/apps/web/webapp
 
 dist/config.json: static/config.json
 	cp --verbose 'static/config.json' 'dist/config.json'
+
+dist/custom-assets/.sentinel: $(shell find 'static/custom-assets' -type 'f')
+	rsync --delete --itemize-changes --recursive --times \
+	  'static/custom-assets/' \
+	  'dist/custom-assets/'
+	touch 'dist/custom-assets/.sentinel'
 
 dist/modules/.sentinel: $(shell find 'static/modules' -type 'f')
 	rsync --delete --itemize-changes --recursive --times \
