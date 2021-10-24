@@ -1,0 +1,129 @@
+<style type="text/css">
+  .mx_Parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px 35px;
+    color: #2e2f32;
+    max-width: 550px;
+  }
+
+  .mx_Logo {
+    height: 12rem;
+    width: auto;
+  }
+
+  .mx_ButtonGroup {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .mx_ButtonRow {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 12px 0 0;
+  }
+
+  .mx_ButtonRow > * {
+    margin: 0 0 10px 0;
+  }
+
+  .mx_ButtonParent {
+    display: flex;
+    padding: 10px 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-decoration: none;
+    color: #2e2f32 !important;
+  }
+
+  .mx_ButtonLabel {
+    margin-left: 20px;
+  }
+
+  .mx_ButtonSignIn {
+    background-color: #666;
+    color: white !important;
+  }
+
+  .mx_ButtonCreateAccount {
+    background-color: #0c5973;
+    color: white !important;
+  }
+
+  .mx_SecondaryButton {
+    background-color: #ffffff;
+    color: #2e2f32;
+  }
+
+  .mx_Button_iconSignIn {
+    background-image: url("welcome/images/icon-sign-in.svg");
+  }
+  .mx_Button_iconCreateAccount {
+    background-image: url("welcome/images/icon-create-account.svg");
+  }
+  .mx_Button_iconHelp {
+    background-image: url("welcome/images/icon-help.svg");
+  }
+  .mx_Button_iconRoomDirectory {
+    background-image: url("welcome/images/icon-room-directory.svg");
+  }
+
+  .button-disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
+
+  .welcome-content {
+    text-align: left;
+  }
+  .welcome-content li {
+    margin-bottom: 0.5em;
+  }
+</style>
+
+<div class="mx_Parent">
+  <a href="https://seagl.org/">
+    <img src="embedded-pages/seagl.svg" alt="SeaGL" class="mx_Logo" />
+  </a>
+
+  <h1>Welcome to SeaGL 2024</h1>
+
+  <div class="welcome-content">
+    <p>
+      The virtual half of our conference exists in
+      <a href="https://matrix.org/">Matrix</a>,
+      an open, decentralized chat network.
+      This website is a Matrix client that integrates features of the conference.
+    </p>
+
+    <p>
+      Please see
+      <a href="https://seagl.org/attend">How to Attend</a>
+      for complete information on how to access the conference with any Matrix account.
+    </p>
+</div>
+
+  <div class="mx_ButtonGroup">
+    <div class="mx_ButtonRow">
+      <a href="#/register?hs=ephemeral" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconCreateAccount">
+        <div class="mx_ButtonLabel">Create 2024 Account</div>
+      </a>
+
+      <a href="#/login">
+        Sign In
+      </a>
+    </div>
+  </div>
+</div>
