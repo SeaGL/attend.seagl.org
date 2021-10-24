@@ -32,6 +32,7 @@
         "https://matrix-client.matrix.org": false
     },
     "settingDefaults": {
+        "UIFeature.feedback": false,
         "breadcrumbs": true
     },
     "jitsi": {
