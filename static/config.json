@@ -28,9 +28,6 @@
     "features": {},
     "default_federate": true,
     "default_theme": "light",
-    "room_directory": {
-        "servers": ["matrix.org"]
-    },
     "enable_presence_by_hs_url": {
         "https://matrix.org": false,
         "https://matrix-client.matrix.org": false
