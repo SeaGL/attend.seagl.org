@@ -34,7 +34,9 @@
     },
     "setting_defaults": {
         "breadcrumbs": true,
-        "UIFeature.feedback": false
+        "UIFeature.feedback": false,
+        "UIFeature.shareQrCode": false,
+        "UIFeature.shareSocial": false
     },
     "jitsi": {
         "preferred_domain": "meet.element.io"
