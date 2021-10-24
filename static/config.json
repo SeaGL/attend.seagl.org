@@ -32,6 +32,8 @@
         "https://matrix-client.matrix.org": false
     },
     "settingDefaults": {
+        "showAvatarChanges": false,
+        "showDisplaynameChanges": false,
         "UIFeature.feedback": false,
         "UIFeature.shareQrCode": false,
         "UIFeature.shareSocial": false,
