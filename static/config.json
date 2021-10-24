@@ -34,6 +34,8 @@
     "settingDefaults": {
         "showAvatarChanges": false,
         "showDisplaynameChanges": false,
+        "lastRightPanelPhaseForRoom": "RoomMemberList",
+        "showRightPanelInRoom": true,
         "UIFeature.feedback": false,
         "UIFeature.shareQrCode": false,
         "UIFeature.shareSocial": false,
