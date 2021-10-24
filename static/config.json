@@ -27,6 +27,18 @@
     "features": { },
     "default_federate": true,
     "default_theme": "light",
+    "branding": {
+        "authHeaderLogoUrl": "welcome/images/matrix.svg",
+        "welcomeBackgroundUrl": "embedded-pages/welcome.jpg",
+        "authFooterLinks": [
+            {"text": "SeaGL", "url": "https://seagl.org/"},
+            {"text": "Code of Conduct", "url": "https://seagl.org/code_of_conduct"},
+            {"text": "Source", "url": "https://github.com/SeaGL/attend.seagl.org"}
+        ]
+    },
+    "embeddedPages": {
+        "welcomeUrl": "embedded-pages/welcome.html"
+    },
     "enable_presence_by_hs_url": {
         "https://matrix.org": false,
         "https://matrix-client.matrix.org": false

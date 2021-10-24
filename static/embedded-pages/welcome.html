@@ -1,0 +1,119 @@
+<style type="text/css">
+  .mx_Parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px 35px;
+    color: #2e2f32;
+  }
+
+  .mx_Logo {
+    height: 12rem;
+    width: auto;
+  }
+
+  .mx_ButtonGroup {
+    margin-top: 10px;
+  }
+
+  .mx_ButtonRow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 12px 0 0;
+  }
+
+  .mx_ButtonRow > * {
+    margin: 0 10px;
+  }
+
+  .mx_ButtonRow > *:first-child {
+    margin-left: 0;
+  }
+
+  .mx_ButtonRow > *:last-child {
+    margin-right: 0;
+  }
+
+  .mx_ButtonParent {
+    display: flex;
+    padding: 10px 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    width: 150px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-decoration: none;
+    color: #2e2f32 !important;
+  }
+
+  .mx_ButtonLabel {
+    margin-left: 20px;
+  }
+
+  .mx_ButtonSignIn {
+    background-color: #0c5973;
+    color: white !important;
+  }
+
+  .mx_ButtonCreateAccount {
+    background-color: #666;
+    color: white !important;
+  }
+
+  .mx_SecondaryButton {
+    background-color: #ffffff;
+    color: #2e2f32;
+  }
+
+  .mx_Button_iconSignIn {
+    background-image: url("welcome/images/icon-sign-in.svg");
+  }
+  .mx_Button_iconCreateAccount {
+    background-image: url("welcome/images/icon-create-account.svg");
+  }
+  .mx_Button_iconHelp {
+    background-image: url("welcome/images/icon-help.svg");
+  }
+  .mx_Button_iconRoomDirectory {
+    background-image: url("welcome/images/icon-room-directory.svg");
+  }
+
+  @media only screen and (max-width: 480px) {
+    .mx_ButtonRow {
+      flex-direction: column;
+    }
+
+    .mx_ButtonRow > * {
+      margin: 0 0 10px 0;
+    }
+  }
+</style>
+
+<div class="mx_Parent">
+  <a href="https://seagl.org/">
+    <img src="embedded-pages/logo.svg" alt="SeaGL" class="mx_Logo" />
+  </a>
+
+  <h1>Welcome to SeaGL 2021</h1>
+
+  <p>Welcome message and instructions here</p>
+
+  <div class="mx_ButtonGroup">
+    <div class="mx_ButtonRow">
+      <a href="#/register" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconCreateAccount">
+        <div class="mx_ButtonLabel">Create Account</div>
+      </a>
+
+      <a href="#/login" class="mx_ButtonParent mx_ButtonSignIn mx_Button_iconSignIn">
+        <div class="mx_ButtonLabel">Enter Conference</div>
+      </a>
+    </div>
+  </div>
+</div>
