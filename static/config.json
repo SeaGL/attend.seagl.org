@@ -33,7 +33,8 @@
         "https://matrix-client.matrix.org": false
     },
     "setting_defaults": {
-        "breadcrumbs": true
+        "breadcrumbs": true,
+        "UIFeature.feedback": false
     },
     "jitsi": {
         "preferred_domain": "meet.element.io"
