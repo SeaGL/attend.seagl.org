@@ -215,6 +215,10 @@ export interface WebConfigJson {
     };
 
     modules?: string[];
+
+    seagl?: {
+        trusted_origins?: string[];
+    };
 }
 
 /**
