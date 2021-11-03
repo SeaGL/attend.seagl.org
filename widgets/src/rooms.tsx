@@ -1,23 +1,33 @@
 import { ReactElement } from "react";
 import Page from "./components/Page";
+import Announcements from "./components/Announcements.mdx";
+import BotHelp from "./components/BotHelp.mdx";
+import CareerExpo from "./components/CareerExpo.mdx";
+import InfoBooth from "./components/InfoBooth.mdx";
+import Orchestration from "./components/Orchestration.mdx";
+import Social from "./components/Social.mdx";
+import SpeakerHelp from "./components/SpeakerHelp.mdx";
+import Sponsors from "./components/Sponsors.mdx";
+import Volunteering from "./components/Volunteering.mdx";
+import Volunteers from "./components/Volunteers.mdx";
 import Welcome from "./components/Welcome.mdx";
 import YouTube from "./components/YouTube";
 
 const rooms: Record<string, ReactElement> = {
   // General
-  "🪶seagl2021-announcements": <Page Content={Welcome} />,
-  "🪶seagl2021-bot-help": <Page Content={Welcome} />,
-  "🪶seagl2021-career-expo": <Page Content={Welcome} />,
-  "🪶seagl2021-info-booth": <Page Content={Welcome} />,
-  "🪶seagl2021-orchestration": <Page Content={Welcome} />,
-  "🪶seagl2021-social": <Page Content={Welcome} />,
-  "🪶seagl2021-speaker-help": <Page Content={Welcome} />,
-  "🪶seagl2021-volunteering": <Page Content={Welcome} />,
-  "🪶seagl2021-volunteers": <Page Content={Welcome} />,
+  "🪶seagl2021-announcements": <Page Content={Announcements} />,
+  "🪶seagl2021-bot-help": <Page Content={BotHelp} />,
+  "🪶seagl2021-career-expo": <Page Content={CareerExpo} />,
+  "🪶seagl2021-info-booth": <Page Content={InfoBooth} />,
+  "🪶seagl2021-orchestration": <Page Content={Orchestration} />,
+  "🪶seagl2021-social": <Page Content={Social} />,
+  "🪶seagl2021-speaker-help": <Page Content={SpeakerHelp} />,
+  "🪶seagl2021-volunteering": <Page Content={Volunteering} />,
+  "🪶seagl2021-volunteers": <Page Content={Volunteers} />,
   "🪶seagl2021-welcome": <Page Content={Welcome} />,
   
   // Sponsors
-  "🪶seagl2021-sponsors": <Page Content={Welcome} />,
+  "🪶seagl2021-sponsors": <Page Content={Sponsors} />,
   "🪶seagl2021-sponsor-aws": <Page Content={Welcome} />,
   "🪶seagl2021-sponsor-extrahop": <Page Content={Welcome} />,
   "🪶seagl2021-sponsor-google": <Page Content={Welcome} />,
