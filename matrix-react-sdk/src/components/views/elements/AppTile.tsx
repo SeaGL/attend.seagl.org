@@ -177,6 +177,11 @@ export default class AppTile extends React.Component<IProps, IState> {
         ModuleRunner.instance.invoke(WidgetLifecycle.PreLoadRequest, opts, new ElementWidget(this.props.app));
         if (opts.approved) return true;
 
+        if (new URL(props.app.url).origin === window.location.origin) {
+            logger.log("Automatically allowing same-origin widget", props.app.url);
+            return true;
+        }
+
         const currentlyAllowedWidgets = SettingsStore.getValue("allowedWidgets", props.room.roomId);
         const allowed =
             isAppWidget(props.app) &&
