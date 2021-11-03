@@ -1,0 +1,36 @@
+{
+  "name": "widgets",
+  "version": "0.0.0",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "16"
+  },
+  "dependencies": {
+    "@mdx-js/react": "^1.6.22",
+    "normalize.css": "^8.0.1",
+    "query-string": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "use-query-params": "^1.2.3"
+  },
+  "devDependencies": {
+    "@parcel/transformer-mdx": "^2.0.0",
+    "@tsconfig/node16": "^1.0.2",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "parcel": "^2.0.0",
+    "typescript": "^4.4.4"
+  },
+  "source": "src/index.html",
+  "scripts": {
+    "build": "parcel build --public-url '/widgets/'",
+    "start": "parcel serve --no-cache"
+  },
+  "browserslist": [
+    "cover 90% in US",
+    "last 2 Firefox version or Firefox ESR",
+    "not dead"
+  ]
+}
