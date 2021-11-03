@@ -1,0 +1,56 @@
+/*
+Copyright 2016 OpenMarket Ltd
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+.mx_DevicesPanel {
+    table-layout: fixed;
+    // Normally the panel is 880px, however this can easily overflow the container.
+    // TODO: Fix the table to not be squishy
+    width: auto;
+    max-width: 880px;
+    border-spacing: 10px;
+}
+
+.mx_DevicesPanel_header {
+    font-weight: bold;
+}
+
+.mx_DevicesPanel_header .mx_DevicesPanel_deviceButtons {
+    height: 48px; // make this tall so the table doesn't move down when the delete button appears
+    width: 20%;
+}
+
+.mx_DevicesPanel_header th {
+    padding: 0px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.mx_DevicesPanel_header .mx_DevicesPanel_deviceName {
+    width: 50%;
+}
+
+.mx_DevicesPanel_header .mx_DevicesPanel_deviceLastSeen {
+    width: 30%;
+}
+
+.mx_DevicesPanel_device td {
+    vertical-align: baseline;
+    padding: 0px;
+}
+
+.mx_DevicesPanel_myDevice {
+    font-weight: bold;
+}
