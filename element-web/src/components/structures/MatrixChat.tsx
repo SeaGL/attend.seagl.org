@@ -20,7 +20,7 @@ import {
     type SyncStateData,
     type TimelineEvents,
 } from "matrix-js-sdk/src/matrix";
-import { type QueryDict } from "matrix-js-sdk/src/utils";
+import { type QueryDict, sleep } from "matrix-js-sdk/src/utils";
 import { logger } from "matrix-js-sdk/src/logger";
 import { throttle } from "lodash";
 import { CryptoEvent, type KeyBackupInfo } from "matrix-js-sdk/src/crypto-api";
@@ -1423,6 +1423,20 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             }
         } else if (!(await this.shouldForceVerification())) {
             this.showScreenAfterLogin();
+        }
+
+        const autoJoin = SdkConfig.get("seagl")?.auto_join;
+        if (autoJoin) {
+            const client = MatrixClientPeg.safeGet();
+            try {
+                for (const alias of autoJoin) {
+                    await sleep(1000);
+                    logger.log("Automatically joining", alias);
+                    await client.joinRoom(alias);
+                }
+            } catch (error) {
+                logger.error(error);
+            }
         }
 
         if (SdkConfig.get("mobile_guide_toast")) {

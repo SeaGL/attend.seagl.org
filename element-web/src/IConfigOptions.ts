@@ -210,6 +210,7 @@ export interface IConfigOptions {
     modules?: string[];
 
     seagl?: {
+        auto_join?: string[];
         conference_space?: string;
         space_filter?: string;
     };
