@@ -1,0 +1,8 @@
+{
+  "extends": "@parcel/config-default",
+
+  "transformers": {
+    // Pending https://github.com/parcel-bundler/parcel/pull/7192
+    "*.yml": ["@parcel/transformer-yaml"]
+  }
+}
