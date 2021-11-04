@@ -27,7 +27,7 @@
   },
   "source": "src/index.html",
   "scripts": {
-    "build": "parcel build --public-url '/widgets/'",
+    "build": "parcel build --no-cache --public-url '/widgets/'",
     "start": "parcel serve --no-cache"
   },
   "browserslist": [
