@@ -308,7 +308,7 @@ const InnerSpacePanel = React.memo<IInnerSpacePanelProps>(
                         onExpand={() => setPanelCollapsed(false)}
                     />
                 ))}
-                {actualSpaces.map((s, i) => (
+                {actualSpaces.filter((s) => s.normalizedName.includes("seagl")).map((s, i) => (
                     <Draggable key={s.roomId} draggableId={s.roomId} index={i}>
                         {(provided, snapshot) => (
                             <SpaceItem
