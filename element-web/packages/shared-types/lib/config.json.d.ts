@@ -217,6 +217,7 @@ export interface WebConfigJson {
     modules?: string[];
 
     seagl?: {
+        conference_space?: string;
         space_filter?: string;
         trusted_origins?: string[];
     };
