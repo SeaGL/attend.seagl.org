@@ -27,7 +27,7 @@ import { ISyncStateData, SyncState } from 'matrix-js-sdk/src/sync';
 import { MatrixError } from 'matrix-js-sdk/src/http-api';
 import { InvalidStoreError } from "matrix-js-sdk/src/errors";
 import { MatrixEvent } from "matrix-js-sdk/src/models/event";
-import { defer, IDeferred, QueryDict } from "matrix-js-sdk/src/utils";
+import { defer, IDeferred, QueryDict, sleep } from "matrix-js-sdk/src/utils";
 import { logger } from "matrix-js-sdk/src/logger";
 import { throttle } from "lodash";
 import { CryptoEvent } from "matrix-js-sdk/src/crypto";
@@ -1325,6 +1325,24 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             }
         } else {
             this.showScreenAfterLogin();
+        }
+
+        const autoJoinAliases = [
+            "#2022-announcements:seagl.org",
+            "#2022-welcome:seagl.org",
+            "#2022-hallway:seagl.org",
+            "#2022-current-sessions:seagl.org",
+            "#2022-upcoming-sessions:seagl.org",
+        ];
+        const client = MatrixClientPeg.get();
+        try {
+            for (const alias of autoJoinAliases) {
+                await sleep(1000);
+                logger.log("Automatically joining", alias);
+                await client.joinRoom(alias);
+            }
+        } catch (error) {
+            logger.error(error);
         }
 
         if (SdkConfig.get("mobile_guide_toast")) {
