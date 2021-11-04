@@ -216,7 +216,6 @@ const InnerSpacePanel = React.memo<IInnerSpacePanelProps>(({ children, isPanelCo
             </Draggable>
         )) }
         { children }
-        <CreateSpaceButton isPanelCollapsed={isPanelCollapsed} setPanelCollapsed={setPanelCollapsed} />
     </div>;
 });
 
