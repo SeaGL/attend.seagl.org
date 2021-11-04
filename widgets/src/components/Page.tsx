@@ -1,13 +1,15 @@
-import { ComponentType } from "react";
+import { ComponentType, FC, ReactHTML } from "react";
 
-interface Props {
-  Content: ComponentType;
-}
+type Props = React.HTMLAttributes<HTMLDivElement> & {
+  Content?: ComponentType;
+};
 
-const Page = ({ Content }: Props) => {
+const Page: FC<Props> = ({ Content, children, className = "", ...rest }) => {
+  className += " page";
+
   return (
-    <div className="page">
-      <Content />
+    <div {...rest} className={className}>
+      {Content ? <Content /> : children}
     </div>
   );
 };
