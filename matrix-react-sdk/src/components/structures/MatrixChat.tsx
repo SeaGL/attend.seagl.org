@@ -734,7 +734,11 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 this.viewWelcome();
                 break;
             case 'view_home_page':
-                this.viewHome(payload.justRegistered);
+                dis.dispatch({
+                    action: 'view_room',
+                    auto_join: true,
+                    room_alias: "#SeaGL2021-Main:seattlematrix.org"
+                });
                 break;
             case 'view_start_chat_or_reuse':
                 this.chatCreateOrReuse(payload.user_id);

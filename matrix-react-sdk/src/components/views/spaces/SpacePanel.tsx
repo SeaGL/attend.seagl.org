@@ -120,12 +120,8 @@ const HomeButton = ({ selected, isPanelCollapsed }: IHomeButtonProps) => {
             className="mx_SpaceButton_home"
             onClick={() => SpaceStore.instance.setActiveSpace(null)}
             selected={selected}
-            label={allRoomsInHome ? _t("All rooms") : _t("Home")}
-            notificationState={allRoomsInHome
-                ? RoomNotificationStateStore.instance.globalState
-                : SpaceStore.instance.getNotificationState(HOME_SPACE)}
+            label={_t("Home")}
             isNarrow={isPanelCollapsed}
-            ContextMenuComponent={HomeButtonContextMenu}
             contextMenuTooltip={_t("Options")}
         />
     </li>;
