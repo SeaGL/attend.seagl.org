@@ -169,7 +169,7 @@ export default class RoomHeader extends React.Component<IProps> {
                     this.displayInfoDialogAboutScreensharing() : this.props.onCallPlaced(PlaceCallType.Video)}
                 title={_t("Video call")}
             />;
-            buttons.push(voiceCallButton, videoCallButton);
+            buttons.push(videoCallButton);
         }
 
         if (this.props.onForgetClick) {
