@@ -7,11 +7,34 @@ import InfoBooth from "./components/InfoBooth.mdx";
 import Orchestration from "./components/Orchestration.mdx";
 import Social from "./components/Social.mdx";
 import SpeakerHelp from "./components/SpeakerHelp.mdx";
-import Sponsors from "./components/Sponsors.mdx";
+import Sponsor from "./components/Sponsor";
+import Sponsors from "./components/Sponsors";
 import Volunteering from "./components/Volunteering.mdx";
 import Volunteers from "./components/Volunteers.mdx";
 import Welcome from "./components/Welcome.mdx";
 import YouTube from "./components/YouTube";
+import sponsorData from "../../seagl.org/_data/sponsors.yml";
+
+export interface Sponsor {
+  level: string,
+  logo: {
+    horizontal?: string,
+    square?: string
+  },
+  name: string,
+  url: string,
+}
+
+const seaglBase = new URL("https://seagl.org");
+const sponsors: Sponsor[] = (sponsorData as any[])
+  .filter((s) => "2021" in s.sponsorships)
+  .map((s) => ({ ...s,
+    level: s.sponsorships["2021"],
+    logo: {
+      horizontal: s.logo.horizontal && new URL(s.logo.horizontal, seaglBase).toString(),
+      square: s.logo.square && new URL(s.logo.square, seaglBase).toString(),
+    },
+  }));
 
 const rooms: Record<string, ReactElement> = {
   // General
@@ -27,14 +50,14 @@ const rooms: Record<string, ReactElement> = {
   "🪶seagl2021-welcome": <Page Content={Welcome} />,
   
   // Sponsors
-  "🪶seagl2021-sponsors": <Page Content={Sponsors} />,
-  "🪶seagl2021-sponsor-aws": <Page Content={Welcome} />,
-  "🪶seagl2021-sponsor-extrahop": <Page Content={Welcome} />,
-  "🪶seagl2021-sponsor-google": <Page Content={Welcome} />,
-  "🪶seagl2021-sponsor-jmp": <Page Content={Welcome} />,
-  "🪶seagl2021-sponsor-red-hat": <Page Content={Welcome} />,
-  "🪶seagl2021-sponsor-tidelift": <Page Content={Welcome} />,
-  "🪶seagl2021-sponsor-ubuntu": <Page Content={Welcome} />,
+  "🪶seagl2021-sponsors": <Page className="light"><Sponsors sponsors={sponsors} /></Page>,
+  "🪶seagl2021-sponsor-aws": <Sponsor sponsor={sponsors.find((s) => s.name === "Amazon AWS")!} />,
+  "🪶seagl2021-sponsor-extrahop": <Sponsor sponsor={sponsors.find((s) => s.name === "ExtraHop")!} />,
+  "🪶seagl2021-sponsor-google": <Sponsor sponsor={sponsors.find((s) => s.name === "Google")!} />,
+  "🪶seagl2021-sponsor-jmp": <Sponsor sponsor={sponsors.find((s) => s.name === "JMP.chat")!} />,
+  "🪶seagl2021-sponsor-red-hat": <Sponsor sponsor={sponsors.find((s) => s.name === "Red Hat")!} />,
+  "🪶seagl2021-sponsor-tidelift": <Sponsor sponsor={sponsors.find((s) => s.name === "Tidelift")!} />,
+  "🪶seagl2021-sponsor-ubuntu": <Sponsor sponsor={sponsors.find((s) => s.name === "Ubuntu Community Fund")!} />,
 
   // Sessions
   "🪶seagl2021-osem-event-816": <Page Content={Welcome} />,
