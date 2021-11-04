@@ -39,13 +39,13 @@ const sponsors: Sponsor[] = (sponsorData as any[])
 
 const rooms: Record<string, ReactElement> = {
   // General
+  "🪶seagl-triage": <Page Content={Triage} />,
   "🪶seagl2021-announcements": <Page Content={Announcements} />,
   "🪶seagl2021-bot-help": <Page Content={BotHelp} />,
   "🪶seagl2021-career-expo": <Page Content={CareerExpo} />,
   "🪶seagl2021-info-booth": <Page Content={InfoBooth} />,
   "🪶seagl2021-orchestration": <Page Content={Orchestration} />,
   "🪶seagl2021-speaker-help": <Page Content={SpeakerHelp} />,
-  "🪶seagl2021-triage": <Page Content={Triage} />,
   "🪶seagl2021-volunteering": <Page Content={Volunteering} />,
   "🪶seagl2021-volunteers": <Page Content={Volunteers} />,
   "🪶seagl2021-welcome": <Page Content={Welcome} />,
