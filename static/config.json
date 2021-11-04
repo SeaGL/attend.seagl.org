@@ -48,6 +48,7 @@
     },
     "map_style_url": "https://api.maptiler.com/maps/streets/style.json?key=fU3vlMsMn4Jb6dnEIFsx",
     "seagl": {
+        "conference_space": "#2023:seagl.org",
         "space_filter": "seagl"
     }
 }
