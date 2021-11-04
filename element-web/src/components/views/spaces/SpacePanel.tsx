@@ -69,6 +69,7 @@ import AccessibleButton from "../elements/AccessibleButton";
 import { Landmark, LandmarkNavigation } from "../../../accessibility/LandmarkNavigation";
 import { KeyboardShortcut } from "../settings/KeyboardShortcut";
 import { ReleaseAnnouncement } from "../../structures/ReleaseAnnouncement";
+import SdkConfig from "../../../SdkConfig";
 
 const useSpaces = (): [Room[], MetaSpace[], Room[], SpaceKey] => {
     const invites = useEventEmitterState<Room[]>(SpaceStore.instance, UPDATE_INVITED_SPACES, () => {
@@ -82,7 +83,13 @@ const useSpaces = (): [Room[], MetaSpace[], Room[], SpaceKey] => {
     const activeSpace = useEventEmitterState<SpaceKey>(SpaceStore.instance, UPDATE_SELECTED_SPACE, () => {
         return SpaceStore.instance.activeSpace;
     });
-    return [invites, metaSpaces, actualSpaces, activeSpace];
+    const filter = SdkConfig.get("seagl")?.space_filter;
+    const filteredSpaces = filter
+        ? actualSpaces.filter(
+              (s) => s.getCanonicalAlias()?.includes(filter) || s.getAltAliases().some((a) => a.includes(filter)),
+          )
+        : actualSpaces;
+    return [invites, metaSpaces, filteredSpaces, activeSpace];
 };
 
 export const HomeButtonContextMenu: React.FC<ComponentProps<typeof SpaceContextMenu>> = ({

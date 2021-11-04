@@ -208,6 +208,10 @@ export interface IConfigOptions {
     };
 
     modules?: string[];
+
+    seagl?: {
+        space_filter?: string;
+    };
 }
 
 export interface ISsoRedirectOptions {
