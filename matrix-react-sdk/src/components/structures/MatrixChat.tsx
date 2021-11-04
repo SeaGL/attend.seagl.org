@@ -1333,7 +1333,9 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
 
         const autoJoinAliases = [
             "#SeaGL2021-Welcome:seattlematrix.org",
-            "#SeaGL2021-Announcements:seattlematrix.org"
+            "#SeaGL2021-Announcements:seattlematrix.org",
+            "#SeaGL2021-Sessions-Current:seattlematrix.org",
+            "#SeaGL2021-Hallway:seattlematrix.org"
         ];
         const client = MatrixClientPeg.get();
         try {
