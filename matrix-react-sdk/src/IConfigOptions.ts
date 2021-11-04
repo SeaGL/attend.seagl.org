@@ -213,6 +213,10 @@ export interface IConfigOptions {
         policy_uri?: string;
         contacts?: string[];
     };
+
+    seagl?: {
+        space_filter?: string;
+    }
 }
 
 export interface ISsoRedirectOptions {
