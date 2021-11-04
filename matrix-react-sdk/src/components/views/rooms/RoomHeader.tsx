@@ -158,18 +158,22 @@ export default class RoomHeader extends React.Component<IProps> {
         const buttons: JSX.Element[] = [];
 
         if (this.props.inRoom && SettingsStore.getValue("showCallButtonsInComposer")) {
-            const voiceCallButton = <AccessibleTooltipButton
-                className="mx_RoomHeader_button mx_RoomHeader_voiceCallButton"
-                onClick={() => this.props.onCallPlaced(PlaceCallType.Voice)}
-                title={_t("Voice call")}
-            />;
-            const videoCallButton = <AccessibleTooltipButton
-                className="mx_RoomHeader_button mx_RoomHeader_videoCallButton"
-                onClick={(ev: React.MouseEvent<Element>) => ev.shiftKey ?
-                    this.displayInfoDialogAboutScreensharing() : this.props.onCallPlaced(PlaceCallType.Video)}
-                title={_t("Video call")}
-            />;
-            buttons.push(videoCallButton);
+            const disable = this.props.room.currentState.getStateEvents("org.seagl.jitsi", "")?.getContent()?.disable;
+
+            if (!disable) {
+                const voiceCallButton = <AccessibleTooltipButton
+                    className="mx_RoomHeader_button mx_RoomHeader_voiceCallButton"
+                    onClick={() => this.props.onCallPlaced(PlaceCallType.Voice)}
+                    title={_t("Voice call")}
+                />;
+                const videoCallButton = <AccessibleTooltipButton
+                    className="mx_RoomHeader_button mx_RoomHeader_videoCallButton"
+                    onClick={(ev: React.MouseEvent<Element>) => ev.shiftKey ?
+                        this.displayInfoDialogAboutScreensharing() : this.props.onCallPlaced(PlaceCallType.Video)}
+                    title={_t("Video call")}
+                />;
+                buttons.push(videoCallButton);
+            }
         }
 
         if (this.props.onForgetClick) {
