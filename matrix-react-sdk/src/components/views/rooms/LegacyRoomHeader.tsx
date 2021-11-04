@@ -279,7 +279,7 @@ const CallButtons: FC<CallButtonsProps> = ({ room }) => {
     );
 
     const makeVoiceCallButton = (behavior: VoiceCallButtonProps["behavior"]): JSX.Element => (
-        <VoiceCallButton room={room} busy={busy} setBusy={setBusy} behavior={behavior} />
+        null
     );
     const makeVideoCallButton = (behavior: VideoCallButtonProps["behavior"]): JSX.Element => (
         <VideoCallButton room={room} busy={busy} setBusy={setBusy} behavior={behavior} />
