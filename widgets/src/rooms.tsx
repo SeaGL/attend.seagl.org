@@ -9,6 +9,7 @@ import PendingStream from "./components/PendingStream.mdx";
 import SpeakerHelp from "./components/SpeakerHelp.mdx";
 import Sponsor from "./components/Sponsor";
 import Sponsors from "./components/Sponsors";
+import Triage from "./components/Triage.mdx";
 import Volunteering from "./components/Volunteering.mdx";
 import Volunteers from "./components/Volunteers.mdx";
 import Welcome from "./components/Welcome.mdx";
@@ -44,6 +45,7 @@ const rooms: Record<string, ReactElement> = {
   "🪶seagl2021-info-booth": <Page Content={InfoBooth} />,
   "🪶seagl2021-orchestration": <Page Content={Orchestration} />,
   "🪶seagl2021-speaker-help": <Page Content={SpeakerHelp} />,
+  "🪶seagl2021-triage": <Page Content={Triage} />,
   "🪶seagl2021-volunteering": <Page Content={Volunteering} />,
   "🪶seagl2021-volunteers": <Page Content={Volunteers} />,
   "🪶seagl2021-welcome": <Page Content={Welcome} />,
