@@ -27,10 +27,50 @@ html,
   width: 100%;
 }
 
+#widget > .featured-logo,
 #widget > .page {
   height: 100%;
   overflow: auto;
   width: 100%;
+}
+
+.featured-logo {
+  align-items: center;
+  background-color: #fffcf7;
+  border-top: 6pt solid #0c5a73;
+  color: #000;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+.featured-logo > a {
+  height: 2cm;
+  max-height: calc(100% - 2em);
+  max-width: calc(100% - 2em);
+  position: relative;
+  width: auto;
+}
+.featured-logo > a > img {
+  height: 2cm;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  width: auto;
+}
+
+.logo {
+  height: 2cm;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  width: auto;
+}
+
+.logo-collection > a {
+  display: inline-block;
+  margin: 1em;
 }
 
 .page {
