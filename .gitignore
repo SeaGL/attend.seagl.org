@@ -1,2 +1,5 @@
 # Project
 /dist/
+
+# Yarn
+/node_modules/
