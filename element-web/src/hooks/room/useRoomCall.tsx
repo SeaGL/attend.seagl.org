@@ -278,7 +278,7 @@ export const useRoomCall = (
     const roomDoesNotExist = room instanceof LocalRoom && room.state !== LocalRoomState.CREATED;
 
     // We hide the voice call button if it'd have the same effect as the video call button
-    let hideVoiceCallButton = isManagedHybridWidgetEnabled(room) || !callOptions.includes(PlatformCallType.LegacyCall);
+    let hideVoiceCallButton = true
     let hideVideoCallButton = false;
     // We hide both buttons if:
     // - they require widgets but widgets are disabled
