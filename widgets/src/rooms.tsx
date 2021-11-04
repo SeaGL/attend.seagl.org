@@ -29,6 +29,7 @@ export interface Sponsor {
 const seaglBase = new URL("https://seagl.org");
 const sponsors: Sponsor[] = (sponsorData as any[])
   .filter((s) => "2021" in s.sponsorships)
+  .sort((a, b) => a.name.localeCompare(b.name))
   .map((s) => ({ ...s,
     level: s.sponsorships["2021"],
     logo: {
