@@ -24,6 +24,7 @@ import {
 } from "matrix-js-sdk/src/matrix";
 import { type RoomJoinRulesEventContent } from "matrix-js-sdk/src/types";
 import { logger } from "matrix-js-sdk/src/logger";
+import { sleep } from "matrix-js-sdk/src/utils";
 import { throttle } from "lodash";
 import { CryptoEvent, type KeyBackupInfo } from "matrix-js-sdk/src/crypto-api";
 import { TooltipProvider } from "@vector-im/compound-web";
@@ -1433,6 +1434,19 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         } else {
             logger.debug("onShowPostLoginScreen: showScreenAfterLogin");
             this.showScreenAfterLogin();
+        }
+
+        const autoJoin = SdkConfig.get("seagl")?.auto_join;
+        if (autoJoin) {
+            const client = MatrixClientPeg.safeGet();
+            sleep(1000)
+                .then(async () => {
+                    for (const alias of autoJoin) {
+                        logger.info("Automatically joining", alias);
+                        await client.joinRoom(alias);
+                    }
+                })
+                .catch(logger.error);
         }
 
         if (SdkConfig.get("mobile_guide_toast")) {
