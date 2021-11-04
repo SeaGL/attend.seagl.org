@@ -789,9 +789,20 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             case "view_welcome_page":
                 this.viewWelcome();
                 break;
-            case Action.ViewHomePage:
-                this.viewHome(payload.justRegistered);
+            case Action.ViewHomePage: {
+                const conference_space = SdkConfig.get("seagl")?.conference_space;
+                if (conference_space) {
+                    dis.dispatch<ViewRoomPayload>({
+                        action: Action.ViewRoom,
+                        auto_join: true,
+                        room_alias: conference_space,
+                        metricsTrigger: undefined,
+                    });
+                } else {
+                    this.viewHome(payload.justRegistered);
+                }
                 break;
+            }
             case Action.Share:
                 this.viewShare(payload.format, payload.msg);
                 break;
