@@ -285,7 +285,10 @@ const CallButtons: FC<CallButtonsProps> = ({ room }) => {
         <VideoCallButton room={room} busy={busy} setBusy={setBusy} behavior={behavior} />
     );
 
-    if (isVideoRoom || !showButtons) {
+    const getIsDisabledByRoom = (): boolean =>
+        !!room.currentState.getStateEvents("org.seagl.jitsi", "")?.getContent()?.disable;
+
+    if (isVideoRoom || !showButtons || getIsDisabledByRoom()) {
         return null;
     } else if (groupCallsEnabled) {
         if (useElementCallExclusively) {
