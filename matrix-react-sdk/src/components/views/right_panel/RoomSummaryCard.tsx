@@ -222,9 +222,6 @@ const AppsSection: React.FC<IAppsSectionProps> = ({ room }) => {
     return <Group className="mx_RoomSummaryCard_appsGroup" title={_t("Widgets")}>
         { realApps.map(app => <AppRow key={app.id} app={app} room={room} />) }
         { copyLayoutBtn }
-        <AccessibleButton kind="link" onClick={onManageIntegrations}>
-            { realApps.length > 0 ? _t("Edit widgets, bridges & bots") : _t("Add widgets, bridges & bots") }
-        </AccessibleButton>
     </Group>;
 };
 
