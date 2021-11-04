@@ -1331,6 +1331,21 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
 
         StorageManager.tryPersistStorage();
 
+        const autoJoinAliases = [
+            "#SeaGL2021-Welcome:seattlematrix.org",
+            "#SeaGL2021-Announcements:seattlematrix.org"
+        ];
+        const client = MatrixClientPeg.get();
+        try {
+            for (const alias of autoJoinAliases) {
+                await sleep(1000);
+                logger.log("Automatically joining", alias);
+                await client.joinRoom(alias);
+            }
+        } catch (err) {
+            logger.error(err);
+        }
+
         // defer the following actions by 30 seconds to not throw them at the user immediately
         await sleep(30);
         if (SettingsStore.getValue("showCookieBar") &&
