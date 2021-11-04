@@ -79,6 +79,7 @@ import { UserMenuViewModel } from "../../../viewmodels/menus/UserMenuViewModel.t
 import { SDKContext } from "../../../contexts/SDKContext.ts";
 import { OwnProfileStore } from "../../../stores/OwnProfileStore.ts";
 import { type SDKContextClass } from "../../../contexts/SDKContextClass.ts";
+import SdkConfig from "../../../SdkConfig";
 
 const useSpaces = (): [Room[], MetaSpace[], Room[], SpaceKey] => {
     const sdkContext = useContext(SDKContext);
@@ -93,7 +94,11 @@ const useSpaces = (): [Room[], MetaSpace[], Room[], SpaceKey] => {
     const activeSpace = useEventEmitterState<SpaceKey>(sdkContext.spaceStore, UPDATE_SELECTED_SPACE, () => {
         return sdkContext.spaceStore.activeSpace;
     });
-    return [invites, metaSpaces, actualSpaces, activeSpace];
+    const filter = SdkConfig.get("seagl")?.space_filter;
+    const filteredSpaces = filter
+        ? actualSpaces.filter((s) => s.getCanonicalAlias()?.includes(filter) || s.getAltAliases().some((a) => a.includes(filter)))
+        : actualSpaces;
+    return [invites, metaSpaces, filteredSpaces, activeSpace];
 };
 
 export const HomeButtonContextMenu: React.FC<ComponentProps<typeof SpaceContextMenu>> = ({

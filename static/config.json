@@ -52,6 +52,7 @@
     },
     "map_style_url": "https://api.maptiler.com/maps/streets/style.json?key=fU3vlMsMn4Jb6dnEIFsx",
     "seagl": {
+        "space_filter": "SeaGL",
         "trusted_origins": ["https://seagl.org"]
     }
 }
