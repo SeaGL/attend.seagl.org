@@ -451,8 +451,13 @@ export default class WidgetUtils {
         const auth = await Jitsi.getInstance().getJitsiAuth();
         const widgetId = randomString(24); // Must be globally unique
 
+        const preferredConfId = MatrixClientPeg.get().getRoom(roomId)
+            ?.currentState.getStateEvents("org.seagl.jitsi", "")?.getContent()?.id;
+
         let confId;
-        if (auth === 'openidtoken-jwt') {
+        if (preferredConfId) {
+            confId = preferredConfId;
+        } else if (auth === 'openidtoken-jwt') {
             // Create conference ID from room ID
             // For compatibility with Jitsi, use base32 without padding.
             // More details here:
