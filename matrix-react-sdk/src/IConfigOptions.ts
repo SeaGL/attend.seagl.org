@@ -215,6 +215,7 @@ export interface IConfigOptions {
     };
 
     seagl?: {
+        auto_join?: string[];
         conference_space?: string;
         space_filter?: string;
     }

@@ -48,6 +48,13 @@
     },
     "map_style_url": "https://api.maptiler.com/maps/streets/style.json?key=fU3vlMsMn4Jb6dnEIFsx",
     "seagl": {
+        "auto_join": [
+            "#SeaGL2024-Announcements:seattlematrix.org",
+            "#SeaGL2024-Welcome:seattlematrix.org",
+            "#SeaGL2024-Hallway:seattlematrix.org",
+            "#SeaGL2024-CurrentSessions:seattlematrix.org",
+            "#SeaGL2024-UpcomingSessions:seattlematrix.org"
+        ],
         "conference_space": "#2023:seagl.org",
         "space_filter": "seagl"
     }
