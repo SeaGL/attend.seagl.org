@@ -819,21 +819,22 @@ export default class CallHandler extends EventEmitter {
                     // otherwise it can race.
 
                     const members = room.getJoinedMembers();
-                    if (members.length <= 1) {
-                        Modal.createTrackedDialog('Call Handler', 'Cannot place call with self', ErrorDialog, {
-                            description: _t('You cannot place a call with yourself.'),
-                        });
-                        return;
-                    } else if (members.length === 2) {
-                        logger.info(`Place ${payload.type} call in ${payload.room_id}`);
-
-                        this.placeCall(payload.room_id, payload.type, payload.transferee);
-                    } else { // > 2
+                    const preferredId = room.currentState.getStateEvents("org.seagl.jitsi", "")?.getContent()?.id;
+                    if (preferredId !== undefined || members.length > 2) {
                         dis.dispatch({
                             action: "place_conference_call",
                             room_id: payload.room_id,
                             type: payload.type,
                         });
+                    } else if (members.length === 2) {
+                        logger.info(`Place ${payload.type} call in ${payload.room_id}`);
+                        
+                        this.placeCall(payload.room_id, payload.type, payload.transferee);
+                    } else { // < 2
+                        Modal.createTrackedDialog('Call Handler', 'Cannot place call with self', ErrorDialog, {
+                            description: _t('You cannot place a call with yourself.'),
+                        });
+                        return;
                     }
                 }
                 break;
@@ -1065,10 +1066,14 @@ export default class CallHandler extends EventEmitter {
             return;
         }
 
+        const preferredId = room.currentState.getStateEvents("org.seagl.jitsi", "")?.getContent()?.id;
+
         const jitsiDomain = Jitsi.getInstance().preferredDomain;
         const jitsiAuth = await Jitsi.getInstance().getJitsiAuth();
         let confId;
-        if (jitsiAuth === 'openidtoken-jwt') {
+        if (preferredId !== undefined) {
+            confId = preferredId;
+        } else if (jitsiAuth === 'openidtoken-jwt') {
             // Create conference ID from room ID
             // For compatibility with Jitsi, use base32 without padding.
             // More details here:
