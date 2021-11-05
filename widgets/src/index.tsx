@@ -8,6 +8,9 @@ const mdxComponents = {
   a: (props: HTMLAttributes<HTMLAnchorElement>) => (
     <a rel="noopener noreferrer" target="_blank" {...props} />
   ),
+  muted: (props: HTMLAttributes<HTMLSpanElement>) => (
+    <span className="text-muted" {...props} />
+  ),
 };
 
 ReactDOM.render(

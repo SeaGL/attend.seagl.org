@@ -104,12 +104,19 @@ body {
   }
 }
 
+.page ol,
+.page p,
+.page table, 
+.page ul {
+  margin: 0 0 1em 0;
+}
+
 .page a {
   color: #0c5a73;
 }
 @media (prefers-color-scheme: dark) {
   .page:not(.light) a {
-    color: #1d7193;
+    color: #2690b9;
   }
 }
 
@@ -152,14 +159,23 @@ body {
 
 .page ol,
 .page ul {
-  margin: 0 0 1em 0;
   text-align: left;
+}
+
+.page table td {
+  padding: 0.25em;
+  vertical-align: top;
 }
 
 .page ul {
   list-style-type: square;
 }
 
-.page p {
-  margin: 0 0 1em 0;
+.page .text-muted {
+  color: #666;
+}
+@media (prefers-color-scheme: dark) {
+  .page:not(.light) .text-muted {
+    color: #777;
+  }
 }
