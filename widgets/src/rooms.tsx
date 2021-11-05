@@ -9,6 +9,7 @@ import PendingStream from "./components/PendingStream.mdx";
 import SpeakerHelp from "./components/SpeakerHelp.mdx";
 import Sponsor from "./components/Sponsor";
 import Sponsors from "./components/Sponsors";
+import Triage from "./components/Triage.mdx";
 import Volunteering from "./components/Volunteering.mdx";
 import Volunteers from "./components/Volunteers.mdx";
 import Welcome from "./components/Welcome.mdx";
@@ -28,6 +29,7 @@ export interface Sponsor {
 const seaglBase = new URL("https://seagl.org");
 const sponsors: Sponsor[] = (sponsorData as any[])
   .filter((s) => "2021" in s.sponsorships)
+  .sort((a, b) => a.name.localeCompare(b.name))
   .map((s) => ({ ...s,
     level: s.sponsorships["2021"],
     logo: {
@@ -38,6 +40,7 @@ const sponsors: Sponsor[] = (sponsorData as any[])
 
 const rooms: Record<string, ReactElement> = {
   // General
+  "🪶seagl-triage": <Page Content={Triage} />,
   "🪶seagl2021-announcements": <Page Content={Announcements} />,
   "🪶seagl2021-bot-help": <Page Content={BotHelp} />,
   "🪶seagl2021-career-expo": <Page Content={CareerExpo} />,
