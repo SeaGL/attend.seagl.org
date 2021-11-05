@@ -38,6 +38,11 @@ const sponsors: Sponsor[] = (sponsorData as any[])
     },
   }));
 
+const youtubeIds = [
+  ["T_N0I1vYUrc", "J5Susi6f1eE", "-3iLYLhPIqo"],
+  ["w7wj9HrRFPk", "PRMwUjXSa3A", "1GiwoMkuSHg"],
+];
+
 const rooms: Record<string, ReactElement> = {
   // General
   "🪶seagl-triage": <Page Content={Triage} />,
@@ -61,52 +66,54 @@ const rooms: Record<string, ReactElement> = {
   "🪶seagl2021-sponsor-tidelift": <Sponsor sponsor={sponsors.find((s) => s.name === "Tidelift")!} />,
   "🪶seagl2021-sponsor-ubuntu": <Sponsor sponsor={sponsors.find((s) => s.name === "Ubuntu Community Fund")!} />,
 
+  // Social events
+  "🪶seagl2021-osem-event-868": <Page Content={Welcome} />, // Lightning Talks
+  "🪶seagl2021-osem-event-870": <Page Content={Welcome} />, // Saturday TeaGL
+  "🪶seagl2021-osem-event-872": <Page Content={Welcome} />, // DevOps Party Games
+  "🪶seagl2021-osem-event-873": <Page Content={Welcome} />, // Cocktails and Mocktails with Mako
+  "🪶seagl2021-osem-event-875": <Page Content={Welcome} />, // Winners announced!
+  "🪶seagl2021-osem-event-877": <Page Content={Welcome} />, // Make Tea Sandwiches with Molly and Sri!
+  "🪶seagl2021-osem-event-878": <Page Content={Welcome} />, // Trivia Contest for fun and prizes!
+
   // Sessions
-  "🪶seagl2021-osem-event-816": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-818": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-819": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-821": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-822": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-824": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-826": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-827": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-828": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-829": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-832": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-834": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-835": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-836": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-838": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-839": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-841": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-843": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-844": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-845": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-846": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-848": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-849": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-850": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-851": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-854": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-856": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-857": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-858": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-859": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-861": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-864": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-865": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-866": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-867": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-868": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-869": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-870": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-871": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-872": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-873": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-874": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-875": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-877": <Page Content={PendingStream} />,
-  "🪶seagl2021-osem-event-878": <Page Content={PendingStream} />,
+  "🪶seagl2021-osem-event-816": <YouTube id={youtubeIds[1][2]} />,
+  "🪶seagl2021-osem-event-818": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-819": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-821": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-822": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-824": <YouTube id={youtubeIds[0][1]} />,
+  "🪶seagl2021-osem-event-826": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-827": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-828": <YouTube id={youtubeIds[1][2]} />,
+  "🪶seagl2021-osem-event-829": <YouTube id={youtubeIds[1][2]} />,
+  "🪶seagl2021-osem-event-832": <YouTube id={youtubeIds[0][1]} />,
+  "🪶seagl2021-osem-event-834": <YouTube id={youtubeIds[0][1]} />,
+  "🪶seagl2021-osem-event-835": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-836": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-838": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-839": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-841": <YouTube id={youtubeIds[0][2]} />,
+  "🪶seagl2021-osem-event-843": <YouTube id={youtubeIds[0][2]} />,
+  "🪶seagl2021-osem-event-844": <YouTube id={youtubeIds[1][2]} />,
+  "🪶seagl2021-osem-event-845": <YouTube id={youtubeIds[0][1]} />,
+  "🪶seagl2021-osem-event-846": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-848": <YouTube id={youtubeIds[0][2]} />,
+  "🪶seagl2021-osem-event-849": <YouTube id={youtubeIds[1][2]} />,
+  "🪶seagl2021-osem-event-850": <YouTube id={youtubeIds[1][2]} />,
+  "🪶seagl2021-osem-event-851": <YouTube id={youtubeIds[0][1]} />,
+  "🪶seagl2021-osem-event-854": <YouTube id={youtubeIds[0][2]} />,
+  "🪶seagl2021-osem-event-856": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-857": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-858": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-859": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-861": <YouTube id={youtubeIds[0][2]} />,
+  "🪶seagl2021-osem-event-864": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-865": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-866": <YouTube id={youtubeIds[1][0]} />,
+  "🪶seagl2021-osem-event-867": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-869": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-871": <YouTube id={youtubeIds[0][0]} />,
+  "🪶seagl2021-osem-event-874": <YouTube id={youtubeIds[1][0]} />,
 };
 
 export default rooms;
