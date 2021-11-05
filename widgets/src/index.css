@@ -81,10 +81,33 @@ body {
   width: auto;
 }
 
-.logo-collection > a {
-  display: inline-block;
-  margin: 1em;
+.logo-wall {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-left: -0.75em;
+  margin-right: -0.75em;
 }
+.logo-wall { font-size: 1.3em; }
+.logo-wall.level-silver { font-size: 1.4em; }
+.logo-wall.level-gold { font-size: 1.45em; }
+.logo-wall.level-platinum { font-size: 1.5em; }
+
+.logo-wall-item {
+  margin: 0.5em 0.75em;
+  text-align: center;
+}
+
+.logo-wall-item > img {
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+.logo-wall-item { height: 5em; max-width: 6em; }
+.logo-wall-item.horizontal { height: 3em; max-width: 12em; }
 
 .page {
   align-items: center;
