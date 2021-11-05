@@ -1,16 +1,20 @@
 import { Sponsor } from "../rooms";
 
-const renderSponsor = (s: Sponsor) => (
-  <a title={s.name} href={s.url} rel="noopener noreferrer" target="_blank">
-    <img className="logo" alt={s.name} src={s.logo.horizontal || s.logo.square} />
-  </a>
-);
-
 interface Props {
   sponsors: Sponsor[];
 }
 
 const Sponsors = ({ sponsors }: Props) => {
+  const renderLevel = (level: string) => (
+    <div className={`logo-wall level-${level}`}>
+      {sponsors.filter((s) => s.level === level).map((s) =>
+        <a className={`logo-wall-item ${s.logo.horizontal ? "horizontal" : ""}`} title={s.name} href={s.url} rel="noopener noreferrer" target="_blank">
+          <img alt={s.name} src={s.logo.horizontal || s.logo.square} />
+        </a>
+      )}
+    </div>
+  );
+
   return (
     <>
       <h1>SeaGL 2021 Sponsors</h1>
@@ -21,39 +25,27 @@ const Sponsors = ({ sponsors }: Props) => {
 
       <h2>Platinum</h2>
 
-      <div className="logo-collection">
-        {sponsors.filter((s) => s.level === "platinum").map(renderSponsor)}
-      </div>
+      {renderLevel("platinum")}
 
       <h2>Gold</h2>
 
-      <div className="logo-collection">
-        {sponsors.filter((s) => s.level === "gold").map(renderSponsor)}
-      </div>
+      {renderLevel("gold")}
 
       <h2>Silver</h2>
 
-      <div className="logo-collection">
-        {sponsors.filter((s) => s.level === "silver").map(renderSponsor)}
-      </div>
+      {renderLevel("silver")}
 
       <h2>Bronze</h2>
 
-      <div className="logo-collection">
-        {sponsors.filter((s) => s.level === "bronze").map(renderSponsor)}
-      </div>
+      {renderLevel("bronze")}
 
       <h2>Media Sponsors</h2>
 
-      <div className="logo-collection">
-        {sponsors.filter((s) => s.level === "media").map(renderSponsor)}
-      </div>
+      {renderLevel("media")}
 
       <h2>Special Thanks To</h2>
 
-      <div className="logo-collection">
-        {sponsors.filter((s) => s.level === "thanks").map(renderSponsor)}
-      </div>
+      {renderLevel("thanks")}
     </>
   );
 };
