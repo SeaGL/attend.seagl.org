@@ -72,7 +72,7 @@ interface IProps {
     onLoggedIn(data: IMatrixClientCreds, password: string): void;
 
     // login shouldn't know or care how registration, password recovery, etc is done.
-    onRegisterClick(): void;
+    onRegisterClick(ephemeral?: boolean): void;
     onForgotPasswordClick?(): void;
     onServerConfigChange(config: ValidatedServerConfig): void;
 }
@@ -166,6 +166,8 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
     }
 
     isBusy = () => this.state.busy || this.props.busy;
+
+    isEphemeral = () => this.props.serverConfig.hsUrl === "https://matrix.seagl.org";
 
     onPasswordLogin = async (username, phoneCountry, phoneNumber, password) => {
         if (!this.state.serverIsAlive) {
@@ -345,7 +347,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
     onRegisterClick = ev => {
         ev.preventDefault();
         ev.stopPropagation();
-        this.props.onRegisterClick();
+        this.props.onRegisterClick(this.isEphemeral());
     };
 
     onTryRegisterClick = ev => {
@@ -527,6 +529,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                 serverConfig={this.props.serverConfig}
                 disableSubmit={this.isBusy()}
                 busy={this.props.isSyncing || this.state.busyLoggingIn}
+                ephemeral={this.isEphemeral()}
             />
         );
     };
@@ -608,6 +611,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                     <ServerPicker
                         serverConfig={this.props.serverConfig}
                         onServerConfigChange={this.props.onServerConfigChange}
+                        prompt={true}
                     />
                     { this.renderLoginComponentForFlows() }
                     { footer }

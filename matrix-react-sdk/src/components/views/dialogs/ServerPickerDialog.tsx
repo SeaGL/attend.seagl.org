@@ -54,7 +54,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
         this.defaultServer = config["validated_server_config"] as ValidatedServerConfig;
         const { serverConfig } = this.props;
 
-        let otherHomeserver = "";
+        let otherHomeserver = "matrix.org";
         if (!serverConfig.isDefault) {
             if (serverConfig.isNameResolvable && serverConfig.hsName) {
                 otherHomeserver = serverConfig.hsName;
@@ -180,7 +180,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
         }
 
         return <BaseDialog
-            title={this.props.title || _t("Sign into your homeserver")}
+            title={this.props.title || "Select your homeserver"}
             className="mx_ServerPickerDialog"
             contentId="mx_ServerPickerDialog"
             onFinished={this.props.onFinished}
@@ -189,7 +189,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
         >
             <form className="mx_Dialog_content" id="mx_ServerPickerDialog" onSubmit={this.onSubmit}>
                 <p>
-                    { _t("We call the places where you can host your account ‘homeservers’.") } { text }
+                    { "The providers where you can host your account are called ‘homeservers’." } { text }
                 </p>
 
                 <StyledRadioButton
@@ -212,7 +212,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
                     <Field
                         type="text"
                         className="mx_ServerPickerDialog_otherHomeserver"
-                        label={_t("Other homeserver")}
+                        label={"Homeserver"}
                         onChange={this.onHomeserverChange}
                         onFocus={this.onOtherChosen}
                         ref={this.fieldRef}
@@ -224,7 +224,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
                     />
                 </StyledRadioButton>
                 <p>
-                    { _t("Use your preferred Matrix homeserver if you have one, or host your own.") }
+                    { "Enter the name of the homeserver that hosts your account." }
                 </p>
 
                 <AccessibleButton className="mx_ServerPickerDialog_continue" kind="primary" onClick={this.onSubmit}>

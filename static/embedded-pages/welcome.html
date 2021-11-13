@@ -7,6 +7,7 @@
     text-align: center;
     padding: 25px 35px;
     color: #2e2f32;
+    max-width: 550px;
   }
 
   .mx_Logo {
@@ -16,10 +17,12 @@
 
   .mx_ButtonGroup {
     margin-top: 10px;
+    width: 100%;
   }
 
   .mx_ButtonRow {
     display: flex;
+    flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
     justify-content: space-between;
@@ -28,15 +31,7 @@
   }
 
   .mx_ButtonRow > * {
-    margin: 0 10px;
-  }
-
-  .mx_ButtonRow > *:first-child {
-    margin-left: 0;
-  }
-
-  .mx_ButtonRow > *:last-child {
-    margin-right: 0;
+    margin: 0 0 10px 0;
   }
 
   .mx_ButtonParent {
@@ -46,7 +41,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    width: 150px;
+    width: 100%;
     background-repeat: no-repeat;
     background-position: 10px center;
     text-decoration: none;
@@ -85,34 +80,71 @@
     background-image: url("welcome/images/icon-room-directory.svg");
   }
 
-  @media only screen and (max-width: 480px) {
-    .mx_ButtonRow {
-      flex-direction: column;
-    }
+  .button-disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
 
-    .mx_ButtonRow > * {
-      margin: 0 0 10px 0;
-    }
+  .welcome-content {
+    text-align: left;
+  }
+  .welcome-content li {
+    margin-bottom: 0.5em;
   }
 </style>
 
 <div class="mx_Parent">
-  <a href="https://seagl.org/">
+  <a href="https://seagl.org/" rel="noreferrer noopener" target="_blank">
     <img src="embedded-pages/logo.svg" alt="SeaGL" class="mx_Logo" />
   </a>
 
   <h1>Welcome to SeaGL 2021</h1>
 
-  <p>Welcome message and instructions here</p>
+  <div class="welcome-content">
+    <p>
+      Our virtual conference space exists in
+      <a href="https://matrix.org/" rel="noreferrer noopener" target="_blank">Matrix</a>,
+      an open, decentralized chat network.
+      This website is a Matrix client that integrates features of the conference.
+    </p>
+
+    <h3>Getting Started</h3>
+  
+    <p>
+      Matrix accounts are decentralized similarly to email—your account is
+      “at” the provider of your choice,
+      but you can communicate seamlessly across providers. To begin:
+    </p>
+  
+    <ul>
+      <li>
+        If you already have a Matrix account at any provider, you can sign in with it below.
+      </li>
+    
+      <li>
+        If you’d just like to participate in the conference and aren’t interested in using Matrix further,
+        you can create a temporary account with SeaGL. The account will be deleted at the end of the conference.
+      </li>
+    
+      <li>
+        If you’d like to have a Matrix account that can be used outside of the conference,
+        we recommend creating an account at <i>Matrix.org</i>.
+      </li>
+    </ul>
+  </div>
 
   <div class="mx_ButtonGroup">
     <div class="mx_ButtonRow">
-      <a href="#/register" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconCreateAccount">
-        <div class="mx_ButtonLabel">Create Account</div>
+      <a href="#/login" class="mx_ButtonParent mx_ButtonSignIn mx_Button_iconSignIn">
+        <div class="mx_ButtonLabel">Sign In</div>
       </a>
 
-      <a href="#/login" class="mx_ButtonParent mx_ButtonSignIn mx_Button_iconSignIn">
-        <div class="mx_ButtonLabel">Enter Conference</div>
+      <a href="#/register?hs=ephemeral" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconCreateAccount">
+        <div class="mx_ButtonLabel">Create Tempory Account</div>
+      </a>
+
+      <a href="#/register" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconCreateAccount">
+        <div class="mx_ButtonLabel">Create Account @ Matrix.org</div>
       </a>
     </div>
   </div>
