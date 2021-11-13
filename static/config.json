@@ -44,6 +44,7 @@
         "UIFeature.shareSocial": false,
         "breadcrumbs": true
     },
+    "mobileGuideToast": false,
     "jitsi": {
         "preferredDomain": "meet.seattlematrix.org"
     }
