@@ -575,6 +575,12 @@ export async function restoreSessionFromStorage(opts?: { ignoreGuest?: boolean }
     }
 
     if (accessToken && userId && hsUrl) {
+        const destroyedHomeservers = SdkConfig.get("seagl")?.destroyed_homeservers ?? [];
+        if (destroyedHomeservers.includes(hsUrl)) {
+            logger.log(`Ignoring session from known destroyed homeserver ${hsUrl}`);
+            return false;
+        }
+
         if (ignoreGuest && isGuest) {
             logger.log("Ignoring stored guest account: " + userId);
             return false;

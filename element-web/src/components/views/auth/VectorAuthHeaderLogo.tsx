@@ -18,14 +18,16 @@ limitations under the License.
 import * as React from "react";
 import SdkConfig from "matrix-react-sdk/src/SdkConfig";
 
+const matrixSvg = require('matrix-react-sdk/res/img/matrix.svg').default;
+
 export default class VectorAuthHeaderLogo extends React.PureComponent {
     public render(): React.ReactElement {
         const brandingConfig = SdkConfig.getObject("branding");
-        const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? "themes/element/img/logos/element-logo.svg";
+        const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? matrixSvg;
 
         return (
             <aside className="mx_AuthHeaderLogo">
-                <img src={logoUrl} alt="Element" />
+                <img src={logoUrl} alt="Matrix" />
             </aside>
         );
     }
