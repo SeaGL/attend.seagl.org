@@ -1,3 +1,4 @@
 {
-  "src/customisations/ComponentVisibility.ts": "src/customisations/ConferenceComponentVisibility.ts"
+  "src/customisations/ComponentVisibility.ts": "src/customisations/ConferenceComponentVisibility.ts",
+  "src/customisations/Security.ts": "src/customisations/ConferenceSecurity.ts"
 }
