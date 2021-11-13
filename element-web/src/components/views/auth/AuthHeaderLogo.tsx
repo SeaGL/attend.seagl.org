@@ -10,14 +10,16 @@ import React from "react";
 
 import SdkConfig from "../../../SdkConfig";
 
+const matrixSvg = require('../../../../res/img/matrix.svg').default;
+
 export default class AuthHeaderLogo extends React.PureComponent {
     public render(): React.ReactElement {
         const brandingConfig = SdkConfig.getObject("branding");
-        const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? "themes/element/img/logos/element-logo.svg";
+        const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? matrixSvg;
 
         return (
             <aside className="mx_AuthHeaderLogo">
-                <img src={logoUrl} alt="Element" />
+                <img src={logoUrl} alt="Matrix" />
             </aside>
         );
     }

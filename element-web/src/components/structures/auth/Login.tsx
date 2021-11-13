@@ -17,6 +17,7 @@ import { messageForConnectionError, messageForLoginError } from "../../../utils/
 import AutoDiscoveryUtils from "../../../utils/AutoDiscoveryUtils";
 import AuthPage from "../../views/auth/AuthPage";
 import PlatformPeg from "../../../PlatformPeg";
+import SdkConfig from "../../../SdkConfig";
 import SettingsStore from "../../../settings/SettingsStore";
 import { UIFeature } from "../../../settings/UIFeature";
 import { type IMatrixClientCreds } from "../../../MatrixClientPeg";
@@ -44,13 +45,14 @@ interface IProps {
     defaultDeviceDisplayName?: string;
     fragmentAfterLogin?: string;
     defaultUsername?: string;
+    ephemeral?: boolean;
 
     // Called when the user has logged in. Params:
     // - The object returned by the login API
     onLoggedIn(data: IMatrixClientCreds): void;
 
     // login shouldn't know or care how registration, password recovery, etc is done.
-    onRegisterClick(): void;
+    onRegisterClick(ephemeral?: boolean): void;
     onForgotPasswordClick?(): void;
     onServerConfigChange(config: ValidatedServerConfig): void;
 }
@@ -280,7 +282,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
     public onRegisterClick = (ev: ButtonEvent): void => {
         ev.preventDefault();
         ev.stopPropagation();
-        this.props.onRegisterClick();
+        this.props.onRegisterClick(this.isEphemeral());
     };
 
     public onTryRegisterClick = (ev: ButtonEvent): void => {
@@ -389,6 +391,11 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
             });
     }
 
+    private isEphemeral = () => {
+        const ephemeralHomeserver = SdkConfig.get("seagl")?.ephemeral_homeserver;
+        return ephemeralHomeserver && this.props.serverConfig.hsUrl === ephemeralHomeserver.url;
+    };
+
     private isSupportedFlow = (flow: ClientLoginFlow): boolean => {
         // technically the flow can have multiple steps, but no one does this
         // for login and loginLogic doesn't support it so we can ignore it.
@@ -432,6 +439,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                 serverConfig={this.props.serverConfig}
                 disableSubmit={this.isBusy()}
                 busy={this.props.isSyncing || this.state.busyLoggingIn}
+                ephemeral={this.isEphemeral()}
             />
         );
     };
@@ -510,7 +518,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                     )}
                 </div>
             );
-        } else if (SettingsStore.getValue(UIFeature.Registration)) {
+        } else if (SettingsStore.getValue(UIFeature.Registration) && this.props.ephemeral) {
             footer = (
                 <span className="mx_AuthBody_changeFlow">
                     {_t(
@@ -543,6 +551,34 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                         onServerConfigChange={this.props.onServerConfigChange}
                         disabled={this.isBusy()}
                     />
+                    <div
+                        style={{
+                            color: "var(--cpd-color-text-primary)",
+                            font: "var(--cpd-font-body-md-regular)",
+                            fontSize: "1rem",
+                        }}
+                    >
+                        {this.props.serverConfig.isDefault ? (
+                            <p>
+                                Remember, this temporary account <strong>will be deleted</strong> after the conference.
+                            </p>
+                        ) : (
+                            // TODO: Make look like a warning, not prefixed.
+                            <div>
+                                <p>
+                                    Notice—you’re about to sign in through a website controlled by SeaGL, not
+                                    by your account provider. In general <strong>you should be skeptical</strong> of any
+                                    website that asks this of you. Only proceed if you trust SeaGL to responsibly handle
+                                    control of your account.
+                                </p>
+                                <p>
+                                    Using this website is{" "}
+                                    <a href="https://seagl.org/attend/existing">not a requirement</a> for remotely
+                                    attending the conference.
+                                </p>
+                            </div>
+                        )}
+                    </div>
                     {this.renderLoginComponentForFlows()}
                     {footer}
                 </AuthBody>

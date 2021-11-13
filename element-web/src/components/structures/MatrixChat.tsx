@@ -206,7 +206,29 @@ interface IState {
     justRegistered?: boolean;
     roomJustCreatedOpts?: IOpts;
     forceTimeline?: boolean; // see props
+    hs?: string;
 }
+
+const ephemeralHomeserver = SdkConfig.get("seagl")?.ephemeral_homeserver;
+const ephemeralHomeserverConfig: ValidatedServerConfig | undefined =
+  ephemeralHomeserver && {
+    hsUrl: ephemeralHomeserver.url,
+    hsName: ephemeralHomeserver.server_name,
+    hsNameIsDifferent: true,
+    isUrl: undefined,
+    isDefault: true,
+    isNameResolvable: false,
+    warning: null,
+  };
+const defaultByoHomeserverConfig: ValidatedServerConfig = {
+    hsUrl: "https://matrix-client.matrix.org",
+    hsName: "matrix.org",
+    hsNameIsDifferent: true,
+    isUrl: "https://vector.im",
+    isDefault: false,
+    isNameResolvable: false,
+    warning: null,
+};
 
 export default class MatrixChat extends React.PureComponent<IProps, IState> {
     public static displayName = "MatrixChat";
@@ -693,7 +715,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 if (payload.screenAfterLogin) {
                     this.screenAfterLogin = payload.screenAfterLogin;
                 }
-                this.viewLogin();
+                this.viewLogin(payload.params || {});
                 break;
             case "start_password_recovery":
                 this.setStateForNewView({
@@ -997,6 +1019,8 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             newState.register_client_secret = params.client_secret;
             newState.register_session_id = params.session_id;
             newState.register_id_sid = params.sid;
+        } else if (params.hs) {
+            newState.hs = params.hs;
         }
 
         newState.isMobileRegistration = isMobileRegistration;
@@ -1004,7 +1028,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         this.setStateForNewView(newState);
         ThemeController.isLogin = true;
         this.themeWatcher?.recheck();
-        this.notifyNewScreen(isMobileRegistration ? "mobile_register" : "register");
+        this.notifyNewScreen(`${isMobileRegistration ? "mobile_register" : "register"}${params.hs ? `?hs=${params.hs}` : ""}`);
     }
 
     // switch view to the given room
@@ -1109,7 +1133,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             view: Views.LOGIN,
             ...otherState,
         });
-        this.notifyNewScreen("login");
+        this.notifyNewScreen(`login${otherState?.hs ? `?hs=${otherState?.hs}` : ""}`);
         ThemeController.isLogin = true;
         this.themeWatcher?.recheck();
     }
@@ -1787,6 +1811,14 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         }
 
         if (screen === "register") {
+            if (ephemeralHomeserverConfig) {
+                if (params?.hs === "ephemeral") {
+                    this.onServerConfigChange(ephemeralHomeserverConfig);
+                } else {
+                    const defaultConfig = SdkConfig.get("validated_server_config");
+                    if (defaultConfig) this.onServerConfigChange(defaultConfig);
+                }
+            }
             dis.dispatch({
                 action: "start_registration",
                 params: params,
@@ -1798,6 +1830,11 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 params: params,
             });
         } else if (screen === "login") {
+            if (ephemeralHomeserverConfig && params?.hs === "ephemeral") {
+                this.onServerConfigChange(ephemeralHomeserverConfig);
+            } else if (params?.hs === "byo") {
+                this.onServerConfigChange(defaultByoHomeserverConfig);
+            }
             dis.dispatch({
                 action: "start_login",
                 params: params,
@@ -1987,8 +2024,12 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         dis.dispatch({ action: "timeline_resize" });
     }
 
-    private onRegisterClick = (): void => {
-        this.showScreen("register");
+    private onRegisterClick = (ephemeral: boolean = false): void => {
+        if (ephemeral) {
+            this.showScreen("register", { hs: "ephemeral" });
+        } else {
+            this.showScreen("register");
+        }
     };
 
     private onLoginClick = (): void => {
@@ -2174,6 +2215,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     defaultDeviceDisplayName={this.props.defaultDeviceDisplayName}
                     fragmentAfterLogin={fragmentAfterLogin}
                     mobileRegister={this.state.isMobileRegistration}
+                    ephemeral={this.state.hs === "ephemeral"}
                     {...this.getServerProperties()}
                 />
             );
@@ -2198,6 +2240,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     onServerConfigChange={this.onServerConfigChange}
                     fragmentAfterLogin={fragmentAfterLogin}
                     defaultUsername={this.props.startingFragmentQueryParams?.defaultUsername as string | undefined}
+                    ephemeral={this.state.hs === "ephemeral"}
                     {...this.getServerProperties()}
                 />
             );
