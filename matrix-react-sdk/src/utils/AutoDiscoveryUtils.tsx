@@ -30,7 +30,7 @@ const LIVELINESS_DISCOVERY_ERRORS: string[] = [
 export class ValidatedServerConfig {
     hsUrl: string;
     hsName: string;
-    hsNameIsDifferent: string;
+    hsNameIsDifferent: boolean | string;
 
     isUrl: string;
 
