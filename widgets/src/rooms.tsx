@@ -42,7 +42,7 @@ const sponsors: Sponsor[] = (sponsorData as any[])
 
 const youtubeIds = [
   ["T_N0I1vYUrc", "J5Susi6f1eE", "-3iLYLhPIqo"],
-  ["w7wj9HrRFPk", "PRMwUjXSa3A", "1GiwoMkuSHg"],
+  ["w7wj9HrRFPk", "PRMwUjXSa3A", "1GiwoMkuSHg", "vMI5rIoVMic"],
 ];
 
 const rooms: Record<string, ReactElement> = {
@@ -104,7 +104,7 @@ const rooms: Record<string, ReactElement> = {
   "🪶seagl2021-osem-event-850": <YouTube id={youtubeIds[1][2]} />,
   "🪶seagl2021-osem-event-851": <YouTube id={youtubeIds[0][1]} />,
   "🪶seagl2021-osem-event-854": <YouTube id={youtubeIds[0][2]} />,
-  "🪶seagl2021-osem-event-856": <YouTube id={youtubeIds[1][1]} />,
+  "🪶seagl2021-osem-event-856": <YouTube id={youtubeIds[1][3]} />,
   "🪶seagl2021-osem-event-857": <YouTube id={youtubeIds[1][0]} />,
   "🪶seagl2021-osem-event-858": <YouTube id={youtubeIds[1][0]} />,
   "🪶seagl2021-osem-event-859": <YouTube id={youtubeIds[1][1]} />,
