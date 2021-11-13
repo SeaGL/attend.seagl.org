@@ -138,7 +138,7 @@ async function start() {
             const isAndroid = /Android/.test(navigator.userAgent);
             if (isIos || isAndroid) {
                 if (document.cookie.indexOf("element_mobile_redirect_to_guide=false") === -1) {
-                    window.location.href = "mobile_guide/";
+                    window.location.href = "mobile_guide/index.html";
                     return;
                 }
             }
