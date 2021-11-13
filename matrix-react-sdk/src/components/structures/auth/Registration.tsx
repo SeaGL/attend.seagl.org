@@ -68,6 +68,7 @@ interface IProps {
     sessionId?: string;
     idSid?: string;
     fragmentAfterLogin?: string;
+    ephemeral?: boolean;
 
     // Called when the user has logged in. Params:
     // - object with userId, deviceId, homeserverUrl, identityServerUrl, accessToken
@@ -563,6 +564,7 @@ export default class Registration extends React.Component<IProps, IState> {
                         serverConfig={this.props.serverConfig}
                         canSubmit={!this.state.serverErrorIsFatal}
                         matrixClient={this.state.matrixClient}
+                        ephemeral={this.props.ephemeral}
                     />
                 </React.Fragment>
             );

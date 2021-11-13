@@ -53,7 +53,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
         this.defaultServer = config["validated_server_config"]!;
         const { serverConfig } = this.props;
 
-        let otherHomeserver = "";
+        let otherHomeserver = "matrix.org";
         if (!serverConfig.isDefault) {
             if (serverConfig.isNameResolvable && serverConfig.hsName) {
                 otherHomeserver = serverConfig.hsName;
@@ -199,7 +199,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
             >
                 <form className="mx_Dialog_content" id="mx_ServerPickerDialog" onSubmit={this.onSubmit}>
                     <p>
-                        {_t("auth|server_picker_intro")} {text}
+                        {"The providers where you can host your account are called ‘homeservers’."} {text}
                     </p>
 
                     <StyledRadioButton
@@ -219,12 +219,12 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
                         checked={!this.state.defaultChosen}
                         onChange={this.onOtherChosen}
                         childrenInLabel={false}
-                        aria-label={_t("auth|server_picker_custom")}
+                        aria-label={"Homeserver"}
                     >
                         <Field
                             type="text"
                             className="mx_ServerPickerDialog_otherHomeserver"
-                            label={_t("auth|server_picker_custom")}
+                            label={"Homeserver"}
                             onChange={this.onHomeserverChange}
                             onFocus={this.onOtherChosen}
                             ref={this.fieldRef}
@@ -236,7 +236,7 @@ export default class ServerPickerDialog extends React.PureComponent<IProps, ISta
                             id="mx_homeserverInput"
                         />
                     </StyledRadioButton>
-                    <p>{_t("auth|server_picker_explainer")}</p>
+                    <p>{"Enter the name of the homeserver that hosts your account."}</p>
 
                     <AccessibleButton className="mx_ServerPickerDialog_continue" kind="primary" onClick={this.onSubmit}>
                         {_t("action|continue")}

@@ -216,7 +216,29 @@ interface IState {
     justRegistered?: boolean;
     roomJustCreatedOpts?: IOpts;
     forceTimeline?: boolean; // see props
+    hs?: string;
 }
+
+const serverConfigPresets = {
+    "2022.seagl.org": {
+        hsUrl: "https://matrix.2022.seagl.org",
+        hsName: "Temporary Account",
+        hsNameIsDifferent: true,
+        isUrl: undefined,
+        isDefault: true,
+        isNameResolvable: false,
+        warning: null,
+    },
+    "matrix.org": {
+        hsUrl: "https://matrix-client.matrix.org",
+        hsName: "matrix.org",
+        hsNameIsDifferent: true,
+        isUrl: "https://vector.im",
+        isDefault: false,
+        isNameResolvable: true,
+        warning: null,
+    },
+};
 
 export default class MatrixChat extends React.PureComponent<IProps, IState> {
     public static displayName = "MatrixChat";
@@ -987,12 +1009,14 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             newState.register_client_secret = params.client_secret;
             newState.register_session_id = params.session_id;
             newState.register_id_sid = params.sid;
+        } else if (params.hs) {
+            newState.hs = params.hs;
         }
 
         this.setStateForNewView(newState);
         ThemeController.isLogin = true;
         this.themeWatcher.recheck();
-        this.notifyNewScreen("register");
+        this.notifyNewScreen(`register${params.hs ? `?hs=${params.hs}` : ""}`);
     }
 
     // switch view to the given room
@@ -1808,12 +1832,18 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         }
 
         if (screen === "register") {
+            if (params?.hs === "ephemeral") {
+                this.onServerConfigChange(serverConfigPresets["2022.seagl.org"]);
+            } else {
+                this.onServerConfigChange(serverConfigPresets["matrix.org"]);
+            }
             dis.dispatch({
                 action: "start_registration",
                 params: params,
             });
             PerformanceMonitor.instance.start(PerformanceEntryNames.REGISTER);
         } else if (screen === "login") {
+            this.onServerConfigChange(serverConfigPresets["2022.seagl.org"]);
             dis.dispatch({
                 action: "start_login",
                 params: params,
@@ -1994,8 +2024,12 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         dis.dispatch({ action: "timeline_resize" });
     }
 
-    private onRegisterClick = (): void => {
-        this.showScreen("register");
+    private onRegisterClick = (ephemeral: boolean = false): void => {
+        if (ephemeral) {
+            this.showScreen("register", { hs: "ephemeral" });
+        } else {
+            this.showScreen("register");
+        }
     };
 
     private onLoginClick = (): void => {
@@ -2191,6 +2225,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     onServerConfigChange={this.onServerConfigChange}
                     defaultDeviceDisplayName={this.props.defaultDeviceDisplayName}
                     fragmentAfterLogin={fragmentAfterLogin}
+                    ephemeral={this.state.hs === "ephemeral"}
                     {...this.getServerProperties()}
                 />
             );
@@ -2215,6 +2250,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     onServerConfigChange={this.onServerConfigChange}
                     fragmentAfterLogin={fragmentAfterLogin}
                     defaultUsername={this.props.startingFragmentQueryParams?.defaultUsername as string | undefined}
+                    ephemeral={this.state.hs === "ephemeral"}
                     {...this.getServerProperties()}
                 />
             );
