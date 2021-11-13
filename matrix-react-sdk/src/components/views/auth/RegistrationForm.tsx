@@ -67,6 +67,7 @@ interface IProps {
     serverConfig: ValidatedServerConfig;
     canSubmit?: boolean;
     matrixClient: MatrixClient;
+    ephemeral?: boolean;
 
     onRegisterClick(params: {
         username: string;
@@ -425,6 +426,9 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
     }
 
     private showEmail() {
+        if (this.props.ephemeral) {
+            return false;
+        }
         if (!this.authStepIsUsed('m.login.email.identity')) {
             return false;
         }
@@ -432,6 +436,9 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
     }
 
     private showPhoneNumber() {
+        if (this.props.ephemeral) {
+            return false;
+        }
         const threePidLogin = !SdkConfig.get().disable_3pid_login;
         if (!threePidLogin || !this.authStepIsUsed('m.login.msisdn')) {
             return false;

@@ -30,6 +30,7 @@ interface IProps {
     dialogTitle?: string;
     serverConfig: ValidatedServerConfig;
     onServerConfigChange?(config: ValidatedServerConfig): void;
+    prompt?: boolean;
 }
 
 const showPickerDialog = (
@@ -53,7 +54,7 @@ const onHelpClick = () => {
     }, "mx_ServerPicker_helpDialog");
 };
 
-const ServerPicker = ({ title, dialogTitle, serverConfig, onServerConfigChange }: IProps) => {
+const ServerPicker = ({ title, dialogTitle, serverConfig, onServerConfigChange, prompt = false }: IProps) => {
     const disableCustomUrls = SdkConfig.get("disable_custom_urls");
 
     let editBtn;
@@ -68,6 +69,11 @@ const ServerPicker = ({ title, dialogTitle, serverConfig, onServerConfigChange }
         editBtn = <AccessibleButton className="mx_ServerPicker_change" kind="link" onClick={onClick}>
             { _t("Edit") }
         </AccessibleButton>;
+        React.useLayoutEffect(() => {
+            if (prompt) {
+                onClick();
+            }
+        }, []);
     }
 
     let serverName: React.ReactNode = serverConfig.isNameResolvable ? serverConfig.hsName : serverConfig.hsUrl;
