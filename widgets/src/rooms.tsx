@@ -3,6 +3,8 @@ import Page from "./components/Page";
 import Announcements from "./components/Announcements.mdx";
 import BotHelp from "./components/BotHelp.mdx";
 import CareerExpo from "./components/CareerExpo.mdx";
+import CocktailsAndMocktailsWithMako from "./components/CocktailsAndMocktailsWithMako.mdx";
+import DevOpsPartyGames from "./components/DevOpsPartyGames.mdx";
 import InfoBooth from "./components/InfoBooth.mdx";
 import Orchestration from "./components/Orchestration.mdx";
 import PendingStream from "./components/PendingStream.mdx";
@@ -67,10 +69,10 @@ const rooms: Record<string, ReactElement> = {
   "🪶seagl2021-sponsor-ubuntu": <Sponsor sponsor={sponsors.find((s) => s.name === "Ubuntu Community Fund")!} />,
 
   // Social events
-  "🪶seagl2021-osem-event-868": <Page Content={Welcome} />, // Lightning Talks
+  "🪶seagl2021-osem-event-868": <YouTube id={youtubeIds[0][0]} />, // Lightning Talks
   "🪶seagl2021-osem-event-870": <Page Content={Welcome} />, // Saturday TeaGL
-  "🪶seagl2021-osem-event-872": <Page Content={Welcome} />, // DevOps Party Games
-  "🪶seagl2021-osem-event-873": <Page Content={Welcome} />, // Cocktails and Mocktails with Mako
+  "🪶seagl2021-osem-event-872": <Page Content={DevOpsPartyGames} />, // DevOps Party Games
+  "🪶seagl2021-osem-event-873": <Page Content={CocktailsAndMocktailsWithMako} />, // Cocktails and Mocktails with Mako
   "🪶seagl2021-osem-event-875": <Page Content={Welcome} />, // Winners announced!
   "🪶seagl2021-osem-event-877": <Page Content={Welcome} />, // Make Tea Sandwiches with Molly and Sri!
   "🪶seagl2021-osem-event-878": <Page Content={Welcome} />, // Trivia Contest for fun and prizes!
