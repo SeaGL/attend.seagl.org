@@ -23,6 +23,7 @@
         "https://matrix.org": false,
         "https://matrix-client.matrix.org": false
     },
+    "mobile_guide_toast": false,
     "setting_defaults": {
         "breadcrumbs": true,
         "feature_element_call_video_rooms": false,
