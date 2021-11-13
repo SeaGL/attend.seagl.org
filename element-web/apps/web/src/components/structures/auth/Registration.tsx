@@ -72,6 +72,8 @@ interface IProps {
     idSid?: string;
     fragmentAfterLogin?: string;
     mobileRegister?: boolean;
+    ephemeral?: boolean;
+
     // Called when the user has logged in. Params:
     // - object with userId, deviceId, homeserverUrl, identityServerUrl, accessToken
     onLoggedIn(params: IMatrixClientCreds): Promise<void>;
@@ -648,6 +650,7 @@ export default class Registration extends React.Component<IProps, IState> {
                 <React.Fragment>
                     {ssoSection}
                     <RegistrationForm
+                        serverConfig={this.props.serverConfig}
                         defaultUsername={this.state.formVals.username}
                         defaultEmail={this.state.formVals.email}
                         defaultPhoneCountry={this.state.formVals.phoneCountry}
@@ -658,6 +661,7 @@ export default class Registration extends React.Component<IProps, IState> {
                         canSubmit={!this.state.serverErrorIsFatal}
                         matrixClient={this.state.matrixClient}
                         mobileRegister={this.props.mobileRegister}
+                        ephemeral={this.props.ephemeral}
                     />
                 </React.Fragment>
             );

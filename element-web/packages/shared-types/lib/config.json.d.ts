@@ -219,6 +219,12 @@ export interface WebConfigJson {
     seagl?: {
         auto_join?: string[];
         conference_space?: string;
+        destroyed_homeservers?: string[];
+        ephemeral_homeserver?: {
+            domain: string;
+            server_name: string;
+            url: string;
+        };
         space_filter?: string;
         trusted_origins?: string[];
     };

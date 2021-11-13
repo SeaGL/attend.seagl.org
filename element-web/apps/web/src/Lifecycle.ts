@@ -662,6 +662,15 @@ export async function restoreSessionFromStorage(opts?: { ignoreGuest?: boolean }
     const { hsUrl, isUrl, hasAccessToken, accessToken, refreshToken, userId, deviceId, isGuest } =
         await getStoredSessionVars();
 
+    if (hsUrl) {
+        const destroyedHomeservers = SdkConfig.get("seagl")?.destroyed_homeservers ?? [];
+        if (destroyedHomeservers.includes(hsUrl)) {
+            logger.info(`Abandoning session from known destroyed homeserver ${hsUrl}`);
+            await clearStorage();
+            return false;
+        }
+    }
+
     if (hasAccessToken && !accessToken) {
         logger.warn(
             "restoreSessionFromStorage: storage indicates we should have an access token, but we do not. Displaying StorageEvictedDialog",

@@ -17,6 +17,7 @@ import Modal from "../../../Modal";
 import { _t, _td } from "../../../languageHandler";
 import SdkConfig from "../../../SdkConfig";
 import { SAFE_LOCALPART_REGEX } from "../../../Registration";
+import { type ValidatedServerConfig } from "../../../utils/ValidatedServerConfig";
 import withValidation, { type IFieldState, type IValidationResult } from "../elements/Validation";
 import EmailField from "./EmailField";
 import PassphraseField from "./PassphraseField";
@@ -45,6 +46,7 @@ enum UsernameAvailableStatus {
 export const PASSWORD_MIN_SCORE = 3; // safely unguessable: moderate protection from offline slow-hash scenario.
 
 interface IProps {
+    serverConfig: ValidatedServerConfig;
     // Values pre-filled in the input boxes when the component loads
     defaultEmail?: string;
     defaultPhoneCountry?: string;
@@ -57,6 +59,7 @@ interface IProps {
     canSubmit?: boolean;
     matrixClient: MatrixClient;
     mobileRegister?: boolean;
+    ephemeral?: boolean;
 
     onRegisterClick(params: {
         username: string;
@@ -413,6 +416,9 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
     }
 
     private showEmail(): boolean {
+        if (this.props.ephemeral) {
+            return false;
+        }
         const threePidLogin = !SdkConfig.get().disable_3pid_login;
         if (!threePidLogin || !this.authStepIsUsed("m.login.email.identity")) {
             return false;
@@ -421,6 +427,9 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
     }
 
     private showPhoneNumber(): boolean {
+        if (this.props.ephemeral) {
+            return false;
+        }
         const threePidLogin = !SdkConfig.get().disable_3pid_login;
         if (!threePidLogin || !this.authStepIsUsed("m.login.msisdn")) {
             return false;
@@ -585,6 +594,12 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
 
         return (
             <div>
+                {this.props.ephemeral && this.props.serverConfig.isDefault && (
+                    <p>
+                        This temporary account <strong>will be deleted</strong> after the conference.
+                    </p>
+                )}
+
                 <form onSubmit={this.onSubmit}>
                     <div className="mx_AuthBody_fieldRow">{this.renderUsername()}</div>
                     {passwordFields}

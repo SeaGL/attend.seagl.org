@@ -30,6 +30,7 @@ interface IProps {
     loginIncorrect: boolean;
     disableSubmit?: boolean;
     busy?: boolean;
+    ephemeral?: boolean;
 
     onSubmit(username: string, phoneCountry: void, phoneNumber: void, password: string): void;
     onSubmit(username: void, phoneCountry: string, phoneNumber: string, password: string): void;
@@ -385,7 +386,7 @@ export default class PasswordLogin extends React.PureComponent<IProps, IState> {
         const loginField = this.renderLoginField(this.state.loginType, !autoFocusPassword);
 
         let loginType;
-        if (!SdkConfig.get().disable_3pid_login) {
+        if (!this.props.ephemeral && !SdkConfig.get().disable_3pid_login) {
             loginType = (
                 <div className="mx_Login_type_container">
                     <label className="mx_Login_type_label">{_t("auth|identifier_label")}</label>
@@ -430,7 +431,7 @@ export default class PasswordLogin extends React.PureComponent<IProps, IState> {
                             this[LoginField.Password] = field;
                         }}
                     />
-                    {forgotPasswordJsx}
+                    {!this.props.ephemeral && forgotPasswordJsx}
                     {!this.props.busy && (
                         <Button className="mx_Login_submit" size="md" type="submit" disabled={this.props.disableSubmit}>
                             {_t("action|sign_in")}
