@@ -14,6 +14,10 @@ dotenv.config();
 let ogImageUrl = process.env.RIOT_OG_IMAGE_URL;
 if (!ogImageUrl) ogImageUrl = 'https://app.element.io/themes/element/img/logos/opengraph.png';
 
+const additionalPlugins = [
+    // This is where you can put your customisation replacements.
+];
+
 const cssThemes = {
     // CSS themes
     "theme-legacy-light": "./node_modules/matrix-react-sdk/res/themes/legacy-light/css/legacy-light.scss",
@@ -528,6 +532,7 @@ module.exports = (env, argv) => {
             }),
             useHMR && new ReactRefreshWebpackPlugin(fullPageErrors ? undefined : { overlay: { entry: false } }),
 
+            ...additionalPlugins,
         ].filter(Boolean),
 
         output: {
