@@ -15,7 +15,10 @@ let ogImageUrl = process.env.RIOT_OG_IMAGE_URL;
 if (!ogImageUrl) ogImageUrl = 'https://app.element.io/themes/element/img/logos/opengraph.png';
 
 const additionalPlugins = [
-    // This is where you can put your customisation replacements.
+    new webpack.NormalModuleReplacementPlugin(
+        /src[\/\\]customisations[\/\\]Security\.ts/,
+        path.resolve(__dirname, "src/customisations/ConferenceSecurity.ts")
+    ),
 ];
 
 const cssThemes = {
