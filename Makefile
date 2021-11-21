@@ -1,6 +1,11 @@
-.PHONY: all clean element-web static widgets
+.PHONY: all clean down element-web static widgets
 
 all: clean element-web widgets static
+
+down:
+	make clean \
+	&& mkdir --parents 'dist' \
+	&& cp 'static/down.html' 'dist/index.html'
 
 element-web:
 	cd 'element-web' \
