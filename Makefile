@@ -1,6 +1,11 @@
-.PHONY: all clean element-web matrix-react-sdk static widgets
+.PHONY: all clean down element-web matrix-react-sdk static widgets
 
 all: clean matrix-react-sdk element-web widgets static
+
+down:
+	make clean \
+	&& mkdir --parents 'dist' \
+	&& cp 'static/down.html' 'dist/index.html'
 
 element-web:
 	cd 'element-web' \
