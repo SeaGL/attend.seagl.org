@@ -48,6 +48,14 @@ make 'element-web-dev'
 
 To update Element Web, reapply our customizations to the new upstream. For minor updates this might be accomplished by merging the update or rebasing our commits, but if Element Web’s features have changed substantially, further development may be necessary. You must consider the _intent_ of each of our commits; even if it applies cleanly, achieving our desired result may require further modifications in the newer Element Web.
 
+## Decommissioning
+
+Build a static placeholder:
+
+```bash
+make 'down'
+```
+
 [coreutils]: https://www.gnu.org/software/coreutils/
 [diffutils]: https://www.gnu.org/software/diffutils/
 [Element Web]: https://github.com/element-hq/element-web

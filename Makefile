@@ -1,4 +1,4 @@
-.PHONY: all clean element-web-dev
+.PHONY: all clean down element-web-dev
 
 all: clean dist
 
@@ -18,6 +18,10 @@ dist/.sentinel: element-web/apps/web/webapp
 	  'element-web/apps/web/webapp/' \
 	  'dist/'
 	touch 'dist/.sentinel'
+
+down: clean
+	mkdir --verbose 'dist'
+	cp --verbose 'static/down.html' 'dist/index.html'
 
 element-web/apps/web/webapp: element-web/node_modules/.sentinel $(shell find 'element-web/apps/web/src' -type 'f' ! -name 'modules.js')
 	cd 'element-web/apps/web' && pnpm build
