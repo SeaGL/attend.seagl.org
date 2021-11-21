@@ -25,6 +25,15 @@ Serve it at e.g. [`localhost:8000`](http://localhost:8000/):
 python -m 'http.server' --directory 'dist'
 ```
 
+## Decommissioning
+
+Build a static placeholder:
+
+```bash
+make 'down'
+```
+
+
 [find]: https://www.gnu.org/software/findutils/
 [http.server]: https://docs.python.org/3/library/http.server.html
 [Make]: https://www.gnu.org/software/make/

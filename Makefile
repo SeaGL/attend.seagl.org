@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: all clean down
 
 all: clean dist
 
@@ -14,6 +14,10 @@ dist/.sentinel: element-web/webapp
 	  'element-web/webapp/' \
 	  'dist/'
 	touch 'dist/.sentinel'
+
+down: clean
+	mkdir --verbose 'dist'
+	cp --verbose 'static/down.html' 'dist/index.html'
 
 element-web/node_modules: element-web/yarn.lock
 	cd 'element-web' && yarn install --frozen-lockfile
