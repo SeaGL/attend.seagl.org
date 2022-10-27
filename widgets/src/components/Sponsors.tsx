@@ -21,7 +21,7 @@ const Sponsors = ({ sponsors }: Props) => {
 
   return (
     <>
-      <h1>SeaGL 2021 Sponsors</h1>
+      <h1>SeaGL 2022 Sponsors</h1>
 
       <p>Our community sponsors are the lifeblood of SeaGL and we can't thank them enough.</p>
 
