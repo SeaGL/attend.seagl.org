@@ -982,19 +982,7 @@ export default class LegacyCallHandler extends EventEmitter {
         // We leave the check for whether there's already a call in this room until later,
         // otherwise it can race.
 
-        const members = getJoinedNonFunctionalMembers(room);
-        if (members.length <= 1) {
-            Modal.createDialog(ErrorDialog, {
-                description: _t("You cannot place a call with yourself."),
-            });
-        } else if (members.length === 2) {
-            logger.info(`Place ${type} call in ${roomId}`);
-
-            await this.placeMatrixCall(roomId, type, transferee);
-        } else {
-            // > 2
-            await this.placeJitsiCall(roomId, type);
-        }
+        await this.placeJitsiCall(roomId, type);
     }
 
     public hangupAllCalls(): void {
