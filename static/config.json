@@ -42,6 +42,6 @@
     },
     "mobileGuideToast": false,
     "jitsi": {
-        "preferredDomain": "meet.seattlematrix.org"
+        "preferredDomain": "meet.jit.si"
     }
 }
