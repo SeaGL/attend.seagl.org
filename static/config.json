@@ -2,7 +2,7 @@
     "default_server_config": {
         "m.homeserver": {
             "base_url": "https://matrix.2022.seagl.org",
-            "server_name": "Temporary Account"
+            "server_name": "SeaGL 2022 Temporary Account"
         }
     },
     "disable_custom_urls": false,
