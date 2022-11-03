@@ -222,7 +222,7 @@ interface IState {
 const serverConfigPresets = {
     "2022.seagl.org": {
         hsUrl: "https://matrix.2022.seagl.org",
-        hsName: "Temporary Account",
+        hsName: "SeaGL 2022 Temporary Account",
         hsNameIsDifferent: true,
         isUrl: undefined,
         isDefault: true,
