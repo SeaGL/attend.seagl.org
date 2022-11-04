@@ -612,7 +612,6 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                     <ServerPicker
                         serverConfig={this.props.serverConfig}
                         onServerConfigChange={this.props.onServerConfigChange}
-                        prompt={true}
                     />
                     { this.renderLoginComponentForFlows() }
                     { footer }
