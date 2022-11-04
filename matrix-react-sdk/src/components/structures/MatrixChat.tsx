@@ -1385,7 +1385,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         this.themeWatcher.recheck();
         StorageManager.tryPersistStorage();
 
-        if (MatrixClientPeg.currentUserIsJustRegistered() && SettingsStore.getValue("FTUE.useCaseSelection") === null) {
+        if (false && MatrixClientPeg.currentUserIsJustRegistered() && SettingsStore.getValue("FTUE.useCaseSelection") === null) {
             this.setStateForNewView({ view: Views.USE_CASE_SELECTION });
 
             // Listen to changes in settings and hide the use case screen if appropriate - this is necessary because
