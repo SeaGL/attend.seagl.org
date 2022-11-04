@@ -832,7 +832,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 dis.dispatch<ViewRoomPayload>({
                     action: Action.ViewRoom,
                     auto_join: true,
-                    room_alias: "#2022:seagl.org",
+                    room_alias: "#SeaGL2022:seattlematrix.org",
                     metricsTrigger: undefined,
                 });
                 break;
@@ -1452,11 +1452,11 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         }
 
         const autoJoinAliases = [
-            "#2022-announcements:seagl.org",
-            "#2022-welcome:seagl.org",
-            "#2022-hallway:seagl.org",
-            "#2022-current-sessions:seagl.org",
-            "#2022-upcoming-sessions:seagl.org",
+            "#SeaGL2022-announcements:seattlematrix.org",
+            "#SeaGL2022-welcome:seattlematrix.org",
+            "#SeaGL2022-hallway:seattlematrix.org",
+            "#SeaGL2022-current-sessions:seattlematrix.org",
+            "#SeaGL2022-upcoming-sessions:seattlematrix.org",
         ];
         const client = MatrixClientPeg.get();
         try {
