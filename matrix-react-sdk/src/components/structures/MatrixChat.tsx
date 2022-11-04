@@ -1283,6 +1283,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         StorageManager.tryPersistStorage();
 
         if (
+            false &&
             MatrixClientPeg.currentUserIsJustRegistered() &&
             SettingsStore.getValue("FTUE.useCaseSelection") === null
         ) {
