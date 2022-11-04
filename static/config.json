@@ -42,6 +42,6 @@
     },
     "mobileGuideToast": false,
     "jitsi": {
-        "preferredDomain": "meet.jit.si"
+        "preferredDomain": "meet.seagl.org"
     }
 }
