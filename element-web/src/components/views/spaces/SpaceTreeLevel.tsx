@@ -42,6 +42,7 @@ import { type NotificationState } from "../../../stores/notifications/Notificati
 import SpaceContextMenu from "../context_menus/SpaceContextMenu";
 import { useRovingTabIndex } from "../../../accessibility/RovingTabIndex";
 import { KeyBindingAction } from "../../../accessibility/KeyboardShortcuts";
+import SdkConfig from "../../../SdkConfig";
 
 type ButtonProps<T extends keyof HTMLElementTagNameMap> = Omit<
     AccessibleButtonProps<T>,
@@ -198,10 +199,13 @@ export class SpaceItem extends React.PureComponent<IItemProps, IItemState> {
     public constructor(props: IItemProps) {
         super(props);
 
+        const conferenceSpace = SdkConfig.get("seagl")?.conference_space;
+
         const collapsed = SpaceTreeLevelLayoutStore.instance.getSpaceCollapsedState(
             props.space.roomId,
             this.props.parents,
-            !props.isNested, // default to collapsed for root items
+            !props.isNested && // default to collapsed for root items
+                !(conferenceSpace && this.props.space.getCanonicalAlias() === conferenceSpace),
         );
 
         this.state = {
