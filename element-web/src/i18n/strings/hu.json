@@ -1,0 +1,39 @@
+{
+    "action": {
+        "create_account": "Fiók létrehozása",
+        "dismiss": "Eltüntetés",
+        "explore_rooms": "Szobák felderítése",
+        "open": "Megnyitás",
+        "sign_in": "Bejelentkezés"
+    },
+    "auth": {
+        "sso_complete_in_browser_dialog_title": "A böngészőben fejezze be a bejelentkezést"
+    },
+    "desktop_default_device_name": "Asztali %(brand)s: (%(platformName)s)",
+    "download_completed": "A letöltés befejeződött",
+    "error": {
+        "app_launch_unexpected_error": "Váratlan hiba történt az alkalmazás előkészítésénél. A részletekért lásd a konzolt.",
+        "cannot_load_config": "A konfigurációs fájlt nem sikerült betölteni: frissítse az oldalt és próbálja meg újra.",
+        "invalid_configuration_no_server": "Érvénytelen konfiguráció: nincs megadva alapértelmezett kiszolgáló.",
+        "invalid_json": "Az Element érvénytelen JSON-t tartalmazó konfigurációval rendelkezik. Javítsa és töltse újra az oldalt.",
+        "invalid_json_detail": "A feldolgozó algoritmus üzenete: %(message)s",
+        "invalid_json_generic": "Érvénytelen JSON",
+        "misconfigured": "Az Element hibásan van beállítva"
+    },
+    "failed_to_start": "Az indítás sikertelen",
+    "go_to_element_io": "Irány a element.io",
+    "incompatible_browser": {
+        "browser_links": "A legjobb élmény érdékében telepítsen <chromeLink>Chrome-ot</chromeLink>, <firefoxLink>Firefoxot</firefoxLink> vagy <safariLink>Safarit</safariLink>.",
+        "continue_warning": "Megértettem a kockázatot és folytatom",
+        "feature_warning": "Folytathatja a jelenlegi böngészőjével, de néhány vagy az összes funkció használhatatlan lehet, vagy hibák lehetnek az alkalmazás kinézetében és viselkedésében.",
+        "features": "A(z) %(brand)s speciális böngészőfunkciókat használ, amelyeket a jelenlegi böngészője nem támogat.",
+        "summary": "A böngészője nem tudja futtatni ezt: %(brand)s",
+        "title": "Nem támogatott böngésző"
+    },
+    "powered_by_matrix": "A gépházban: Matrix",
+    "powered_by_matrix_with_logo": "Elosztott, titkosított csevegés és együttműködés ezzel: $matrixLogo",
+    "unknown_device": "Ismeretlen eszköz",
+    "use_brand_on_mobile": "Mobilon használja ezt: %(brand)s",
+    "web_default_device_name": "%(appName)s: (%(browserName)s itt: %(osName)s)",
+    "welcome_to_element": "Üdvözli az Element"
+}
