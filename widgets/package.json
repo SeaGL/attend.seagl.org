@@ -4,10 +4,10 @@
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@parcel/transformer-pug": "2.7.0",
+    "@parcel/transformer-pug": "2.9.3",
     "js-yaml": "^4.1.0",
     "jstransformer-markdown-it": "^3.0.0",
-    "parcel": "^2.7.0"
+    "parcel": "^2.9.3"
   },
   "scripts": {
     "build": "parcel build --no-cache --public-url '/widgets/' entrypoints/*",
