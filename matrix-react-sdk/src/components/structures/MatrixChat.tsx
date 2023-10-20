@@ -220,9 +220,9 @@ interface IState {
 }
 
 const serverConfigPresets = {
-    "2022.seagl.org": {
-        hsUrl: "https://matrix.2022.seagl.org",
-        hsName: "SeaGL 2022 Temporary Account",
+    "2023.seagl.org": {
+        hsUrl: "https://matrix.2023.seagl.org",
+        hsName: "SeaGL 2023 Temporary Account",
         hsNameIsDifferent: true,
         isUrl: undefined,
         isDefault: true,
@@ -832,7 +832,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 dis.dispatch<ViewRoomPayload>({
                     action: Action.ViewRoom,
                     auto_join: true,
-                    room_alias: "#SeaGL2022:seattlematrix.org",
+                    room_alias: "#SeaGL2023:seattlematrix.org",
                     metricsTrigger: undefined,
                 });
                 break;
@@ -1452,11 +1452,11 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         }
 
         const autoJoinAliases = [
-            "#SeaGL2022-announcements:seattlematrix.org",
-            "#SeaGL2022-welcome:seattlematrix.org",
-            "#SeaGL2022-hallway:seattlematrix.org",
-            "#SeaGL2022-current-sessions:seattlematrix.org",
-            "#SeaGL2022-upcoming-sessions:seattlematrix.org",
+            "#SeaGL2023-announcements:seattlematrix.org",
+            "#SeaGL2023-welcome:seattlematrix.org",
+            "#SeaGL2023-hallway:seattlematrix.org",
+            "#SeaGL2023-current-sessions:seattlematrix.org",
+            "#SeaGL2023-upcoming-sessions:seattlematrix.org",
         ];
         const client = MatrixClientPeg.get();
         try {
@@ -1833,7 +1833,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
 
         if (screen === "register") {
             if (params?.hs === "ephemeral") {
-                this.onServerConfigChange(serverConfigPresets["2022.seagl.org"]);
+                this.onServerConfigChange(serverConfigPresets["2023.seagl.org"]);
             } else {
                 this.onServerConfigChange(serverConfigPresets["matrix.org"]);
             }
@@ -1843,7 +1843,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             });
             PerformanceMonitor.instance.start(PerformanceEntryNames.REGISTER);
         } else if (screen === "login") {
-            this.onServerConfigChange(serverConfigPresets["2022.seagl.org"]);
+            this.onServerConfigChange(serverConfigPresets["2023.seagl.org"]);
             dis.dispatch({
                 action: "start_login",
                 params: params,

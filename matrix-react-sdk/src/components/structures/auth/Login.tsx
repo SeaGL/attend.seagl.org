@@ -174,7 +174,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
 
     public isBusy = (): boolean => !!this.state.busy || !!this.props.busy;
 
-    isEphemeral = () => this.props.serverConfig.hsUrl === "https://matrix.2022.seagl.org";
+    isEphemeral = () => this.props.serverConfig.hsUrl === "https://matrix.2023.seagl.org";
 
     public onPasswordLogin: OnPasswordLogin = async (
         username: string | undefined,

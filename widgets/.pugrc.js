@@ -8,13 +8,9 @@ const { custom: { year }, origin } = fromSite("_config.yml");
 
 const absolute = (url) => new URL(url, origin).toString();
 
-const level = (slug, title) => ({
-  slug,
-  title,
-  sponsors: sponsors.filter((s) => s.level === slug),
-});
+const sponsorship = fromSite("_data/sponsorship.yml");
 
-const sponsors = fromSite("_data/sponsors.yml")
+const sponsors = sponsorship.sponsors
   .filter((s) => year in s.sponsorships)
   .sort((a, b) => a.name.localeCompare(b.name))
   .map(({ logo: { horizontal, square }, sponsorships, ...sponsor }) => ({
@@ -26,13 +22,12 @@ const sponsors = fromSite("_data/sponsors.yml")
     },
   }));
 
-const sponsorLevels = [
-  level("platinum", "Platinum"),
-  level("gold", "Gold"),
-  level("silver", "Silver"),
-  level("bronze", "Bronze"),
-  level("media", "Media Sponsors"),
-  level("thanks", "Special Thanks To"),
-];
+const sponsorLevels = Object.entries(sponsorship.levels).map(
+  ([slug, title]) => ({
+    slug,
+    title,
+    sponsors: sponsors.filter((s) => s.level === slug),
+  })
+);
 
 module.exports = { locals: { sponsorLevels } };

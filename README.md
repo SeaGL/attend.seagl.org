@@ -1,6 +1,6 @@
 # attend.seagl.org
 
-Web interface to the SeaGL 2022 virtual conference
+Web interface to the virtual half of SeaGL 2023
 
 ## Development
 
