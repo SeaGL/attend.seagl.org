@@ -88,6 +88,8 @@ const REFRESH_TOKEN_IV = "refresh_token";
 const HAS_ACCESS_TOKEN_STORAGE_KEY = "mx_has_access_token";
 const HAS_REFRESH_TOKEN_STORAGE_KEY = "mx_has_refresh_token";
 
+const destroyedHomeservers = ["https://matrix.2022.seagl.org"];
+
 dis.register((payload) => {
     if (payload.action === Action.TriggerLogout) {
         // noinspection JSIgnoredPromiseFromCall - we don't care if it fails
@@ -613,6 +615,11 @@ export async function restoreFromLocalStorage(opts?: { ignoreGuest?: boolean }):
     }
 
     if (accessToken && userId && hsUrl) {
+        if (destroyedHomeservers.includes(hsUrl)) {
+            logger.log(`Ignoring session from known destroyed homeserver ${hsUrl}`);
+            return false;
+        }
+
         if (ignoreGuest && isGuest) {
             logger.log("Ignoring stored guest account: " + userId);
             return false;
