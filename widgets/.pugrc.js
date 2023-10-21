@@ -1,4 +1,6 @@
 const { readFileSync } = require("fs");
+const markdownIt = require("markdown-it")();
+const markdownItExternalLink = require("markdown-it-external-link").default;
 const { join } = require("path");
 const { load } = require("js-yaml");
 
@@ -30,4 +32,12 @@ const sponsorLevels = Object.entries(sponsorship.levels).map(
   })
 );
 
-module.exports = { locals: { sponsorLevels } };
+markdownIt.use(markdownItExternalLink);
+
+module.exports = {
+  filters: {
+    "markdown-it": (source) => markdownIt.render(source),
+  },
+
+  locals: { markdownItExternalLink, sponsorLevels },
+};

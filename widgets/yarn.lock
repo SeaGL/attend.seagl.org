@@ -1119,6 +1119,11 @@ csso@^4.2.0:
   dependencies:
     css-tree "^1.1.2"
 
+detect-external-link@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/detect-external-link/-/detect-external-link-2.0.1.tgz#1df5e9e54fbfbc5ca52d82a8da97797a7ff1d64b"
+  integrity sha512-q1geB6Hbd/q2ruRckXZhzj0XIAbeyVnlai9ZQybCxIApcyv1JMXi+IGhAAWYViIa9PumWD9IOk9cvB8PSKsClQ==
+
 detect-libc@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
@@ -1486,10 +1491,28 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+markdown-it-external-link@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-external-link/-/markdown-it-external-link-1.1.0.tgz#81a3169f62b7bfaed3971306c101961e3e5806da"
+  integrity sha512-edDijfvFjssMav4591fJnVKj9oTH1lgpFuOfpw7wm+eVrBf9/pg05PFUQaZImuirpjkz0UzRLNskD8piaULA/g==
+  dependencies:
+    detect-external-link "2.0.1"
+
 markdown-it@^13.0.1:
   version "13.0.1"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-13.0.1.tgz#c6ecc431cacf1a5da531423fc6a42807814af430"
   integrity sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==
+  dependencies:
+    argparse "^2.0.1"
+    entities "~3.0.1"
+    linkify-it "^4.0.1"
+    mdurl "^1.0.1"
+    uc.micro "^1.0.5"
+
+markdown-it@^13.0.2:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-13.0.2.tgz#1bc22e23379a6952e5d56217fbed881e0c94d536"
+  integrity sha512-FtwnEuuK+2yVU7goGn/MJ0WBZMM9ZPgU9spqlFs7/A/pDIUNSOQZhUgOqYCficIuR2QaFnrt8LHqBWsbTAoI5w==
   dependencies:
     argparse "^2.0.1"
     entities "~3.0.1"
