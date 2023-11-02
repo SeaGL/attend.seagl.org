@@ -1,2 +1,7 @@
+mixin offline
+  p Offline
+  script.
+    setTimeout(() => window.location.reload(true), 1000 * 60);
+
 mixin youtube(id)
   iframe(allow="encrypted-media; picture-in-picture" allowFullScreen src=`https://www.youtube-nocookie.com/embed/${id}?modestbranding=1&rel=0`)
