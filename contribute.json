@@ -1,0 +1,13 @@
+{
+    "name": "Element",
+    "description": "A glossy Matrix collaboration client for the web.",
+    "repository": {
+        "url": "https://github.com/element-hq/element-web",
+        "license": "Apache License 2.0"
+    },
+    "bugs": {
+        "list": "https://github.com/element-hq/element-web/issues",
+        "report": "https://github.com/element-hq/element-web/issues/new/choose"
+    },
+    "keywords": ["chat", "riot", "matrix"]
+}

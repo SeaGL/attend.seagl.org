@@ -1,0 +1,44 @@
+{
+    "action": {
+        "create_account": "Create Account",
+        "dismiss": "Dismiss",
+        "explore_rooms": "Explore rooms",
+        "open": "Open",
+        "sign_in": "Sign in"
+    },
+    "auth": {
+        "sso_complete_in_browser_dialog_title": "Go to your browser to complete Sign In"
+    },
+    "desktop_default_device_name": "%(brand)s Desktop: %(platformName)s",
+    "download_completed": "Download Completed",
+    "error": {
+        "app_launch_unexpected_error": "Unexpected error preparing the app. See console for details.",
+        "cannot_load_config": "Unable to load config file: please refresh the page to try again.",
+        "invalid_configuration_mixed_server": "Invalid configuration: a default_hs_url can't be specified along with default_server_name or default_server_config",
+        "invalid_configuration_no_server": "Invalid configuration: no default server specified.",
+        "invalid_json": "Your Element configuration contains invalid JSON. Please correct the problem and reload the page.",
+        "invalid_json_detail": "The message from the parser is: %(message)s",
+        "invalid_json_generic": "Invalid JSON",
+        "misconfigured": "Your Element is misconfigured"
+    },
+    "incompatible_browser": {
+        "continue": "Continue anyway",
+        "description": "%(brand)s uses some browser features which are not available in your current browser. %(detail)s",
+        "detail_can_continue": "If you continue, some features may stop working and there is a risk that you may lose data in the future.",
+        "detail_no_continue": "Try updating this browser if you're not using the latest version and try again.",
+        "learn_more": "Learn more",
+        "linux": "Linux",
+        "macos": "Mac",
+        "supported_browsers": "For the best experience, use <Chrome>Chrome</Chrome>, <Firefox>Firefox</Firefox>, <Edge>Edge</Edge>, or <Safari>Safari</Safari>.",
+        "title": "%(brand)s does not support this browser",
+        "use_desktop_heading": "Use %(brand)s Desktop instead",
+        "use_mobile_heading": "Use %(brand)s on mobile instead",
+        "use_mobile_heading_after_desktop": "Or use our mobile app",
+        "windows": "Windows (%(bits)s-bit)"
+    },
+    "powered_by_matrix": "Powered by Matrix",
+    "powered_by_matrix_with_logo": "Decentralised, encrypted chat &amp; collaboration powered by $matrixLogo",
+    "unknown_device": "Unknown device",
+    "web_default_device_name": "%(appName)s: %(browserName)s on %(osName)s",
+    "welcome_to_element": "Welcome to Element"
+}

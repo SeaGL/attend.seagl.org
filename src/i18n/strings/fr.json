@@ -1,0 +1,32 @@
+{
+    "action": {
+        "create_account": "Créer un compte",
+        "dismiss": "Ignorer",
+        "explore_rooms": "Parcourir les salons",
+        "open": "Ouvrir",
+        "sign_in": "Se connecter"
+    },
+    "auth": {
+        "sso_complete_in_browser_dialog_title": "Utilisez votre navigateur pour terminer la connexion"
+    },
+    "desktop_default_device_name": "%(brand)s pour bureau : %(platformName)s",
+    "download_completed": "Téléchargement terminé",
+    "error": {
+        "app_launch_unexpected_error": "Une erreur inattendue est survenue pendant la préparation de l’application. Consultez la console pour avoir des détails.",
+        "cannot_load_config": "Impossible de charger le fichier de configuration : rechargez la page pour réessayer.",
+        "invalid_configuration_mixed_server": "Configuration invalide : default_hs_url ne peut pas être défini en même temps que default_server_name ou default_server_config",
+        "invalid_configuration_no_server": "Configuration invalide : aucun serveur par défaut indiqué.",
+        "invalid_json": "La configuration de votre Element contient du JSON invalide. Veuillez corriger le problème et recharger la page.",
+        "invalid_json_detail": "Le message de l’analyseur est : %(message)s",
+        "invalid_json_generic": "JSON non valide",
+        "misconfigured": "Votre Element est mal configuré"
+    },
+    "incompatible_browser": {
+        "title": "Navigateur non pris en charge"
+    },
+    "powered_by_matrix": "Propulsé par Matrix",
+    "powered_by_matrix_with_logo": "Messagerie décentralisée, chiffrée &amp; une collaboration alimentée par $matrixLogo",
+    "unknown_device": "Appareil inconnu",
+    "web_default_device_name": "%(appName)s : %(browserName)s pour %(osName)s",
+    "welcome_to_element": "Bienvenue sur Element"
+}
