@@ -11,13 +11,17 @@ clean:
 	  'dist' \
 	  'element-web/apps/web/webapp'
 
-dist: dist/.sentinel
+dist: dist/.sentinel dist/config.json
 
 dist/.sentinel: element-web/apps/web/webapp
 	rsync --itemize-changes --recursive --times \
+		--exclude '/config.json' \
 	  'element-web/apps/web/webapp/' \
 	  'dist/'
 	touch 'dist/.sentinel'
+
+dist/config.json: static/config.json
+	cp --verbose 'static/config.json' 'dist/config.json'
 
 down: clean
 	mkdir --verbose 'dist'

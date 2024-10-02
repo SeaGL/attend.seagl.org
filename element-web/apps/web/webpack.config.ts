@@ -673,6 +673,9 @@ export default (env: string, argv: Record<string, any>): webpack.Configuration =
                         context: path.resolve(__dirname, "src/vector/mobile_guide"),
                         to: "mobile_guide",
                     },
+                    ...(devMode ? [
+                        "../../../static/config.json",
+                    ] : [])
                 ],
             }),
 
