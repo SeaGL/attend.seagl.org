@@ -689,6 +689,9 @@ module.exports = (env, argv) => {
                         context: path.resolve(__dirname, "src/vector/mobile_guide"),
                         to: "mobile_guide",
                     },
+                    ...(devMode ? [
+                        "../static/config.json",
+                    ] : [])
                 ],
             }),
 
