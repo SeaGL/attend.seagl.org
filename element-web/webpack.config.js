@@ -692,6 +692,7 @@ module.exports = (env, argv) => {
                     ...(devMode ? [
                         "../static/config.json",
                         { from: "embedded-pages/**", context: path.resolve(__dirname, "../static") },
+                        { from: "**", context: path.resolve(__dirname, "../widgets/dist"), to: "widgets/seagl/" },
                     ] : [])
                 ],
             }),
