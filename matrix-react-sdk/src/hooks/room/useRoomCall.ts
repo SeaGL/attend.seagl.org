@@ -6,7 +6,7 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
 Please see LICENSE files in the repository root for full details.
 */
 
-import { Room } from "matrix-js-sdk/src/matrix";
+import { EventTimeline, Room } from "matrix-js-sdk/src/matrix";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { CallType } from "matrix-js-sdk/src/webrtc/call";
 
@@ -268,6 +268,10 @@ export const useRoomCall = (
     // We hide both buttons if they require widgets but widgets are disabled.
     if (memberCount > 2 && !SettingsStore.getValue(UIFeature.Widgets)) {
         hideVoiceCallButton = true;
+        hideVideoCallButton = true;
+    }
+    // Allow rooms to hide the video call button
+    if (room.getLiveTimeline().getState(EventTimeline.FORWARDS)?.getStateEvents("org.seagl.jitsi", "")?.getContent()?.disable) {
         hideVideoCallButton = true;
     }
 
