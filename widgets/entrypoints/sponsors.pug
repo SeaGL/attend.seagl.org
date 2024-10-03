@@ -1,0 +1,18 @@
+extends ../components/base
+
+block content
+  .page.light
+    h1 SeaGL 2023 Sponsors
+
+    p Our community sponsors are the lifeblood of SeaGL and we can't thank them enough.
+
+    p Their contributions will have a real and lasting effect in the FLOSS community. Thank you all.
+
+    each level in sponsorLevels
+      unless level.sponsors.length === 0
+        h2= level.title
+
+        .logo-wall(class=`level-${level.slug}`)
+          each sponsor in level.sponsors
+            a.logo-wall-item(class=(sponsor.logo.horizontal ? "horizontal" : "") title=sponsor.name href=sponsor.url rel="noopener noreferrer" target="_blank")
+              img(alt=sponsor.name src=(sponsor.logo.horizontal || sponsor.logo.square))

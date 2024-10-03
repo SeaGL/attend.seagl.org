@@ -1,6 +1,6 @@
-.PHONY: all clean down element-web matrix-react-sdk static
+.PHONY: all clean down element-web matrix-react-sdk static widgets
 
-all: clean matrix-react-sdk element-web static
+all: clean matrix-react-sdk element-web widgets static
 
 down:
 	make clean \
@@ -25,7 +25,16 @@ static:
 	rsync --checksum --itemize-changes --recursive \
 		'static/' 'dist/'
 
+widgets:
+	cd 'widgets' \
+	&& yarn install --frozen-lockfile \
+	&& yarn build \
+	&& mkdir --parents '../dist' \
+	&& rsync --checksum --itemize-changes --recursive \
+		'dist/' '../dist/widgets/'
+
 clean:
 	rm --force --recursive \
 		'dist' \
-		'element-web/webapp'
+		'element-web/webapp' \
+		'widgets/dist'
