@@ -30,6 +30,7 @@
         "breadcrumbs": true,
         "feature_element_call_video_rooms": false,
         "feature_group_calls": false,
+        "Registration.mobileRegistrationHelper": false,
         "showAvatarChanges": false,
         "showDisplaynameChanges": false,
         "Spaces.enabledMetaSpaces": { "home-space": false, "orphans-space": true },
