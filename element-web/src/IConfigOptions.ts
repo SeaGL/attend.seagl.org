@@ -214,6 +214,7 @@ export interface IConfigOptions {
         conference_space?: string;
         destroyed_homeservers?: string[];
         ephemeral_homeserver?: {
+            cohort: string;
             domain: string;
             server_name: string;
             url: string;
