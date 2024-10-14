@@ -10,6 +10,7 @@ import { TypedEventEmitter } from "matrix-js-sdk/src/matrix";
 import { logger } from "matrix-js-sdk/src/logger";
 import { cloneDeep } from "lodash";
 
+import SdkConfig from "../SdkConfig";
 import SettingsStore from "../settings/SettingsStore";
 import { SettingLevel } from "../settings/SettingLevel";
 import ToastStore from "./ToastStore";
@@ -63,7 +64,7 @@ export class ReleaseAnnouncementStore extends TypedEventEmitter<ReleaseAnnouncem
      * Whether the release announcement is enabled. Useful to disable it in e2e tests.
      * @private
      */
-    private enabled = true;
+    private enabled = SdkConfig.get("show_release_announcements") ?? true;
 
     /**
      * The singleton instance of the ReleaseAnnouncementStore.

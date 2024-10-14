@@ -96,6 +96,7 @@ export interface WebConfigJson {
     default_widget_container_height?: number; // height in pixels
 
     show_labs_settings?: boolean;
+    show_release_announcements?: boolean; // Re element-hq/element-web#32775
     features?: Record<string, boolean>; // <FeatureName, EnabledBool>
 
     /**
