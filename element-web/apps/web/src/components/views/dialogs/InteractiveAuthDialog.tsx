@@ -65,6 +65,8 @@ export interface InteractiveAuthDialogProps<T = unknown> extends Pick<
     // Default is defined in _getDefaultDialogAesthetics()
     aestheticsForStagePhases?: DialogAesthetics;
 
+    ephemeral?: boolean;
+
     onFinished(success?: boolean, result?: T | Error | null): void;
 }
 
@@ -184,6 +186,7 @@ export default class InteractiveAuthDialog<T> extends React.Component<Interactiv
                         onStagePhaseChange={this.onUpdateStagePhase}
                         continueText={continueText}
                         continueKind={continueKind}
+                        ephemeral={this.props.ephemeral}
                     />
                 </div>
             );

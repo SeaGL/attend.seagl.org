@@ -17,6 +17,7 @@ import UserProfileSolidIcon from "@vector-im/compound-design-tokens/assets/web/i
 
 import EmailPromptIcon from "../../../../res/img/element-icons/email-prompt.svg";
 import { _t } from "../../../languageHandler";
+import SdkConfig from "../../../SdkConfig";
 import { AuthHeaderModifier } from "../../structures/auth/header/AuthHeaderModifier";
 import AccessibleButton, { type AccessibleButtonKind, type ButtonEvent } from "../elements/AccessibleButton";
 import Field from "../elements/Field";
@@ -87,6 +88,7 @@ interface IAuthEntryProps {
     requestEmailToken?: () => Promise<void>;
     fail: (error: Error) => void;
     clientSecret: string;
+    ephemeral?: boolean;
 }
 
 interface IPasswordAuthEntryState {
@@ -681,6 +683,17 @@ export class RegistrationTokenAuthEntry extends React.Component<IAuthEntryProps,
 
     public componentDidMount(): void {
         this.props.onPhaseChange(DEFAULT_PHASE);
+
+        if (this.props.ephemeral) {
+            const ephemeralHomeserver = SdkConfig.get("seagl")?.ephemeral_homeserver;
+
+            if (ephemeralHomeserver) {
+                this.props.submitAuthDict({
+                    type: this.props.loginType,
+                    token: ephemeralHomeserver.cohort,
+                });
+            }
+        }
     }
 
     private onSubmit = (e: FormEvent): void => {
@@ -724,6 +737,10 @@ export class RegistrationTokenAuthEntry extends React.Component<IAuthEntryProps,
                     {this.props.errorText}
                 </div>
             );
+        }
+
+        if (this.props.ephemeral) {
+            return errorSection ?? <Spinner />;
         }
 
         return (
