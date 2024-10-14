@@ -802,7 +802,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 break;
             case Action.ViewHomePage:
                 const conference_space = SdkConfig.get("seagl")?.conference_space;
-                if (conference_space) {
+                if (payload.justRegistered && conference_space) {
                     dis.dispatch<ViewRoomPayload>({
                         action: Action.ViewRoom,
                         auto_join: true,

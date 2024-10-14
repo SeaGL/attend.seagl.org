@@ -40,6 +40,19 @@ const onClickNewRoom = (ev: ButtonEvent): void => {
     dis.dispatch({ action: "view_create_room" });
 };
 
+const onClickEnterConference = (ev: ButtonEvent): void => {
+    const conference_space = SdkConfig.get("seagl")?.conference_space;
+
+    if (conference_space) {
+        dis.dispatch({
+            action: Action.ViewRoom,
+            auto_join: true,
+            room_alias: conference_space,
+            metricsTrigger: undefined,
+        });
+    }
+};
+
 interface IProps {
     justRegistered?: boolean;
 }
@@ -116,14 +129,8 @@ const HomePage: React.FC<IProps> = ({ justRegistered = false }) => {
             <div className="mx_HomePage_default_wrapper">
                 {introSection}
                 <div className="mx_HomePage_default_buttons">
-                    <AccessibleButton onClick={onClickSendDm} className="mx_HomePage_button_sendDm">
-                        {_tDom("onboarding|send_dm")}
-                    </AccessibleButton>
-                    <AccessibleButton onClick={onClickExplore} className="mx_HomePage_button_explore">
-                        {_tDom("onboarding|explore_rooms")}
-                    </AccessibleButton>
-                    <AccessibleButton onClick={onClickNewRoom} className="mx_HomePage_button_createGroup">
-                        {_tDom("onboarding|create_room")}
+                    <AccessibleButton onClick={onClickEnterConference} className="mx_HomePage_button_createGroup">
+                        Enter Conference
                     </AccessibleButton>
                 </div>
             </div>
