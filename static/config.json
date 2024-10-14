@@ -59,6 +59,7 @@
             "https://matrix.2023.seagl.org"
         ],
         "ephemeral_homeserver": {
+            "cohort": "SeaGL2024",
             "domain": "2024.seagl.org",
             "server_name": "SeaGL 2024 Temporary Account",
             "url": "https://matrix.2024.seagl.org"

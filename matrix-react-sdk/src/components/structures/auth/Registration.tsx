@@ -552,6 +552,7 @@ export default class Registration extends React.Component<IProps, IState> {
                     clientSecret={this.props.clientSecret}
                     emailSid={this.props.idSid}
                     poll={true}
+                    ephemeral={this.props.ephemeral}
                 />
             );
         } else if (!this.state.matrixClient && !this.state.busy) {
