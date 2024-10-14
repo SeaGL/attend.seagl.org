@@ -28,6 +28,7 @@
     "mobile_guide_toast": false,
     "setting_defaults": {
         "breadcrumbs": true,
+        "Registration.mobileRegistrationHelper": false,
         "showAvatarChanges": false,
         "showDisplaynameChanges": false,
         "Spaces.enabledMetaSpaces": {
