@@ -368,6 +368,8 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
 
         // remove the loginToken or auth code from the URL regardless
         if (
+            this.props.realQueryParams?.userId ||
+            this.props.realQueryParams?.password ||
             this.props.realQueryParams?.loginToken ||
             this.props.realQueryParams?.code ||
             this.props.realQueryParams?.state

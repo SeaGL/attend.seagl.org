@@ -28,6 +28,7 @@ import Modal from "./Modal";
 import ActiveWidgetStore from "./stores/ActiveWidgetStore";
 import PlatformPeg from "./PlatformPeg";
 import { sendLoginRequest } from "./Login";
+import AutoDiscoveryUtils from "./utils/AutoDiscoveryUtils";
 import * as StorageManager from "./utils/StorageManager";
 import * as StorageAccess from "./utils/StorageAccess";
 import SettingsStore from "./settings/SettingsStore";
@@ -267,6 +268,11 @@ export async function attemptDelegatedAuthLogin(
     defaultDeviceDisplayName?: string,
     fragmentAfterLogin?: string,
 ): Promise<boolean> {
+    if (queryParams.userId && queryParams.password) {
+        console.log("Automatically logging in with provided user ID and password");
+        return attemptPasswordLogin(queryParams, defaultDeviceDisplayName);
+    }
+
     if (queryParams.code && queryParams.state) {
         console.log("We have OIDC params - attempting OIDC login");
         return attemptOidcNativeLogin(queryParams);
@@ -339,6 +345,32 @@ async function getUserIdFromAccessToken(
         logger.error("Failed to retrieve userId using accessToken", error);
         throw new Error("Failed to retrieve userId using accessToken");
     }
+}
+
+export async function attemptPasswordLogin(
+    queryParams: QueryDict,
+    defaultDeviceDisplayName?: string,
+): Promise<boolean> {
+    const { userId, password } = queryParams;
+    if (!(typeof userId === "string" && typeof password === "string")) return false;
+
+    const serverName = userId.split(":").slice(1).join(":");
+    const discovered = await AutoDiscoveryUtils.validateServerName(serverName);
+
+    return sendLoginRequest(discovered.hsUrl, undefined, "m.login.password", {
+        identifier: { type: "m.id.user", user: queryParams.userId },
+        password: queryParams.password,
+        initial_device_display_name: defaultDeviceDisplayName,
+    })
+        .then(async function (creds) {
+            logger.log("Logged in with password");
+            await onSuccessfulDelegatedAuthLogin(creds);
+            return true;
+        })
+        .catch((error) => {
+            logger.error("Failed to log in with password:", error);
+            return false;
+        });
 }
 
 /**

@@ -57,6 +57,8 @@ function onTokenLoginCompleted(): void {
     // a little nasty but let's redirect to clear them.
     const url = new URL(window.location.href);
 
+    url.searchParams.delete("userId");
+    url.searchParams.delete("password");
     url.searchParams.delete("loginToken");
     url.searchParams.delete("state");
     url.searchParams.delete("code");
