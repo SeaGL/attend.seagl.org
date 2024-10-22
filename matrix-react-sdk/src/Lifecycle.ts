@@ -270,6 +270,14 @@ export async function attemptDelegatedAuthLogin(
     fragmentAfterLogin?: string,
 ): Promise<boolean> {
     if (queryParams.userId && queryParams.password) {
+        if (
+            (await getStoredSessionOwner())[0] === queryParams.userId &&
+            (await restoreSessionFromStorage({ ignoreGuest: true }))
+        ) {
+            console.log("Ignored provided user ID and password in preference for existing session");
+            return false;
+        }
+
         console.log("Automatically logging in with provided user ID and password");
         return attemptPasswordLogin(queryParams, defaultDeviceDisplayName);
     }
