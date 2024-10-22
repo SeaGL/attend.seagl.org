@@ -25,6 +25,7 @@ import Modal from "./Modal";
 import ActiveWidgetStore from "./stores/ActiveWidgetStore";
 import PlatformPeg from "./PlatformPeg";
 import { sendLoginRequest } from "./Login";
+import AutoDiscoveryUtils from "./utils/AutoDiscoveryUtils";
 import * as StorageManager from "./utils/StorageManager";
 import * as StorageAccess from "./utils/StorageAccess";
 import SettingsStore from "./settings/SettingsStore";
@@ -62,6 +63,7 @@ import {
     REFRESH_TOKEN_STORAGE_KEY,
     tryDecryptToken,
 } from "./utils/tokens/tokens";
+import { getServerName } from "./utils/permalinks/Permalinks";
 import { checkBrowserSupport } from "./SupportedBrowser";
 import { type URLParams } from "./vector/url_utils.ts";
 import { type OnLoggedInPayload } from "./dispatcher/payloads/OnLoggedInPayload.ts";
@@ -267,6 +269,19 @@ export async function attemptDelegatedAuthLogin(
     defaultDeviceDisplayName?: string,
     fragmentAfterLogin?: string,
 ): Promise<boolean> {
+    if (urlParams.passwordLogin) {
+        if (
+            (await getStoredSessionOwner())[0] === urlParams.passwordLogin.userId &&
+            (await restoreSessionFromStorage({ ignoreGuest: true }))
+        ) {
+            console.log("Ignored provided user ID and password in preference for existing session");
+            return false;
+        }
+
+        console.log("Automatically logging in with provided user ID and password");
+        return attemptPasswordLogin(urlParams.passwordLogin, defaultDeviceDisplayName);
+    }
+
     if (urlParams.oauth2) {
         return attemptOAuthLogin(urlParams.oauth2);
     }
@@ -361,6 +376,30 @@ async function getUserIdFromAccessToken(
     } catch (error) {
         logger.error("Failed to retrieve userId using accessToken", error);
         throw new Error("Failed to retrieve userId using accessToken");
+    }
+}
+
+export async function attemptPasswordLogin(
+    { userId, password }: NonNullable<URLParams["passwordLogin"]>,
+    defaultDeviceDisplayName?: string,
+): Promise<boolean> {
+    if (!(userId && password)) return false;
+
+    try {
+        const { hsUrl } = await AutoDiscoveryUtils.validateServerName(getServerName(userId));
+
+        const credentials = await sendLoginRequest(hsUrl, undefined, "m.login.password", {
+            identifier: { type: "m.id.user", user: userId },
+            password,
+            initial_device_display_name: defaultDeviceDisplayName,
+        });
+
+        logger.info("Logged in with password");
+        await onSuccessfulDelegatedAuthLogin(credentials);
+        return true;
+    } catch (error) {
+        logger.error("Failed to log in with password:", error);
+        return false;
     }
 }
 

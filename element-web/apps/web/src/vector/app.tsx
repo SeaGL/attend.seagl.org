@@ -43,7 +43,7 @@ function onTokenLoginCompleted(urlParams: URLParams, fragmentAfterLogin: string)
     const url = new URL(window.location.href);
 
     // if we did a token login, we're now left with the login token as query param in the url; clear it out
-    for (const param in { ...urlParams.legacy_sso }) {
+    for (const param in { ...urlParams.legacy_sso, ...urlParams.passwordLogin }) {
         url.searchParams.delete(param);
     }
 
