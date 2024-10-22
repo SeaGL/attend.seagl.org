@@ -74,6 +74,10 @@ const urlParameterConfig = {
         keys: ["guest_user_id", "guest_access_token"],
         location: "fragment",
     },
+    passwordLogin: {
+        keys: ["user_id", "password"],
+        location: "fragment"
+    }
 } as const satisfies Record<
     string,
     {
