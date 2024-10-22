@@ -44,6 +44,9 @@ function onTokenLoginCompleted(): void {
     const url = new URL(window.location.href);
 
     url.searchParams.delete("no_universal_links");
+
+    url.searchParams.delete("userId");
+    url.searchParams.delete("password");
     url.searchParams.delete("loginToken");
     url.searchParams.delete("state");
     url.searchParams.delete("code");

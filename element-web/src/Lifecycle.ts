@@ -34,6 +34,7 @@ import Modal from "./Modal";
 import ActiveWidgetStore from "./stores/ActiveWidgetStore";
 import PlatformPeg from "./PlatformPeg";
 import { sendLoginRequest } from "./Login";
+import AutoDiscoveryUtils from "./utils/AutoDiscoveryUtils";
 import * as StorageManager from "./utils/StorageManager";
 import * as StorageAccess from "./utils/StorageAccess";
 import SettingsStore from "./settings/SettingsStore";
@@ -80,6 +81,7 @@ import {
     tryDecryptToken,
 } from "./utils/tokens/tokens";
 import { TokenRefresher } from "./utils/oidc/TokenRefresher";
+import { getServerName } from "./utils/permalinks/Permalinks";
 import { checkBrowserSupport } from "./SupportedBrowser";
 
 const HOMESERVER_URL_KEY = "mx_hs_url";
@@ -279,6 +281,19 @@ export async function attemptDelegatedAuthLogin(
     defaultDeviceDisplayName?: string,
     fragmentAfterLogin?: string,
 ): Promise<boolean> {
+    if (queryParams.userId && queryParams.password) {
+        if (
+            (await getStoredSessionOwner())[0] === queryParams.userId &&
+            (await restoreSessionFromStorage({ ignoreGuest: true }))
+        ) {
+            console.log("Ignored provided user ID and password in preference for existing session");
+            return false;
+        }
+
+        console.log("Automatically logging in with provided user ID and password");
+        return attemptPasswordLogin(queryParams, defaultDeviceDisplayName);
+    }
+
     if (queryParams.code && queryParams.state) {
         console.log("We have OIDC params - attempting OIDC login");
         return attemptOidcNativeLogin(queryParams);
@@ -350,6 +365,30 @@ async function getUserIdFromAccessToken(
     } catch (error) {
         logger.error("Failed to retrieve userId using accessToken", error);
         throw new Error("Failed to retrieve userId using accessToken");
+    }
+}
+
+export async function attemptPasswordLogin(
+    { userId, password }: QueryDict,
+    defaultDeviceDisplayName?: string,
+): Promise<boolean> {
+    if (!(typeof userId === "string" && typeof password === "string")) return false;
+
+    try {
+        const { hsUrl } = await AutoDiscoveryUtils.validateServerName(getServerName(userId));
+
+        const credentials = await sendLoginRequest(hsUrl, undefined, "m.login.password", {
+            identifier: { type: "m.id.user", user: userId },
+            password,
+            initial_device_display_name: defaultDeviceDisplayName,
+        });
+
+        logger.log("Logged in with password");
+        await onSuccessfulDelegatedAuthLogin(credentials);
+        return true;
+    } catch (error) {
+        logger.error("Failed to log in with password:", error);
+        return false;
     }
 }
 
