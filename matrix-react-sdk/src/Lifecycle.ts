@@ -75,6 +75,7 @@ import {
     tryDecryptToken,
 } from "./utils/tokens/tokens";
 import { TokenRefresher } from "./utils/oidc/TokenRefresher";
+import { getServerName } from "./utils/permalinks/Permalinks";
 import { checkBrowserSupport } from "./SupportedBrowser";
 
 const HOMESERVER_URL_KEY = "mx_hs_url";
@@ -348,29 +349,27 @@ async function getUserIdFromAccessToken(
 }
 
 export async function attemptPasswordLogin(
-    queryParams: QueryDict,
+    { userId, password }: QueryDict,
     defaultDeviceDisplayName?: string,
 ): Promise<boolean> {
-    const { userId, password } = queryParams;
     if (!(typeof userId === "string" && typeof password === "string")) return false;
 
-    const serverName = userId.split(":").slice(1).join(":");
-    const discovered = await AutoDiscoveryUtils.validateServerName(serverName);
+    try {
+        const { hsUrl } = await AutoDiscoveryUtils.validateServerName(getServerName(userId));
 
-    return sendLoginRequest(discovered.hsUrl, undefined, "m.login.password", {
-        identifier: { type: "m.id.user", user: queryParams.userId },
-        password: queryParams.password,
-        initial_device_display_name: defaultDeviceDisplayName,
-    })
-        .then(async function (creds) {
-            logger.log("Logged in with password");
-            await onSuccessfulDelegatedAuthLogin(creds);
-            return true;
-        })
-        .catch((error) => {
-            logger.error("Failed to log in with password:", error);
-            return false;
+        const credentials = await sendLoginRequest(hsUrl, undefined, "m.login.password", {
+            identifier: { type: "m.id.user", user: userId },
+            password,
+            initial_device_display_name: defaultDeviceDisplayName,
         });
+
+        logger.log("Logged in with password");
+        await onSuccessfulDelegatedAuthLogin(credentials);
+        return true;
+    } catch (error) {
+        logger.error("Failed to log in with password:", error);
+        return false;
+    }
 }
 
 /**
