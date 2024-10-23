@@ -1,5 +1,5 @@
 const { readFileSync } = require("fs");
-const markdownIt = require("markdown-it")();
+const markdownIt = require("markdown-it");
 const markdownItExternalLink = require("markdown-it-external-link").default;
 const { join } = require("path");
 const { load } = require("js-yaml");
@@ -36,11 +36,12 @@ const sponsorLevels = Object.entries(sponsorship.levels).map(
   })
 );
 
-markdownIt.use(markdownItExternalLink);
+md = markdownIt({ html: true });
+md.use(markdownItExternalLink);
 
 module.exports = {
   filters: {
-    "markdown-it": (source) => markdownIt.render(source),
+    "markdown-it": (source) => md.render(source),
   },
 
   locals: { markdownItExternalLink, sponsorLevels },
