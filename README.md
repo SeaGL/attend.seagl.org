@@ -7,7 +7,7 @@ Web interface to the virtual half of SeaGL 2024
 Install dependencies:
 
 - [Node.js] (latest LTS)
-- [Yarn]
+- [Yarn Classic]
 - [Make]
 - [rsync]
 - a local web server, such as [serve] or Python’s [`http.server`][http.server]
@@ -41,4 +41,4 @@ the site to AWS [S3] and [CloudFront].
 [rsync]: https://rsync.samba.org/
 [s3]: https://aws.amazon.com/s3/
 [serve]: https://github.com/vercel/serve
-[yarn]: https://yarnpkg.com/
+[yarn classic]: https://classic.yarnpkg.com/
