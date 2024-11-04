@@ -82,7 +82,11 @@ const useSpaces = (): [Room[], MetaSpace[], Room[], SpaceKey] => {
         return SpaceStore.instance.activeSpace;
     });
     const filter = SdkConfig.get("seagl")?.space_filter;
-    const filteredSpaces = filter ? actualSpaces.filter((s) => s.getCanonicalAlias()?.includes(filter)) : actualSpaces;
+    const filteredSpaces = filter
+        ? actualSpaces.filter(
+              (s) => s.getCanonicalAlias()?.includes(filter) || s.getAltAliases().some((a) => a.includes(filter)),
+          )
+        : actualSpaces;
     return [invites, metaSpaces, filteredSpaces, activeSpace];
 };
 
