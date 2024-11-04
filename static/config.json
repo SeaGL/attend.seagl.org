@@ -67,7 +67,8 @@
         "conference_space": "#2024:seagl.org",
         "destroyed_homeservers": [
             "https://matrix.2022.seagl.org",
-            "https://matrix.2023.seagl.org"
+            "https://matrix.2023.seagl.org",
+            "https://matrix.predictably.flawed.science"
         ],
         "ephemeral_homeserver": {
             "cohort": "SeaGL2024",
