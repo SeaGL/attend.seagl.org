@@ -1,7 +1,7 @@
 {
     "default_server_config": {
         "m.homeserver": {
-            "base_url": "https://matrix.2024.seagl.org",
+            "base_url": "https://2024-ephemeral.host.seagl.org",
             "server_name": "SeaGL 2024 Temporary Account"
         }
     },
@@ -73,7 +73,7 @@
             "cohort": "SeaGL2024",
             "domain": "2024.seagl.org",
             "server_name": "SeaGL 2024 Temporary Account",
-            "url": "https://matrix.2024.seagl.org"
+            "url": "https://2024-ephemeral.host.seagl.org"
         },
         "space_filter": "SeaGL"
     }
