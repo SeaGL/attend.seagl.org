@@ -1,7 +1,7 @@
 {
     "default_server_config": {
         "m.homeserver": {
-            "base_url": "https://2024-ephemeral.host.seagl.org",
+            "base_url": "https://matrix.2024.seagl.org",
             "server_name": "SeaGL 2024 Temporary Account"
         }
     },
@@ -70,11 +70,14 @@
             "https://matrix.2023.seagl.org",
             "https://matrix.predictably.flawed.science"
         ],
+        "renamed_homeservers": {
+            "https://2024-ephemeral.host.seagl.org": "https://matrix.2024.seagl.org"
+        },
         "ephemeral_homeserver": {
             "cohort": "SeaGL2024",
             "domain": "2024.seagl.org",
             "server_name": "SeaGL 2024 Temporary Account",
-            "url": "https://2024-ephemeral.host.seagl.org"
+            "url": "https://matrix.2024.seagl.org"
         },
         "space_filter": "SeaGL"
     }

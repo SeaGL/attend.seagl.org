@@ -614,11 +614,15 @@ export async function restoreSessionFromStorage(opts?: { ignoreGuest?: boolean }
     }
 
     if (accessToken && userId && hsUrl) {
-        const destroyedHomeservers = SdkConfig.get("seagl")?.destroyed_homeservers ?? [];
+        const seaglConfig = SdkConfig.get("seagl");
+        const destroyedHomeservers = seaglConfig?.destroyed_homeservers ?? [];
         if (destroyedHomeservers.includes(hsUrl)) {
             logger.log(`Ignoring session from known destroyed homeserver ${hsUrl}`);
             return false;
         }
+        let renamedHsUrl = hsUrl;
+        const renamedHomeservers = seaglConfig?.renamed_homeservers ?? {};
+        for (const [from, to] of Object.entries(renamedHomeservers)) if (renamedHsUrl === from) renamedHsUrl = to;
 
         if (ignoreGuest && isGuest) {
             logger.log("Ignoring stored guest account: " + userId);
@@ -645,7 +649,7 @@ export async function restoreSessionFromStorage(opts?: { ignoreGuest?: boolean }
                 deviceId: deviceId,
                 accessToken: decryptedAccessToken,
                 refreshToken: decryptedRefreshToken,
-                homeserverUrl: hsUrl,
+                homeserverUrl: renamedHsUrl,
                 identityServerUrl: isUrl,
                 guest: isGuest,
                 pickleKey: pickleKey ?? undefined,

@@ -224,6 +224,7 @@ export interface IConfigOptions {
             server_name: string;
             url: string;
         };
+        renamed_homeservers?: Record<string, string>;
         space_filter?: string;
     };
 }
