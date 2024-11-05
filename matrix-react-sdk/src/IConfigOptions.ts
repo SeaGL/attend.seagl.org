@@ -225,7 +225,7 @@ export interface IConfigOptions {
             url: string;
         };
         space_filter?: string;
-    }
+    };
 }
 
 export interface ISsoRedirectOptions {
