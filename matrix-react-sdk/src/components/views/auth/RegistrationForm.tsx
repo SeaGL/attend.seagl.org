@@ -566,6 +566,12 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
 
         return (
             <div>
+                {this.props.ephemeral && this.props.serverConfig.isDefault && (
+                    <p>
+                        This temporary account <strong>will be deleted</strong> after the conference.
+                    </p>
+                )}
+
                 <form onSubmit={this.onSubmit}>
                     <div className="mx_AuthBody_fieldRow">{this.renderUsername()}</div>
                     <div className="mx_AuthBody_fieldRow">

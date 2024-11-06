@@ -528,7 +528,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                     )}
                 </div>
             );
-        } else if (SettingsStore.getValue(UIFeature.Registration)) {
+        } else if (SettingsStore.getValue(UIFeature.Registration) && this.props.ephemeral) {
             footer = (
                 <span className="mx_AuthBody_changeFlow">
                     {_t(
@@ -561,6 +561,34 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                         onServerConfigChange={this.props.onServerConfigChange}
                         disabled={this.isBusy()}
                     />
+                    <div
+                        style={{
+                            color: "var(--cpd-color-text-primary)",
+                            font: "var(--cpd-font-body-md-regular)",
+                            fontSize: "1rem",
+                        }}
+                    >
+                        {this.props.serverConfig.isDefault ? (
+                            <p>
+                                Remember, this temporary account <strong>will be deleted</strong> after the conference.
+                            </p>
+                        ) : (
+                            // TODO: Make look like a warning, not prefixed.
+                            <div>
+                                <p>
+                                    Notice—you’re about to enter your password into a website controlled by SeaGL, not
+                                    by your account provider. In general <strong>you should be skeptical</strong> of any
+                                    website that asks this of you. Only proceed if you trust SeaGL to responsibly handle
+                                    control of your account.
+                                </p>
+                                <p>
+                                    Using this website is{" "}
+                                    <a href="https://seagl.org/attend/existing">not a requirement</a> for remotely
+                                    attending the conference.
+                                </p>
+                            </div>
+                        )}
+                    </div>
                     {this.renderLoginComponentForFlows()}
                     {footer}
                 </AuthBody>

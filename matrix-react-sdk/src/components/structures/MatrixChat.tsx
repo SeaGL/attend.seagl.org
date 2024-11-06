@@ -216,7 +216,16 @@ const ephemeralHomeserverConfig: ValidatedServerConfig | undefined =
     isDefault: true,
     isNameResolvable: false,
     warning: null,
-  };
+};
+const defaultByoHomeserverConfig: ValidatedServerConfig = {
+    hsUrl: "https://matrix-client.matrix.org",
+    hsName: "matrix.org",
+    hsNameIsDifferent: true,
+    isUrl: "https://vector.im",
+    isDefault: false,
+    isNameResolvable: false,
+    warning: null,
+};
 
 export default class MatrixChat extends React.PureComponent<IProps, IState> {
     public static displayName = "MatrixChat";
@@ -689,7 +698,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 if (payload.screenAfterLogin) {
                     this.screenAfterLogin = payload.screenAfterLogin;
                 }
-                this.viewLogin();
+                this.viewLogin(payload.params || {});
                 break;
             case "start_password_recovery":
                 this.setStateForNewView({
@@ -1133,7 +1142,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             view: Views.LOGIN,
             ...otherState,
         });
-        this.notifyNewScreen("login");
+        this.notifyNewScreen(`login${otherState?.hs ? `?hs=${otherState?.hs}` : ""}`);
         ThemeController.isLogin = true;
         this.themeWatcher.recheck();
     }
@@ -1792,8 +1801,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 params: params,
             });
         } else if (screen === "login") {
-            if (ephemeralHomeserverConfig) {
+            if (ephemeralHomeserverConfig && params?.hs === "ephemeral") {
                 this.onServerConfigChange(ephemeralHomeserverConfig);
+            } else if (params?.hs === "byo") {
+                this.onServerConfigChange(defaultByoHomeserverConfig);
             }
             dis.dispatch({
                 action: "start_login",

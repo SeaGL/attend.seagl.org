@@ -15,6 +15,13 @@
     width: auto;
   }
 
+  .mx_ButtonGroupLabel {
+    align-self: flex-start;
+    font-size: inherit;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
   .mx_ButtonGroup {
     margin-top: 10px;
     width: 100%;
@@ -22,11 +29,11 @@
 
   .mx_ButtonRow {
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
+    flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
+    gap: 12px;
     margin: 12px 0 0;
   }
 
@@ -60,6 +67,10 @@
   .mx_ButtonCreateAccount {
     background-color: #0c5973;
     color: white !important;
+  }
+
+  .mx_ButtonCreateAccount + .mx_ButtonSignIn {
+    flex: max-content 1 0;
   }
 
   .mx_SecondaryButton {
@@ -102,7 +113,7 @@
 
   <div class="welcome-content">
     <p>
-      The virtual half of our conference exists in
+      The remote part of our conference uses
       <a href="https://matrix.org/">Matrix</a>,
       an open, decentralized chat network.
       This website is a Matrix client that integrates features of the conference.
@@ -111,18 +122,28 @@
     <p>
       Please see
       <a href="https://seagl.org/attend">How to Attend</a>
-      for complete information on how to access the conference with any Matrix account.
+      for complete information on how to access the conference with a temporary or existing Matrix account.
     </p>
 </div>
 
+  <h2 class="mx_ButtonGroupLabel">Option 1: Use a Temporary Matrix Account</h2>
   <div class="mx_ButtonGroup">
     <div class="mx_ButtonRow">
       <a href="#/register?hs=ephemeral" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconCreateAccount">
-        <div class="mx_ButtonLabel">Create 2024 Account</div>
+        <div class="mx_ButtonLabel">Create Temporary Account</div>
       </a>
 
-      <a href="#/login">
-        Sign In
+      <a href="#/login?hs=ephemeral" class="mx_ButtonParent mx_ButtonSignIn mx_Button_iconSignIn">
+        <div class="mx_ButtonLabel">Sign Back In</div>
+      </a>
+    </div>
+  </div>
+
+  <h2 class="mx_ButtonGroupLabel">Option 2: Bring your own Matrix account</h2>
+  <div class="mx_ButtonGroup">
+    <div class="mx_ButtonRow">
+      <a href="#/login?hs=byo" class="mx_ButtonParent mx_ButtonCreateAccount mx_Button_iconSignIn">
+        <div class="mx_ButtonLabel">Sign in with other Matrix account</div>
       </a>
     </div>
   </div>
