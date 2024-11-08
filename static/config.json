@@ -48,7 +48,7 @@
         "UIFeature.shareSocial": false
     },
     "jitsi": {
-        "preferred_domain": "meet.element.io"
+        "preferred_domain": "meet.seagl.org"
     },
     "element_call": {
         "url": "https://call.element.io",
