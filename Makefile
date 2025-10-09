@@ -4,7 +4,7 @@ all: clean matrix-react-sdk element-web widgets static
 
 down:
 	make clean \
-	&& mkdir --parents 'dist' \
+	&&  -p 'dist' \
 	&& cp 'static/down.html' 'dist/index.html'
 
 element-web:
@@ -12,9 +12,9 @@ element-web:
 	&& yarn link 'matrix-react-sdk' \
 	&& yarn install --frozen-lockfile \
 	&& yarn build \
-	&& mkdir --parents '../dist' \
+	&& mkdir -p '../dist' \
 	&& rsync --checksum --itemize-changes --recursive \
-		'webapp/' '../dist/'
+		'webapp/' '../dist/'mkdir
 
 matrix-react-sdk:
 	cd 'matrix-react-sdk' \
@@ -29,7 +29,7 @@ widgets:
 	cd 'widgets' \
 	&& yarn install --frozen-lockfile \
 	&& yarn build \
-	&& mkdir --parents '../dist' \
+	&& mkdir -p '../dist' \
 	&& rsync --checksum --itemize-changes --recursive \
 		'dist/' '../dist/widgets/'
 
