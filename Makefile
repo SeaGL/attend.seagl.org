@@ -34,7 +34,7 @@ widgets:
 		'dist/' '../dist/widgets/'
 
 clean:
-	rm --force --recursive \
+	rm -rf \
 		'dist' \
 		'element-web/webapp' \
 		'widgets/dist'
