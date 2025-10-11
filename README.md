@@ -1,6 +1,6 @@
 # attend.seagl.org
 
-Web interface to the virtual half of SeaGL 2024
+Web interface to the virtual half of SeaGL 2025
 
 ## Development
 

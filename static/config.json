@@ -1,15 +1,15 @@
 {
     "default_server_config": {
         "m.homeserver": {
-            "base_url": "https://matrix.2024.seagl.org",
-            "server_name": "SeaGL 2024 Temporary Account"
+            "base_url": "https://matrix.2025.seagl.org",
+            "server_name": "SeaGL 2025 Temporary Account"
         }
     },
     "disable_custom_urls": false,
     "disable_guests": false,
     "disable_login_language_selector": true,
     "disable_3pid_login": false,
-    "brand": "SeaGL 2024",
+    "brand": "SeaGL 2025",
     "default_widget_height": 280,
     "default_country_code": "US",
     "show_labs_settings": false,
@@ -58,26 +58,27 @@
     "map_style_url": "https://api.maptiler.com/maps/streets/style.json?key=fU3vlMsMn4Jb6dnEIFsx",
     "seagl": {
         "auto_join": [
-            "#SeaGL2024-Announcements:seattlematrix.org",
-            "#SeaGL2024-Welcome:seattlematrix.org",
-            "#SeaGL2024-Hallway:seattlematrix.org",
-            "#SeaGL2024-CurrentSessions:seattlematrix.org",
-            "#SeaGL2024-UpcomingSessions:seattlematrix.org"
+            "#SeaGL2025-Announcements:seattlematrix.org",
+            "#SeaGL2025-Welcome:seattlematrix.org",
+            "#SeaGL2025-Hallway:seattlematrix.org",
+            "#SeaGL2025-CurrentSessions:seattlematrix.org",
+            "#SeaGL2025-UpcomingSessions:seattlematrix.org"
         ],
-        "conference_space": "#2024:seagl.org",
+        "conference_space": "#2025:seagl.org",
         "destroyed_homeservers": [
             "https://matrix.2022.seagl.org",
             "https://matrix.2023.seagl.org",
+            "https://matrix.2024.seagl.org",
             "https://matrix.predictably.flawed.science"
         ],
         "renamed_homeservers": {
-            "https://2024-ephemeral.host.seagl.org": "https://matrix.2024.seagl.org"
+            "https://2025-ephemeral.host.seagl.org": "https://matrix.2024.seagl.org"
         },
         "ephemeral_homeserver": {
-            "cohort": "SeaGL2024",
-            "domain": "2024.seagl.org",
-            "server_name": "SeaGL 2024 Temporary Account",
-            "url": "https://matrix.2024.seagl.org"
+            "cohort": "SeaGL2025",
+            "domain": "2025.seagl.org",
+            "server_name": "SeaGL 2025 Temporary Account",
+            "url": "https://matrix.2025.seagl.org"
         },
         "space_filter": "SeaGL"
     }
