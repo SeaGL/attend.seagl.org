@@ -1,0 +1,73 @@
+name: Build
+on:
+    pull_request: {}
+    push:
+        branches: [develop, master]
+    merge_group:
+        types: [checks_requested]
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.sha }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+# develop pushes and repository_dispatch handled in build_develop.yaml
+env:
+    # This must be set for fetchdep.sh to get the right branch
+    PR_NUMBER: ${{ github.event.pull_request.number }}
+permissions: {} # No permissions required
+jobs:
+    build:
+        name: "Build on ${{ matrix.image }}"
+        # We build on all 3 platforms to ensure we don't have any OS-specific build incompatibilities
+        strategy:
+            fail-fast: false
+            matrix:
+                image:
+                    - ubuntu-24.04
+                    - windows-2022
+                    - macos-14
+                isDevelop:
+                    - ${{ github.event_name == 'push' && github.ref_name == 'develop' }}
+                isPullRequest:
+                    - ${{ github.event_name == 'pull_request' }}
+                # Skip the ubuntu-24.04 build for the develop branch as the dedicated CD build_develop workflow handles that
+                # Skip the non-linux builds for pull requests as Windows is awfully slow, so run in merge queue only
+                exclude:
+                    - isDevelop: true
+                      image: ubuntu-24.04
+                    - isPullRequest: true
+                      image: windows-2022
+                    - isPullRequest: true
+                      image: macos-14
+        runs-on: ${{ matrix.image }}
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+
+            - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+              with:
+                  # Disable cache on Windows as it is slower than not caching
+                  # https://github.com/actions/setup-node/issues/975
+                  cache: ${{ runner.os != 'Windows' && 'yarn' || '' }}
+                  node-version: "lts/*"
+
+            # Workaround for yarn install timeouts, especially on Windows
+            - run: yarn config set network-timeout 300000
+
+            - name: Fetch layered build
+              run: ./scripts/layered.sh
+
+            - name: Copy config
+              run: cp element.io/develop/config.json config.json
+
+            - name: Build
+              env:
+                  CI_PACKAGE: true
+              run: VERSION=$(scripts/get-version-from-git.sh) yarn build
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+              with:
+                  name: webapp-${{ matrix.image }}
+                  path: webapp
+                  retention-days: 1
