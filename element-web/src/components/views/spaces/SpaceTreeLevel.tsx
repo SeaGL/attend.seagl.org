@@ -205,7 +205,7 @@ export class SpaceItem extends React.PureComponent<IItemProps, IItemState> {
             props.space.roomId,
             this.props.parents,
             !props.isNested && // default to collapsed for root items
-                !(conferenceSpace && this.props.space.getCanonicalAlias() === conferenceSpace),
+                !(conferenceSpace && this.props.space.getCanonicalAlias() === conferenceSpace.alias),
         );
 
         this.state = {

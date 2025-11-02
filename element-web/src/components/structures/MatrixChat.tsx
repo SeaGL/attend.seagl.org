@@ -819,8 +819,9 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     dis.dispatch<ViewRoomPayload>({
                         action: Action.ViewRoom,
                         auto_join: true,
-                        room_alias: conference_space,
+                        room_alias: conference_space.alias,
                         metricsTrigger: undefined,
+                        via_servers: conference_space.via,
                     });
                 } else {
                     this.viewHome(payload.justRegistered);

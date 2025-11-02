@@ -211,7 +211,7 @@ export interface IConfigOptions {
 
     seagl?: {
         auto_join?: string[];
-        conference_space?: string;
+        conference_space?: { alias: string; via: string[]; };
         destroyed_homeservers?: string[];
         ephemeral_homeserver?: {
             cohort: string;
