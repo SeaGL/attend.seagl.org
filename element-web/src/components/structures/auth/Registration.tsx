@@ -77,6 +77,7 @@ interface IProps {
     // registration shouldn't know or care how login is done.
     onLoginClick(): void;
     onServerConfigChange(config: ValidatedServerConfig): void;
+    onWelcomeClick(): void;
 }
 
 interface IState {
@@ -776,7 +777,7 @@ export default class Registration extends React.Component<IProps, IState> {
         }
         return (
             <AuthPage>
-                <AuthHeader />
+                <AuthHeader onWelcomeClick={this.props.onWelcomeClick} />
                 <AuthHeaderProvider>
                     <AuthBody flex>{body}</AuthBody>
                 </AuthHeaderProvider>

@@ -55,6 +55,7 @@ interface Props {
     serverConfig: ValidatedServerConfig;
     onLoginClick: () => void;
     onComplete: () => void;
+    onWelcomeClick(): void;
 }
 
 interface State {
@@ -471,7 +472,7 @@ export default class ForgotPassword extends React.Component<Props, State> {
 
         return (
             <AuthPage>
-                <AuthHeader />
+                <AuthHeader onWelcomeClick={this.props.onWelcomeClick} />
                 <AuthBody className="mx_AuthBody_forgot-password">{resetPasswordJsx}</AuthBody>
             </AuthPage>
         );

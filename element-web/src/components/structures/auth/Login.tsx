@@ -55,6 +55,7 @@ interface IProps {
     onRegisterClick(ephemeral?: boolean): void;
     onForgotPasswordClick?(): void;
     onServerConfigChange(config: ValidatedServerConfig): void;
+    onWelcomeClick(): void;
 }
 
 interface IState {
@@ -538,7 +539,7 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
 
         return (
             <AuthPage>
-                <AuthHeader disableLanguageSelector={this.props.isSyncing || this.state.busyLoggingIn} />
+                <AuthHeader disableLanguageSelector={this.props.isSyncing || this.state.busyLoggingIn} onWelcomeClick={this.props.onWelcomeClick} />
                 <AuthBody>
                     <h1>
                         {_t("action|sign_in")}
