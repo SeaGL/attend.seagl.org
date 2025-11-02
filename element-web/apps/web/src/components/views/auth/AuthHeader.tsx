@@ -10,16 +10,27 @@ import React from "react";
 
 import AuthHeaderLogo from "./AuthHeaderLogo";
 import LanguageSelector from "./LanguageSelector";
+import AccessibleButton, { type ButtonEvent } from "../elements/AccessibleButton";
 
 interface IProps {
     disableLanguageSelector?: boolean;
+
+    onWelcomeClick(): void;
 }
 
 export default class AuthHeader extends React.Component<IProps> {
+    public onWelcomeClick = (ev: ButtonEvent): void => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        this.props.onWelcomeClick();
+    };
+
     public render(): React.ReactNode {
         return (
             <div className="mx_AuthHeader">
-                <AuthHeaderLogo />
+                <AccessibleButton kind="link_inline" onClick={this.onWelcomeClick}>
+                    ‹ SeaGL instructions
+                </AccessibleButton>
                 <LanguageSelector disabled={this.props.disableLanguageSelector} />
             </div>
         );

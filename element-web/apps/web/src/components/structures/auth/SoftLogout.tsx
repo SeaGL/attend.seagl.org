@@ -49,6 +49,7 @@ interface IProps {
 
     // Called when the SSO login completes
     onTokenLoginCompleted: (urlParams: URLParams, fragmentAfterLogin: string) => void;
+    onWelcomeClick(): void;
 }
 
 interface IState {
@@ -294,7 +295,7 @@ export default class SoftLogout extends React.Component<IProps, IState> {
     public render(): React.ReactNode {
         return (
             <AuthPage>
-                <AuthHeader />
+                <AuthHeader onWelcomeClick={this.props.onWelcomeClick} />
                 <AuthBody>
                     <h1>{_t("auth|soft_logout_heading")}</h1>
 

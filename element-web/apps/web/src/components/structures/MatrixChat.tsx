@@ -2128,6 +2128,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         this.showScreen("forgot_password");
     };
 
+    private onWelcomeClick = (): void => {
+        this.showScreen("welcome");
+    };
+
     private onRegisterFlowComplete = (credentials: IMatrixClientCreds): Promise<void> => {
         return this.onUserCompletedLoginFlow(credentials);
     };
@@ -2336,6 +2340,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                         onLoggedIn={this.onRegisterFlowComplete}
                         onLoginClick={this.onLoginClick}
                         onServerConfigChange={this.onServerConfigChange}
+                        onWelcomeClick={this.onWelcomeClick}
                         defaultDeviceDisplayName={this.props.defaultDeviceDisplayName}
                         fragmentAfterLogin={fragmentAfterLogin}
                         mobileRegister={this.state.isMobileRegistration}
@@ -2348,6 +2353,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     <ForgotPassword
                         onComplete={this.onLoginClick}
                         onLoginClick={this.onLoginClick}
+                        onWelcomeClick={this.onWelcomeClick}
                         {...this.getServerProperties()}
                     />
                 );
@@ -2363,6 +2369,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                             SettingsStore.getValue(UIFeature.PasswordReset) ? this.onForgotPasswordClick : undefined
                         }
                         onServerConfigChange={this.onServerConfigChange}
+                        onWelcomeClick={this.onWelcomeClick}
                         fragmentAfterLogin={fragmentAfterLogin}
                         defaultUsername={this.props.urlParams?.defaults?.defaultUsername}
                         ephemeral={this.state.hs === "ephemeral"}
@@ -2374,6 +2381,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                     <SoftLogout
                         urlParams={this.props.urlParams}
                         onTokenLoginCompleted={this.props.onTokenLoginCompleted}
+                        onWelcomeClick={this.onWelcomeClick}
                         fragmentAfterLogin={fragmentAfterLogin}
                     />
                 );
