@@ -65,7 +65,10 @@
             "#SeaGL2026-CurrentSessions:seattlematrix.org",
             "#SeaGL2026-UpcomingSessions:seattlematrix.org"
         ],
-        "conference_space": "#2026:seagl.org",
+        "conference_space": {
+            "alias": "#2026:seagl.org",
+            "via": ["seattlematrix.org"]
+        },
         "destroyed_homeservers": [
             "https://matrix.2022.seagl.org/",
             "https://matrix.2023.seagl.org/",

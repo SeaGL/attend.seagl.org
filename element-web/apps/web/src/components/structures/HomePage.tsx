@@ -47,8 +47,9 @@ const onClickEnterConference = (ev: ButtonEvent): void => {
         dis.dispatch({
             action: Action.ViewRoom,
             auto_join: true,
-            room_alias: conference_space,
+            room_alias: conference_space.alias,
             metricsTrigger: undefined,
+            via_servers: conference_space.via,
         });
     }
 };
