@@ -33,6 +33,7 @@ Build a static placeholder:
 make 'down'
 ```
 
+The [`down.yml` workflow](https://github.com/SeaGL/attend.seagl.org/blob/main/.github/workflows/down.yml) can be run manually in order to automatically deploy the "down" page.
 
 [find]: https://www.gnu.org/software/findutils/
 [http.server]: https://docs.python.org/3/library/http.server.html
