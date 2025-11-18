@@ -56,6 +56,8 @@ Build a static placeholder:
 make 'down'
 ```
 
+The [`down.yml` workflow](https://github.com/SeaGL/attend.seagl.org/blob/main/.github/workflows/down.yml) can be run manually in order to automatically deploy the "down" page.
+
 [coreutils]: https://www.gnu.org/software/coreutils/
 [diffutils]: https://www.gnu.org/software/diffutils/
 [Element Web]: https://github.com/element-hq/element-web
