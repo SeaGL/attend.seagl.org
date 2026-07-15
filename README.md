@@ -33,6 +33,13 @@ make 'dist'
 - build dependencies
 - a local web server, e.g. Python’s [`http.server`][http.server]
 
+For convenience, an optional containerized development environment is provided:
+
+```bash
+podman build --file 'development.Containerfile' --tag 'attend.seagl.org-development'
+podman run --rm --interactive --tty --userns 'keep-id:uid=1000,gid=1000' --volume '.:/mnt/attend.seagl.org' --publish '1234:1234' --publish '8000:8000' --publish '8080:8080' 'attend.seagl.org-development'
+```
+
 ### Procedures
 
 Locally serve the built static site:
