@@ -44,16 +44,13 @@ python -m 'http.server' --directory 'dist'
 Run an [Element Web development] server:
 
 ```bash
-make 'element-web/node_modules'
-env --chdir 'element-web' yarn start
+make 'element-web-dev'
 ```
 
 Run a [widgets development] server
 
 ```bash
-git submodule update 'seagl.org'
-make 'widgets/node_modules'
-env --chdir 'widgets' yarn start
+make 'widgets-dev'
 ```
 
 ### Updating

@@ -1,4 +1,4 @@
-.PHONY: all clean down
+.PHONY: all clean down element-web-dev widgets-dev
 
 all: clean dist
 
@@ -40,11 +40,17 @@ down: clean
 	mkdir --verbose 'dist'
 	cp --verbose 'static/down.html' 'dist/index.html'
 
+element-web-dev: element-web/node_modules widgets/dist
+	cd 'element-web' && yarn start
+
 element-web/node_modules: element-web/yarn.lock
 	cd 'element-web' && yarn install --frozen-lockfile
 
 element-web/webapp: element-web/node_modules $(shell find 'element-web/src' -type 'f')
 	cd 'element-web' && yarn build
+
+widgets-dev: .git/modules/seagl.org/HEAD widgets/node_modules
+	cd 'widgets' && yarn start
 
 widgets/dist: .git/modules/seagl.org/HEAD widgets/node_modules $(shell find 'widgets' \( -path 'widgets/dist' -o -path 'widgets/node_modules' \) -prune -o -type 'f' -print)
 	cd 'widgets' && yarn build
