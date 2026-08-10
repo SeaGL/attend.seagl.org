@@ -38,7 +38,7 @@ dist/widgets/seagl/.sentinel: widgets/dist
 
 down: clean
 	mkdir --verbose 'dist'
-	cp --verbose 'static/down.html' 'dist/index.html'
+	sed "s/__CURRENT_YEAR__/$$(date +%Y)/g" 'static/down.html' > 'dist/index.html'
 
 element-web-dev: element-web/node_modules widgets/dist
 	cd 'element-web' && yarn start
