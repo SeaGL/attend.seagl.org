@@ -6,7 +6,6 @@ This is structured as a monorepo which outputs a single static site containing:
 
 - a lightly customized fork of [Element Web]
 - a conventional [Element Web configuration] file and supporting assets
-- miscellaneous pages embeddable as [widgets]
 
 ## Build
 
@@ -47,12 +46,6 @@ Run an [Element Web development] server:
 make 'element-web-dev'
 ```
 
-Run a [widgets development] server
-
-```bash
-make 'widgets-dev'
-```
-
 ### Updating
 
 To update Element Web, reapply our customizations to the new upstream. For minor updates this might be accomplished by merging the update or rebasing our commits, but if Element Web’s features have changed substantially, further development may be necessary. You must consider the _intent_ of each of our commits; even if it applies cleanly, achieving our desired result may require further modifications in the newer Element Web.
@@ -75,6 +68,4 @@ The [`down.yml` workflow](https://github.com/SeaGL/attend.seagl.org/blob/main/.g
 [Make]: https://www.gnu.org/software/make/
 [Node.js]: https://nodejs.org/
 [rsync]: https://rsync.samba.org/
-[widgets]: https://matrix.org/blog/2017/08/23/introducing-matrix-widgets/
-[widgets development]: https://parceljs.org/features/development/
 [Yarn]: https://classic.yarnpkg.com/
