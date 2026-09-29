@@ -1,0 +1,150 @@
+/*
+Copyright 2026 Element Creations Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+Please see LICENSE in the repository root for full details.
+*/
+
+import { type KnipConfig } from "knip";
+
+// Specify this as knip loads config files which may conditionally load plugins
+process.env.GITHUB_ACTIONS = "1";
+
+export default {
+    workspaces: {
+        "packages/shared-components": {
+            entry: ["src/index.ts!", "scripts/**"],
+            project: [
+                "**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,mdx,pcss}!",
+                "!scripts/**!",
+                "!src/test/**!",
+                "!src/**/test-*!",
+                "!src/**/*-{mock,mocks,snapshot,actions}.*!",
+            ],
+            ignoreDependencies: [
+                // Not imported directly, but @fetch-mock/vitest's own type declarations reference
+                // `expect`'s types without declaring it as a dependency themselves. It has to be a
+                // direct dependency here for that .d.ts to resolve under pnpm's strict node_modules.
+                "expect",
+            ],
+        },
+        "packages/playwright-common": {
+            entry: ["src/fixtures/index.ts!", "src/testcontainers/index.ts!"],
+            project: [
+                "**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,pcss}!",
+                "!src/flaky-reporter.ts!",
+                "!src/stale-screenshot-reporter.ts!",
+            ],
+            ignoreDependencies: [
+                // Used in playwright-screenshots.sh
+                "wait-on",
+            ],
+            ignoreBinaries: ["awk"],
+        },
+        "packages/module-api": {},
+        "apps/web": {
+            entry: [
+                "src/workers/*.worker.ts!",
+                "src/utils/exportUtils/exportJS.js!",
+                "src/vector/localstorage-fix.ts!",
+                "scripts/**",
+                "playwright/**",
+                "res/decoder-ring/**",
+                "res/jitsi_external_api.min.js",
+                "res/themes/*/css/*.pcss!",
+                "I18nWebpackPlugin.ts!",
+                // Keep for now
+                "src/hooks/useLocalStorageState.ts!",
+                "src/hooks/useIsReleaseAnnouncementOpen.ts!",
+                "src/components/structures/ReleaseAnnouncement.tsx!",
+                "src/utils/arrays.ts!",
+                "src/utils/EventPresentationContextProvider.tsx!",
+                // This is just an awful side-effect import
+                "src/stores/LifecycleStore.ts!",
+                // New timeline: only its own tests import this so far, and --strict does not
+                // count tests as entry points. NewTimelinePanel picks it up in a follow-up PR,
+                // at which point this line can go.
+                "src/viewmodels/room/timeline/RoomTimelineViewModel.ts!",
+            ],
+            project: [
+                "**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,pcss}!",
+                "!scripts/**!",
+                "!src/test/**!",
+                "!recorder-worklet-loader.cjs!",
+                "!src/**/*-{mock,mocks,snapshot,actions}.*!",
+            ],
+            ignoreDependencies: [
+                // Embedded into webapp
+                "@element-hq/element-call-embedded",
+
+                // Used by matrix-js-sdk, which means we have to include them as a
+                // dependency so that // we can run `tsc` (since we import the typescript
+                // source of js-sdk, rather than the transpiled and annotated JS like you
+                // would with a normal library).
+                "@types/sdp-transform",
+
+                // Referenced as a tsconfig `types` entry rather than imported, so knip
+                // cannot see it. It has to be a direct dependency for
+                // `@vitest/browser/matchers` to resolve under pnpm's strict node_modules.
+                // See apps/web/tsconfig.browser-test.json.
+                "@vitest/browser",
+
+                // Used by Playwright to serve the built web app.
+                "serve",
+            ],
+        },
+        "apps/desktop": {
+            entry: ["src/preload.cts!", "electron-builder.ts!", "scripts/**"],
+            project: ["**/*.{js,ts,pcss}"],
+            ignoreBinaries: [
+                // Used by the fetch-package script (optional)
+                "gpg",
+            ],
+        },
+        "modules": {
+            project: ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,pcss}!", "!playwright/**!"],
+            ignoreDependencies: [
+                // Used by Playwright to serve the built web app.
+                "serve",
+            ],
+        },
+        "modules/*": {
+            entry: ["src/index.ts{x,}!"],
+            project: [
+                "**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,pcss}!",
+                "!src/tests/**!",
+                "!e2e/**!",
+                "!src/setupTests.ts!",
+            ],
+        },
+        ".": {
+            entry: ["scripts/**", "docs/**"],
+        },
+    },
+    ignoreDependencies: [
+        // Used by multiple packages, raises a false positive for some reason
+        "events",
+        // Used as a workaround for api-extractor not supporting typescript 7.0
+        "@typescript/old",
+    ],
+    ignoreExportsUsedInFile: true,
+    ignoreBinaries: [
+        // Optional for coverage:diff development script
+        "diff-cover",
+    ],
+    compilers: {
+        pcss: (text: string) =>
+            [...text.matchAll(/@import\s+(?:url\()?["']([^"']+)["']\)?[^;]*;/g)]
+                .map(([, specifier]) => `import "${specifier}";`)
+                .join("\n"),
+    },
+    nx: {
+        config: ["{nx,package,project}.json", "{apps,packages,modules}/**/{package,project}.json"],
+    },
+    playwright: {
+        config: ["playwright.config.ts", "playwright-merge.config.ts"],
+    },
+    tags: ["-knipignore"],
+    treatConfigHintsAsErrors: true,
+    treatTagHintsAsErrors: true,
+} satisfies KnipConfig;
