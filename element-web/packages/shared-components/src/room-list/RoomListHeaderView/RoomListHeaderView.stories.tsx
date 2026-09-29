@@ -1,0 +1,158 @@
+/*
+ * Copyright 2026 Element Creations Ltd.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
+ * Please see LICENSE files in the repository root for full details.
+ */
+
+import React, { type JSX } from "react";
+import { fn } from "storybook/test";
+
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import {
+    RoomListHeaderView,
+    type RoomListHeaderViewActions,
+    type RoomListHeaderViewSnapshot,
+} from "./RoomListHeaderView";
+import { useMockedViewModel } from "../../core/viewmodel";
+import { withViewDocs } from "../../../.storybook/withViewDocs";
+import { defaultSnapshot } from "./default-snapshot";
+
+type RoomListHeaderProps = RoomListHeaderViewSnapshot & RoomListHeaderViewActions;
+
+const RoomListHeaderViewWrapperImpl = ({
+    createChatRoom,
+    createRoom,
+    createVideoRoom,
+    openSpaceHome,
+    openSpaceSettings,
+    inviteInSpace,
+    openSpacePreferences,
+    sort,
+    toggleMessagePreview,
+    createSection,
+    collapseOrExpandSections,
+    closeSectionReleaseAnnouncement,
+    ...rest
+}: RoomListHeaderProps): JSX.Element => {
+    const vm = useMockedViewModel(rest, {
+        createChatRoom,
+        createRoom,
+        createVideoRoom,
+        openSpaceHome,
+        openSpaceSettings,
+        inviteInSpace,
+        sort,
+        openSpacePreferences,
+        toggleMessagePreview,
+        createSection,
+        collapseOrExpandSections,
+        closeSectionReleaseAnnouncement,
+    });
+    return <RoomListHeaderView vm={vm} />;
+};
+const RoomListHeaderViewWrapper = withViewDocs(RoomListHeaderViewWrapperImpl, RoomListHeaderView);
+
+const meta = {
+    title: "Room List/RoomListHeaderView",
+    component: RoomListHeaderViewWrapper,
+    tags: ["autodocs"],
+    args: {
+        ...defaultSnapshot,
+        createChatRoom: fn(),
+        createRoom: fn(),
+        createVideoRoom: fn(),
+        openSpaceHome: fn(),
+        openSpaceSettings: fn(),
+        inviteInSpace: fn(),
+        sort: fn(),
+        openSpacePreferences: fn(),
+        toggleMessagePreview: fn(),
+        createSection: fn(),
+        collapseOrExpandSections: fn(),
+        closeSectionReleaseAnnouncement: fn(),
+    },
+    parameters: {
+        design: {
+            type: "figma",
+            url: "https://www.figma.com/design/vlmt46QDdE4dgXDiyBJXqp/ER-33-Left-Panel?node-id=2925-19173",
+        },
+    },
+} satisfies Meta<typeof RoomListHeaderViewWrapper>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};
+
+export const NoSpaceMenu: Story = {
+    args: {
+        displaySpaceMenu: false,
+    },
+};
+
+export const LongTitle: Story = {
+    decorators: [
+        (Story) => (
+            <div style={{ width: "200px" }}>
+                <Story />
+            </div>
+        ),
+    ],
+    args: {
+        title: "Loooooooooooooooooooooooooooooooooooooong title",
+    },
+};
+
+export const CollapseSections: Story = {
+    args: {
+        collapseSections: "collapse",
+    },
+};
+
+export const ExpandSections: Story = {
+    args: {
+        collapseSections: "expand",
+    },
+};
+
+export const DisplaySectionReleaseAnnouncement: Story = {
+    decorators: [
+        (Story) => (
+            <div style={{ width: "300px" }}>
+                <Story />
+            </div>
+        ),
+    ],
+    args: {
+        displaySectionReleaseAnnouncement: true,
+    },
+    parameters: {
+        a11y: {
+            config: {
+                rules: [
+                    {
+                        // compound-web's ReleaseAnnouncement renders its header as <h3>,
+                        // which jumps from RoomListHeaderView's <h1> ("Rooms").
+                        id: "heading-order",
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
+};
+
+export const SectionsDisabled: Story = {
+    args: {
+        areSectionsEnabled: false,
+    },
+};
+
+export const NoComposeMenu: Story = {
+    args: {
+        canCreateRoom: false,
+        canCreateVideoRoom: false,
+        areSectionsEnabled: false,
+    },
+};

@@ -1,0 +1,5 @@
+_extends: matrix-org/matrix-js-sdk
+version-resolver:
+    default: patch
+# Exclude modules releases
+tag-prefix: v
