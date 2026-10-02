@@ -384,7 +384,7 @@ export class DeviceListenerCurrentDevice {
 
         this.deviceListener.currentDeviceChangedEmitter.onStateChanged(newState);
 
-        if (newState === "ok" || this.dismissedThisDeviceToast) {
+        if (newState === "ok" || newState === "set_up_recovery" || this.dismissedThisDeviceToast) {
             hideSetupEncryptionToast();
         } else if (!isSecretStorageBeingAccessed()) {
             showSetupEncryptionToast(newState);
