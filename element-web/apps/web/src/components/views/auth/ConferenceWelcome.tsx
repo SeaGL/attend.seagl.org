@@ -28,13 +28,16 @@ const ConferenceWelcome: React.FC = () => {
 
                 <p>
                     Please see <a href="https://seagl.org/attend">How to Attend</a> for complete
-                    information on how to access the conference with a temporary or existing Matrix
-                    account.
+                    information on how to access the conference.
                 </p>
 
                 <Heading as="h2" size="sm" weight="semibold">
                     Option 1: Use a Temporary Account
                 </Heading>
+
+                <p>
+                    Create an account with SeaGL, and we’ll delete it after the conference.
+                </p>
 
                 <div className="mx_DefaultWelcome_buttons">
                     <Button as="a" href="#/register?hs=ephemeral" kind="primary" size="md">
@@ -48,6 +51,10 @@ const ConferenceWelcome: React.FC = () => {
                 <Heading as="h2" size="sm" weight="semibold">
                     Option 2: Bring your own Matrix account
                 </Heading>
+
+                <p>
+                    Use your existing account from Matrix.org, self-hosting, or another provider.
+                </p>
 
                 <div className="mx_DefaultWelcome_buttons">
                     <Button as="a" href="#/login?hs=byo" kind="primary" size="md">
