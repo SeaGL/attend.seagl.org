@@ -372,7 +372,7 @@ const SpacePanel: React.FC = () => {
     const sdkContext = useContext(SDKContext);
     const client = sdkContext.client!;
     const [dragging, setDragging] = useState(false);
-    const [isPanelCollapsed, setPanelCollapsed] = useState(true);
+    const [isPanelCollapsed, setPanelCollapsed] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     useLayoutEffect(() => {
         if (ref.current) UIStore.instance.trackElementDimensions("SpacePanel", ref.current);
