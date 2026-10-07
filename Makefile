@@ -1,4 +1,6 @@
-.PHONY: all clean down element-web-dev
+MODE ?= up
+
+.PHONY: all clean dist element-web-dev
 
 all: clean dist
 
@@ -11,36 +13,26 @@ clean:
 	  'dist' \
 	  'element-web/apps/web/webapp'
 
-dist: dist/.sentinel dist/config.json dist/custom-assets/.sentinel dist/modules/.sentinel
+dist: dist/.$(MODE).sentinel
 
-dist/.sentinel: element-web/apps/web/webapp
-	rsync --itemize-changes --recursive --times \
-		--exclude '/config.json' \
+dist/.down.sentinel: $(shell find 'down' -type 'f')
+	rsync --delete --itemize-changes --recursive --times \
+	  --exclude '.down.sentinel' \
+	  'down/' \
+	  'dist/'
+	touch 'dist/.down.sentinel'
+
+dist/.up.sentinel: element-web/apps/web/webapp/.sentinel $(shell find 'static' -type 'f')
+	rsync --delete --itemize-changes --recursive --times \
+	  --exclude '.up.sentinel' \
+	  'static/' \
 	  'element-web/apps/web/webapp/' \
 	  'dist/'
-	touch 'dist/.sentinel'
+	touch 'dist/.up.sentinel'
 
-dist/config.json: static/config.json
-	cp --verbose 'static/config.json' 'dist/config.json'
-
-dist/custom-assets/.sentinel: $(shell find 'static/custom-assets' -type 'f')
-	rsync --delete --itemize-changes --recursive --times \
-	  'static/custom-assets/' \
-	  'dist/custom-assets/'
-	touch 'dist/custom-assets/.sentinel'
-
-dist/modules/.sentinel: $(shell find 'static/modules' -type 'f')
-	rsync --delete --itemize-changes --recursive --times \
-	  'static/modules/' \
-	  'dist/modules/'
-	touch 'dist/modules/.sentinel'
-
-down: clean
-	mkdir --verbose 'dist'
-	cp --verbose 'static/down.html' 'dist/index.html'
-
-element-web/apps/web/webapp: element-web/node_modules/.sentinel $(shell find 'element-web/apps/web/src' -type 'f' ! -name 'modules.js')
+element-web/apps/web/webapp/.sentinel: element-web/node_modules/.sentinel $(shell find 'element-web/apps/web/src' -type 'f')
 	cd 'element-web/apps/web' && pnpm build
+	touch element-web/apps/web/webapp/.sentinel
 
 element-web/node_modules/.sentinel: element-web/pnpm-lock.yaml.hash
 	cd 'element-web/apps/web' && pnpm install

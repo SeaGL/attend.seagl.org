@@ -7,6 +7,8 @@ This is structured as a monorepo which outputs a single static site containing:
 - a lightly customized fork of [Element Web]
 - a conventional [Element Web configuration] file and supporting assets
 
+To support seasonal deployment, the entire interface can be replaced with a simple placeholder message.
+
 ## Build
 
 ### Dependencies
@@ -17,10 +19,16 @@ This is structured as a monorepo which outputs a single static site containing:
 
 ### Procedures
 
-Build all components into a single static site:
+Build all components of the conference interface into a single static site:
 
 ```bash
 make 'dist'
+```
+
+Build a placeholder message for off-season:
+
+```bash
+MODE='down' make 'dist'
 ```
 
 ## Development
@@ -48,15 +56,11 @@ make 'element-web-dev'
 
 To update Element Web, reapply our customizations to the new upstream. For minor updates this might be accomplished by merging the update or rebasing our commits, but if Element Web’s features have changed substantially, further development may be necessary. You must consider the _intent_ of each of our commits; even if it applies cleanly, achieving our desired result may require further modifications in the newer Element Web.
 
-## Decommissioning
+## Deployment
 
-Build a static placeholder:
-
-```bash
-make 'down'
-```
-
-The [`down.yml` workflow](https://github.com/SeaGL/attend.seagl.org/blob/main/.github/workflows/down.yml) can be run manually in order to automatically deploy the "down" page.
+The site is automatically deployed via [GitHub Actions]. To switch the
+production site between the conference interface and off-season placeholder
+message, edit `MODE` in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
 [coreutils]: https://www.gnu.org/software/coreutils/
 [diffutils]: https://www.gnu.org/software/diffutils/
@@ -64,6 +68,7 @@ The [`down.yml` workflow](https://github.com/SeaGL/attend.seagl.org/blob/main/.g
 [Element Web configuration]: https://github.com/element-hq/element-web/blob/v1.12.29/docs/config.md
 [Element Web development]: https://github.com/element-hq/element-web/blob/v1.12.29/developer_guide.md
 [findutils]: https://www.gnu.org/software/findutils/
+[GitHub Actions]: https://github.com/features/actions
 [http.server]: https://docs.python.org/3/library/http.server.html
 [Make]: https://www.gnu.org/software/make/
 [Node.js]: https://nodejs.org/

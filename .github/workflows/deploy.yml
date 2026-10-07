@@ -1,5 +1,9 @@
 name: Deploy to GitHub Pages
 
+env:
+  # Whether to deploy the conference interface (`up`) or off-season placeholder message (`down`)
+  MODE: up
+
 on:
   push: { branches: [main] }
   workflow_dispatch:
@@ -10,7 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - run: docker build --file 'Containerfile' --output 'type=local,dest=github-pages' --target 'static-site' .
+      - run: |
+          docker build \
+            --build-arg 'MODE' \
+            --file 'Containerfile' \
+            --output 'type=local,dest=github-pages' \
+            --target 'static-site' \
+            .
 
       - uses: actions/upload-pages-artifact@v5
         with: { path: github-pages }

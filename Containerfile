@@ -9,6 +9,7 @@ RUN apt-get update \
 RUN npm install --global 'pnpm@12'
 
 # Source
+COPY --chown='node:node' 'down' '/home/node/attend.seagl.org/down'
 COPY --chown='node:node' 'element-web' '/home/node/attend.seagl.org/element-web'
 COPY --chown='node:node' 'static' '/home/node/attend.seagl.org/static'
 COPY --chown='node:node' 'Makefile' '/home/node/attend.seagl.org/Makefile'
@@ -17,6 +18,7 @@ COPY --chown='node:node' 'Makefile' '/home/node/attend.seagl.org/Makefile'
 USER 'node'
 WORKDIR '/home/node/attend.seagl.org'
 ENV NX_DAEMON='false'
+ARG MODE
 RUN make 'dist'
 
 FROM scratch AS static-site
