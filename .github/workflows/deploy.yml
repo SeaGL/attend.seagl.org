@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 env:
   # Whether to deploy the conference interface (`up`) or off-season placeholder message (`down`)
-  MODE: up
+  MODE: down
 
 on:
   push: { branches: [main] }
