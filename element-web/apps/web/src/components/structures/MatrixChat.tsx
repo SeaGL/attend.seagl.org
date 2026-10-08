@@ -829,18 +829,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
                 this.viewWelcome();
                 break;
             case Action.ViewHomePage: {
-                const conference_space = SdkConfig.get("seagl")?.conference_space;
-                if (payload.justRegistered && conference_space) {
-                    dis.dispatch<ViewRoomPayload>({
-                        action: Action.ViewRoom,
-                        auto_join: true,
-                        room_alias: conference_space.alias,
-                        metricsTrigger: undefined,
-                        via_servers: conference_space.via,
-                    });
-                } else {
-                    this.viewHome(payload.justRegistered);
-                }
+                this.viewHome(payload.justRegistered);
                 break;
             }
             case Action.Share:
@@ -1121,8 +1110,19 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             justRegistered,
             currentRoomId: null,
         });
-        this.setPage(PageType.HomePage);
-        this.notifyNewScreen("home");
+        const conference_space = SdkConfig.get("seagl")?.conference_space;
+        if (conference_space) {
+            dis.dispatch<ViewRoomPayload>({
+                action: Action.ViewRoom,
+                auto_join: true,
+                room_alias: conference_space.alias,
+                metricsTrigger: undefined,
+                via_servers: conference_space.via,
+            });
+        } else {
+            this.setPage(PageType.HomePage);
+            this.notifyNewScreen("home");
+        }
     }
 
     private viewUser(userId: string, subAction: string): void {
