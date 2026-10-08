@@ -18,7 +18,6 @@ import { messageForConnectionError, messageForLoginError } from "../../../utils/
 import AutoDiscoveryUtils from "../../../utils/AutoDiscoveryUtils";
 import AuthPage from "../../views/auth/AuthPage";
 import PlatformPeg from "../../../PlatformPeg";
-import SdkConfig from "../../../SdkConfig";
 import SettingsStore from "../../../settings/SettingsStore";
 import { UIFeature } from "../../../settings/UIFeature";
 import { type IMatrixClientCreds } from "../../../utils/createMatrixClient";
@@ -47,7 +46,6 @@ interface IProps {
     defaultDeviceDisplayName?: string;
     fragmentAfterLogin?: string;
     defaultUsername?: string;
-    ephemeral?: boolean;
     // Any additional content to show, will be rendered between main actions & footer actions
     children?: ReactNode;
 
@@ -56,7 +54,7 @@ interface IProps {
     onLoggedIn(data: IMatrixClientCreds): void;
 
     // login shouldn't know or care how registration, password recovery, etc is done.
-    onRegisterClick?(ephemeral?: boolean): void;
+    onRegisterClick?(): void;
     onForgotPasswordClick?(): void;
     onServerConfigChange(config: ValidatedServerConfig): void;
     onWelcomeClick(): void;
@@ -281,7 +279,7 @@ class LoginComponent extends React.PureComponent<IProps, IState> {
     public onRegisterClick = (ev: ButtonEvent): void => {
         ev.preventDefault();
         ev.stopPropagation();
-        this.props.onRegisterClick?.(this.isEphemeral());
+        this.props.onRegisterClick?.();
     };
 
     public onTryRegisterClick = (ev: ButtonEvent): void => {
@@ -389,11 +387,6 @@ class LoginComponent extends React.PureComponent<IProps, IState> {
             });
     }
 
-    private isEphemeral = () => {
-        const ephemeralHomeserver = SdkConfig.get("seagl")?.ephemeral_homeserver;
-        return ephemeralHomeserver && this.props.serverConfig.hsUrl === ephemeralHomeserver.url;
-    };
-
     private isSupportedFlow = (flow: ClientLoginFlow): boolean => {
         // technically the flow can have multiple steps, but no one does this
         // for login and loginLogic doesn't support it so we can ignore it.
@@ -425,6 +418,7 @@ class LoginComponent extends React.PureComponent<IProps, IState> {
         return (
             <PasswordLogin
                 onSubmit={this.onPasswordLogin}
+                serverConfig={this.props.serverConfig}
                 username={this.state.username}
                 phoneCountry={this.state.phoneCountry}
                 phoneNumber={this.state.phoneNumber}
@@ -436,7 +430,6 @@ class LoginComponent extends React.PureComponent<IProps, IState> {
                 loginIncorrect={this.state.loginIncorrect}
                 disableSubmit={this.isBusy()}
                 busy={this.props.isSyncing || this.state.busyLoggingIn}
-                ephemeral={this.isEphemeral()}
             />
         );
     };
@@ -516,7 +509,7 @@ class LoginComponent extends React.PureComponent<IProps, IState> {
                     )}
                 </div>
             );
-        } else if (this.props.onRegisterClick && SettingsStore.getValue(UIFeature.Registration) && this.props.ephemeral) {
+        } else if (this.props.onRegisterClick && SettingsStore.getValue(UIFeature.Registration)) {
             footer = (
                 <span className="mx_AuthBody_changeFlow">
                     {_t(

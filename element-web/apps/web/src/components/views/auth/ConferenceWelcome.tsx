@@ -40,10 +40,10 @@ const ConferenceWelcome: React.FC = () => {
                 </p>
 
                 <div className="mx_DefaultWelcome_buttons">
-                    <Button as="a" href="#/register?hs=ephemeral" kind="primary" size="md">
+                    <Button as="a" href="#/register" kind="primary" size="md">
                         Create Temporary Account
                     </Button>
-                    <Button as="a" href="#/login?hs=ephemeral" kind="secondary" size="md">
+                    <Button as="a" href="#/login_ephemeral" kind="secondary" size="md">
                         Sign Back In
                     </Button>
                 </div>
@@ -57,7 +57,7 @@ const ConferenceWelcome: React.FC = () => {
                 </p>
 
                 <div className="mx_DefaultWelcome_buttons">
-                    <Button as="a" href="#/login?hs=byo" kind="primary" size="md">
+                    <Button as="a" href="#/login_byo" kind="primary" size="md">
                         Sign in with other Matrix account
                     </Button>
                 </div>

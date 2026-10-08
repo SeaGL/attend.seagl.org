@@ -59,7 +59,6 @@ interface IProps {
     canSubmit?: boolean;
     matrixClient: MatrixClient;
     mobileRegister?: boolean;
-    ephemeral?: boolean;
 
     onRegisterClick(params: {
         username: string;
@@ -416,7 +415,7 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
     }
 
     private showEmail(): boolean {
-        if (this.props.ephemeral) {
+        if (this.props.serverConfig.isDefault) {
             return false;
         }
         const threePidLogin = !SdkConfig.get().disable_3pid_login;
@@ -427,7 +426,7 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
     }
 
     private showPhoneNumber(): boolean {
-        if (this.props.ephemeral) {
+        if (this.props.serverConfig.isDefault) {
             return false;
         }
         const threePidLogin = !SdkConfig.get().disable_3pid_login;
@@ -594,7 +593,7 @@ export default class RegistrationForm extends React.PureComponent<IProps, IState
 
         return (
             <div>
-                {this.props.ephemeral && this.props.serverConfig.isDefault && (
+                {this.props.serverConfig.isDefault && (
                     <p>
                         This temporary account <strong>will be deleted</strong> after the conference.
                     </p>

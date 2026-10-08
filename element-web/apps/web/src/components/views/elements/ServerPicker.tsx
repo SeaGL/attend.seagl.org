@@ -24,7 +24,6 @@ interface IProps {
     serverConfig: ValidatedServerConfig;
     disabled?: boolean;
     onServerConfigChange?(this: void, config: ValidatedServerConfig): void;
-    prompt?: boolean;
 }
 
 const showPickerDialog = (
@@ -51,7 +50,7 @@ const onHelpClick = (): void => {
     );
 };
 
-const ServerPicker: React.FC<IProps> = ({ title, dialogTitle, serverConfig, onServerConfigChange, disabled, prompt = false }) => {
+const ServerPicker: React.FC<IProps> = ({ title, dialogTitle, serverConfig, onServerConfigChange, disabled }) => {
     const disableCustomUrls = SdkConfig.get("disable_custom_urls");
 
     let editBtn;
@@ -68,11 +67,6 @@ const ServerPicker: React.FC<IProps> = ({ title, dialogTitle, serverConfig, onSe
                 {_t("action|change")}
             </AccessibleButton>
         );
-        React.useLayoutEffect(() => {
-            if (prompt) {
-                onClick();
-            }
-        }, []);
     }
 
     let serverName: React.ReactNode = serverConfig.isNameResolvable ? serverConfig.hsName : serverConfig.hsUrl;

@@ -49,7 +49,6 @@ export interface InteractiveAuthProps<T> {
     // continueText and continueKind are passed straight through to the AuthEntryComponent.
     continueText?: string;
     continueKind?: ContinueKind;
-    ephemeral?: boolean;
     // callback
     makeRequest(auth: AuthDict | null): Promise<T>;
     // callback called when the auth process has finished,
@@ -289,7 +288,6 @@ export default class InteractiveAuthComponent<T> extends React.Component<Interac
                 continueText={this.props.continueText}
                 continueKind={this.props.continueKind}
                 onCancel={this.onStageCancel}
-                ephemeral={this.props.ephemeral}
             />
         );
     }

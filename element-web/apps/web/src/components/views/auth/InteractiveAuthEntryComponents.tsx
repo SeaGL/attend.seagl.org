@@ -88,7 +88,6 @@ interface IAuthEntryProps {
     requestEmailToken?: () => Promise<void>;
     fail: (error: Error) => void;
     clientSecret: string;
-    ephemeral?: boolean;
 }
 
 interface IPasswordAuthEntryState {
@@ -684,15 +683,17 @@ export class RegistrationTokenAuthEntry extends React.Component<IAuthEntryProps,
     public componentDidMount(): void {
         this.props.onPhaseChange(DEFAULT_PHASE);
 
-        if (this.props.ephemeral) {
-            const ephemeralHomeserver = SdkConfig.get("seagl")?.ephemeral_homeserver;
+        const token = this.token();
+        if (token) {
+            this.props.submitAuthDict({ type: this.props.loginType, token });
+        }
+    }
 
-            if (ephemeralHomeserver) {
-                this.props.submitAuthDict({
-                    type: this.props.loginType,
-                    token: ephemeralHomeserver.cohort,
-                });
-            }
+    private token = (): string | undefined => {
+        const config = SdkConfig.get("validated_ephemeral_server_config");
+
+        if (config?.hsUrl === this.props.matrixClient.getHomeserverUrl()) {
+            return SdkConfig.get("seagl")?.ephemeral_homeserver_config?.["org.seagl.cohort"];
         }
     }
 
@@ -739,7 +740,7 @@ export class RegistrationTokenAuthEntry extends React.Component<IAuthEntryProps,
             );
         }
 
-        if (this.props.ephemeral) {
+        if (this.token()) {
             return errorSection ?? <Spinner />;
         }
 

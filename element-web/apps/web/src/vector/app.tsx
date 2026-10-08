@@ -242,7 +242,7 @@ async function verifyServerConfig(): Promise<IConfigOptions> {
         }
     }
 
-    validatedConfig.isDefault = true;
+    validatedConfig.isDefault = !SdkConfig.get("seagl")?.ephemeral_homeserver_config;
 
     // Just in case we ever have to debug this
     logger.log("Using homeserver config:", validatedConfig);
@@ -250,6 +250,16 @@ async function verifyServerConfig(): Promise<IConfigOptions> {
     // Add the newly built config to the actual config for use by the app
     logger.log("Updating SdkConfig with validated discovery information");
     SdkConfig.add({ validated_server_config: validatedConfig });
+
+    const ephemeralConfig = SdkConfig.get("seagl")?.ephemeral_homeserver_config;
+    if (ephemeralConfig) {
+        logger.log("Verifying ephemeral homeserver configuration");
+        const discoveryResult = await AutoDiscovery.fromDiscoveryConfig(ephemeralConfig);
+        const validatedEphemeralConfig = await AutoDiscoveryUtils.buildValidatedConfigFromDiscovery(undefined, discoveryResult, true);
+        validatedEphemeralConfig.isDefault = true;
+        logger.log("Using ephemeral homeserver config:", validatedEphemeralConfig);
+        SdkConfig.add({ validated_ephemeral_server_config: validatedEphemeralConfig });
+    }
 
     return SdkConfig.get();
 }

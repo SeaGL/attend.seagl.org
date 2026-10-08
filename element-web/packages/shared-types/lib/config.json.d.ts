@@ -218,13 +218,10 @@ export interface WebConfigJson {
 
     seagl?: {
         auto_join?: string[];
-        conference_space?: { alias: string; via: string[]; };
+        conference_space?: { alias: string; via: string[] };
         destroyed_homeservers?: string[];
-        ephemeral_homeserver?: {
-            cohort: string;
-            domain: string;
-            server_name: string;
-            url: string;
+        ephemeral_homeserver_config?: WebConfigJson["default_server_config"] & {
+            "org.seagl.cohort"?: string;
         };
         space_filter?: string;
         trusted_origins?: string[];

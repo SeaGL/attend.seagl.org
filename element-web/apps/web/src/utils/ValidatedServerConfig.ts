@@ -13,13 +13,13 @@ export interface ValidatedServerConfig {
     hsName: string;
     hsNameIsDifferent: boolean;
 
-    isUrl: string | undefined;
+    isUrl: string;
 
     isDefault: boolean;
     // when the server config is based on static URLs the hsName is not resolvable and things may wish to use hsUrl
     isNameResolvable: boolean;
 
-    warning: string | Error | null;
+    warning: string | Error;
 
     /**
      * Config related to delegated authentication

@@ -72,8 +72,6 @@ interface IProps {
     idSid?: string;
     fragmentAfterLogin?: string;
     mobileRegister?: boolean;
-    ephemeral?: boolean;
-
     // Called when the user has logged in. Params:
     // - object with userId, deviceId, homeserverUrl, identityServerUrl, accessToken
     onLoggedIn(params: IMatrixClientCreds): Promise<void>;
@@ -571,7 +569,6 @@ export default class Registration extends React.Component<IProps, IState> {
                     clientSecret={this.props.clientSecret}
                     emailSid={this.props.idSid}
                     poll={true}
-                    ephemeral={this.props.ephemeral}
                 />
             );
         } else if (this.state.rateLimitError) {
@@ -663,7 +660,6 @@ export default class Registration extends React.Component<IProps, IState> {
                         canSubmit={!this.state.serverErrorIsFatal}
                         matrixClient={this.state.matrixClient}
                         mobileRegister={this.props.mobileRegister}
-                        ephemeral={this.props.ephemeral}
                     />
                 </React.Fragment>
             );
@@ -797,9 +793,6 @@ export default class Registration extends React.Component<IProps, IState> {
                                     title={_t("auth|server_picker_title_registration")}
                                     dialogTitle={_t("auth|server_picker_dialog_title")}
                                     serverConfig={this.props.serverConfig}
-                                    onServerConfigChange={
-                                        this.state.doingUIAuth ? undefined : this.props.onServerConfigChange
-                                    }
                                 />
                             }
                         >
