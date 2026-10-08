@@ -269,11 +269,6 @@ export default class SpaceStore extends AsyncStoreWithClient<EmptyObject> {
                 });
             } else if (ModuleApi.instance.extras.spacePanelItems.has(space)) {
                 // module will handle this
-            } else {
-                this.dispatcher.dispatch<ViewHomePagePayload>({
-                    action: Action.ViewHomePage,
-                    context_switch: true,
-                });
             }
         }
 
