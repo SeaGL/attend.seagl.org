@@ -45,6 +45,29 @@ Run an [Element Web development] server:
 make 'element-web-dev'
 ```
 
+### Container
+
+For convenience, an optional containerized development environment is provided:
+
+```bash
+# Build image
+podman build \
+  --file 'development.Containerfile' \
+  --tag 'attend.seagl.org-development' \
+  '.'
+
+# Run a development command
+podman run \
+  --rm \
+  --interactive \
+  --tty \
+  --userns 'keep-id:uid=1000,gid=1000' \
+  --volume '.:/mnt/attend.seagl.org' \
+  --publish '8080:8080' \
+  'attend.seagl.org-development' \
+  make 'element-web-dev'
+```
+
 ### Updating
 
 To update Element Web, reapply our customizations to the new upstream. For minor updates this might be accomplished by merging the update or rebasing our commits, but if Element Web’s features have changed substantially, further development may be necessary. You must consider the _intent_ of each of our commits; even if it applies cleanly, achieving our desired result may require further modifications in the newer Element Web.
