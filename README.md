@@ -36,15 +36,8 @@ MODE='down' make 'dist'
 ### Dependencies
 
 - build dependencies
-- a local web server, e.g. Python’s [`http.server`][http.server]
 
 ### Procedures
-
-Locally serve the built static site:
-
-```bash
-python -m 'http.server' --directory 'dist'
-```
 
 Run an [Element Web development] server:
 
@@ -69,7 +62,6 @@ message, edit `MODE` in [`.github/workflows/deploy.yml`](.github/workflows/deplo
 [Element Web development]: https://github.com/element-hq/element-web/blob/v1.12.29/developer_guide.md
 [findutils]: https://www.gnu.org/software/findutils/
 [GitHub Actions]: https://github.com/features/actions
-[http.server]: https://docs.python.org/3/library/http.server.html
 [Make]: https://www.gnu.org/software/make/
 [Node.js]: https://nodejs.org/
 [pnpm]: https://pnpm.io/
