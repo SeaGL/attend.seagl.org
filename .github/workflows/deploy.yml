@@ -5,7 +5,7 @@ env:
   MODE: down
 
 on:
-  push: { branches: [main] }
+  push: { branches: [2025] }
   workflow_dispatch:
 
 jobs:
