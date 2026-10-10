@@ -20,6 +20,7 @@ dist/.down.sentinel: $(shell find 'down' -type 'f')
 	  --exclude '.down.sentinel' \
 	  'down/' \
 	  'dist/'
+	sed --in-place "s/__CURRENT_YEAR__/$$(date +%Y)/g" 'dist/index.html'
 	touch 'dist/.down.sentinel'
 
 dist/.up.sentinel: element-web/apps/web/webapp/.sentinel $(shell find 'static' -type 'f')
