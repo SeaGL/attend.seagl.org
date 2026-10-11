@@ -1,5 +1,6 @@
 class ConferenceModule {
     static moduleApiVersion = "^2.0.0";
+    static #trustedOrigins = new Set(["https://seagl.org"]);
 
     constructor(api) {
         this.api = api;
@@ -7,6 +8,11 @@ class ConferenceModule {
 
     async load() {
         this.api.customisations.registerShouldShowComponent(this.shouldShowComponent);
+        this.api.widgetLifecycle.registerPreloadApprover(this.preapprovePreload);
+    }
+
+    preapprovePreload = ({ origin }) => {
+        return ConferenceModule.#trustedOrigins.has(origin);
     }
 
     shouldShowComponent = (component) => {

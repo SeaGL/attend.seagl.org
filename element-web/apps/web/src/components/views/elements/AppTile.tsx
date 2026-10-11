@@ -58,7 +58,6 @@ import { parseUrl } from "../../../utils/UrlUtils";
 import { RightPanelPhases } from "../../../stores/right-panel/RightPanelStorePhases.ts";
 import { WidgetContextMenu } from "../../../viewmodels/room/right-panel/WidgetContextMenuViewModel.tsx";
 import { SDKContext } from "../../../contexts/SDKContext.ts";
-import SdkConfig from "../../../SdkConfig";
 
 // Note that there is advice saying allow-scripts shouldn't be used with allow-same-origin
 // because that would allow the iframe to programmatically remove the sandbox attribute, but
@@ -201,12 +200,6 @@ export default class AppTile extends React.Component<IProps, IState> {
     private hasPermissionToLoadSync = (props: IProps): boolean => {
         if (this.usingLocalWidget()) return true;
         if (!props.room) return true; // user widgets always have permissions
-
-        const trustedOrigins = [window.location.origin, ...(SdkConfig.get("seagl")?.trusted_origins || [])];
-        if (trustedOrigins.includes(new URL(props.app.url).origin)) {
-            logger.info("Automatically allowing widget from trusted origin", props.app.url);
-            return true;
-        }
 
         const currentlyAllowedWidgets = SettingsStore.getValue("allowedWidgets", props.room.roomId);
         const allowed =

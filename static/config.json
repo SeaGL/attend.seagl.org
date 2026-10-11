@@ -83,7 +83,6 @@
             },
             "org.seagl.cohort": "SeaGL2026"
         },
-        "space_filter": "SeaGL",
-        "trusted_origins": ["https://seagl.org"]
+        "space_filter": "SeaGL"
     }
 }

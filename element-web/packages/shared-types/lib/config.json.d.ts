@@ -224,7 +224,6 @@ export interface WebConfigJson {
             "org.seagl.cohort"?: string;
         };
         space_filter?: string;
-        trusted_origins?: string[];
     };
 }
 
