@@ -14,6 +14,8 @@
     "disable_3pid_login": false,
     "force_verification": false,
     "brand": "SeaGL 2026",
+    "integrations_ui_url": null,
+    "integrations_rest_url": null,
     "default_widget_container_height": 280,
     "default_country_code": "US",
     "show_labs_settings": false,
