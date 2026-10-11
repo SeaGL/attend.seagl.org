@@ -271,7 +271,7 @@ export async function attemptDelegatedAuthLogin(
 ): Promise<boolean> {
     if (urlParams.passwordLogin) {
         if (
-            (await getStoredSessionOwner())[0] === urlParams.passwordLogin.userId &&
+            (await getStoredSessionOwner())[0] === urlParams.passwordLogin.user_id &&
             (await restoreSessionFromStorage({ ignoreGuest: true }))
         ) {
             console.log("Ignored provided user ID and password in preference for existing session");
