@@ -43,10 +43,6 @@
         "Registration.mobileRegistrationHelper": false,
         "showAvatarChanges": false,
         "showDisplaynameChanges": false,
-        "Spaces.enabledMetaSpaces": {
-            "home-space": false,
-            "orphans-space": true
-        },
         "UIFeature.feedback": false,
         "UIFeature.shareQrCode": false,
         "UIFeature.shareSocial": false
