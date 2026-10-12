@@ -43,6 +43,7 @@
         "Registration.mobileRegistrationHelper": false,
         "showAvatarChanges": false,
         "showDisplaynameChanges": false,
+        "Spaces.allRoomsInHome": false,
         "UIFeature.feedback": false,
         "UIFeature.shareQrCode": false,
         "UIFeature.shareSocial": false
