@@ -46,7 +46,8 @@
         "Spaces.allRoomsInHome": false,
         "UIFeature.feedback": false,
         "UIFeature.shareQrCode": false,
-        "UIFeature.shareSocial": false
+        "UIFeature.shareSocial": false,
+        "urlPreviewsEnabled": false
     },
     "jitsi": {
         "preferred_domain": "meet.seagl.org"
