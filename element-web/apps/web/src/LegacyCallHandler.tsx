@@ -10,7 +10,7 @@ Please see LICENSE files in the repository root for full details.
 */
 
 import React from "react";
-import { MatrixError, RuleId, TweakName, SyncState, TypedEventEmitter } from "matrix-js-sdk/src/matrix";
+import { JoinRule, MatrixError, RuleId, TweakName, SyncState, TypedEventEmitter } from "matrix-js-sdk/src/matrix";
 import {
     type CallError,
     CallErrorCode,
@@ -784,12 +784,13 @@ export default class LegacyCallHandler extends TypedEventEmitter<LegacyCallHandl
         // We leave the check for whether there's already a call in this room until later,
         // otherwise it can race.
 
+        const isPublic = room.getJoinRule() === JoinRule.Public;
         const members = getJoinedNonFunctionalMembers(room);
-        if (members.length <= 1) {
+        if (!isPublic && members.length <= 1) {
             Modal.createDialog(ErrorDialog, {
                 description: _t("voip|cannot_call_yourself_description"),
             });
-        } else if (members.length === 2 && !Jitsi.getInstance().useFor1To1Calls) {
+        } else if (!isPublic && members.length === 2 && !Jitsi.getInstance().useFor1To1Calls) {
             logger.info(`Place ${type} call in ${roomId}`);
 
             await this.placeMatrixCall(roomId, type, transferee);
