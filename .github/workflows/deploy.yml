@@ -2,10 +2,10 @@ name: Deploy to GitHub Pages
 
 env:
   # Whether to deploy the conference interface (`up`) or off-season placeholder message (`down`)
-  MODE: down
+  MODE: up
 
 on:
-  push: { branches: [2025] }
+  push: { branches: [2026] }
   workflow_dispatch:
 
 jobs:
