@@ -702,11 +702,12 @@ export async function restoreSessionFromStorage(opts?: { ignoreGuest?: boolean }
         await getStoredSessionVars();
 
     if (hsUrl) {
-        const destroyedHomeservers = SdkConfig.get("seagl")?.destroyed_homeservers ?? [];
-        if (destroyedHomeservers.includes(hsUrl)) {
-            logger.info(`Abandoning session from known destroyed homeserver ${hsUrl}`);
-            await clearStorage();
-            return false;
+        for (const origin of SdkConfig.get("seagl")?.destroyed_homeservers ?? []) {
+            if (hsUrl.startsWith(origin)) {
+                logger.info(`Abandoning session from known destroyed homeserver ${hsUrl}`);
+                await clearStorage();
+                return false;
+            }
         }
     }
 

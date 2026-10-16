@@ -71,10 +71,10 @@
             "via": ["seattlematrix.org"]
         },
         "destroyed_homeservers": [
-            "https://matrix.2022.seagl.org/",
-            "https://matrix.2023.seagl.org/",
-            "https://matrix.2024.seagl.org/",
-            "https://matrix.2025.seagl.org/"
+            "https://matrix.2022.seagl.org",
+            "https://matrix.2023.seagl.org",
+            "https://matrix.2024.seagl.org",
+            "https://matrix.2025.seagl.org"
         ],
         "ephemeral_homeserver_config": {
             "m.homeserver": {
